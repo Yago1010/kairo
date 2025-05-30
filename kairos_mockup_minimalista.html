@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kairós - Mockup Minimalista</title>
+    <style>
+        /* Reset e variáveis */
+        :root {
+            --primary: #000000;
+            --secondary: #FFFFFF;
+            --background: #F9FAFB;
+            --border: #E5E7EB;
+            --text: #111827;
+            --text-secondary: #4B5563;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--background);
+            color: var(--text);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        /* Layout principal */
+        .app-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-rows: auto 1fr auto;
+            min-height: 100vh;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+        
+        @media (min-width: 768px) {
+            .app-container {
+                grid-template-columns: 300px 1fr;
+                grid-template-rows: auto 1fr;
+                gap: 1.5rem;
+                padding: 1.5rem;
+            }
+        }
+        
+        /* Cabeçalho */
+        .header {
+            grid-column: 1 / -1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 1.5rem;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--secondary);
+            font-size: 1rem;
+            font-weight: bold;
+        }
+        
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .user-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            color: var(--secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        /* Barra lateral */
+        .sidebar {
+            display: none;
+        }
+        
+        @media (min-width: 768px) {
+            .sidebar {
+                display: block;
+                grid-row: 2 / 3;
+                background-color: var(--secondary);
+                border-radius: 0.5rem;
+                padding: 1.5rem;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            }
+        }
+        
+        .nav-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .nav-list {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+        
+        .nav-item {
+            margin-bottom: 0.5rem;
+        }
+        
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.5rem;
+            border-radius: 0.375rem;
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.2s;
+        }
+        
+        .nav-link:hover {
+            background-color: var(--background);
+        }
+        
+        .nav-link.active {
+            background-color: var(--background);
+            font-weight: 600;
+        }
+        
+        .nav-icon {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Conteúdo principal */
+        .main-content {
+            grid-column: 1 / -1;
+            grid-row: 2 / 3;
+        }
+        
+        @media (min-width: 768px) {
+            .main-content {
+                grid-column: 2 / 3;
+            }
+        }
+        
+        /* VoxMind e AIHologram */
+        .voxmind-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .ai-hologram {
+            position: relative;
+            width: 240px;
+            height: 240px;
+            margin-bottom: 1.5rem;
+        }
+        
+        .hologram-ring {
+            position: absolute;
+            border-radius: 50%;
+            border: 1px solid var(--primary);
+        }
+        
+        .hologram-ring-1 {
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            animation: rotate 20s linear infinite;
+        }
+        
+        .hologram-ring-2 {
+            width: 80%;
+            height: 80%;
+            top: 10%;
+            left: 10%;
+            animation: rotate 15s linear infinite reverse;
+        }
+        
+        .hologram-ring-3 {
+            width: 60%;
+            height: 60%;
+            top: 20%;
+            left: 20%;
+            animation: rotate 10s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .hologram-dot {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background-color: var(--primary);
+            border-radius: 50%;
+        }
+        
+        .hologram-dot-1 { top: 0; left: 50%; transform: translateX(-50%); }
+        .hologram-dot-2 { top: 50%; right: 0; transform: translateY(-50%); }
+        .hologram-dot-3 { bottom: 0; left: 50%; transform: translateX(-50%); }
+        .hologram-dot-4 { top: 50%; left: 0; transform: translateY(-50%); }
+        
+        .hologram-metrics {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+        
+        .vox-avatar {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--secondary);
+            font-weight: bold;
+            font-size: 1.25rem;
+            animation: pulse 3s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.05); }
+            100% { transform: translate(-50%, -50%) scale(1); }
+        }
+        
+        /* Interface de comandos */
+        .command-interface {
+            background-color: var(--secondary);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .command-history {
+            margin-bottom: 1.5rem;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        
+        .message {
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .message:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .message-user {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+        
+        .message-user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            color: var(--secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.75rem;
+            flex-shrink: 0;
+        }
+        
+        .message-content {
+            flex-grow: 1;
+        }
+        
+        .message-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.25rem;
+        }
+        
+        .message-name {
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+        
+        .message-time {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+        
+        .message-text {
+            font-size: 0.875rem;
+            line-height: 1.5;
+        }
+        
+        .message-system {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+        
+        .message-system-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            color: var(--secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.75rem;
+            flex-shrink: 0;
+        }
+        
+        .command-input {
+            display: flex;
+            gap: 0.75rem;
+        }
+        
+        .command-input-field {
+            flex-grow: 1;
+            padding: 0.75rem 1rem;
+            border-radius: 0.375rem;
+            border: 1px solid var(--border);
+            background-color: var(--background);
+            font-family: inherit;
+            font-size: 0.875rem;
+            color: var(--text);
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        
+        .command-input-field:focus {
+            border-color: var(--primary);
+        }
+        
+        .command-input-button {
+            padding: 0.75rem 1rem;
+            border-radius: 0.375rem;
+            background-color: var(--primary);
+            color: var(--secondary);
+            font-family: inherit;
+            font-size: 0.875rem;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+        
+        .command-input-button:hover {
+            opacity: 0.9;
+        }
+        
+        /* Agentes e Status */
+        .panels-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+        
+        @media (min-width: 768px) {
+            .panels-container {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        .panel {
+            background-color: var(--secondary);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .panel-title {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        
+        .panel-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .panel-action {
+            width: 24px;
+            height: 24px;
+            border-radius: 0.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--background);
+            color: var(--text);
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .panel-action:hover {
+            background-color: var(--border);
+        }
+        
+        /* Agentes */
+        .agents-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .agent-tab {
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            background-color: var(--background);
+            color: var(--text);
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .agent-tab:hover {
+            background-color: var(--border);
+        }
+        
+        .agent-tab.active {
+            background-color: var(--primary);
+            color: var(--secondary);
+        }
+        
+        .agent-content {
+            font-size: 0.875rem;
+        }
+        
+        /* Status Panel */
+        .status-metrics {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .status-metric {
+            background-color: var(--background);
+            border-radius: 0.375rem;
+            padding: 0.75rem;
+        }
+        
+        .status-metric-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.25rem;
+        }
+        
+        .status-metric-value {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+        
+        .status-logs {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            max-height: 150px;
+            overflow-y: auto;
+        }
+        
+        .status-log {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .status-log:last-child {
+            border-bottom: none;
+        }
+        
+        .status-log-time {
+            font-weight: 600;
+            margin-right: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Cabeçalho -->
+        <header class="header">
+            <div class="logo">
+                <div class="logo-icon">K</div>
+                <span>Kairós</span>
+            </div>
+            <div class="user-menu">
+                <div class="user-avatar">JP</div>
+            </div>
+        </header>
+        
+        <!-- Barra lateral -->
+        <aside class="sidebar">
+            <div class="nav-section">
+                <h2 class="nav-title">Menu</h2>
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link active">
+                            <span class="nav-icon">⚡</span>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <span class="nav-icon">🧠</span>
+                            <span>Agente Mente</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <span class="nav-icon">💪</span>
+                            <span>Agente Corpo</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <span class="nav-icon">💼</span>
+                            <span>Agente Carreira</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="nav-section">
+                <h2 class="nav-title">Ferramentas</h2>
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <span class="nav-icon">⚙️</span>
+                            <span>Automações</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <span class="nav-icon">💰</span>
+                            <span>Monetização</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <span class="nav-icon">📊</span>
+                            <span>Análises</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="nav-section">
+                <h2 class="nav-title">Configurações</h2>
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <span class="nav-icon">👤</span>
+                            <span>Perfil</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <span class="nav-icon">🔄</span>
+                            <span>Integrações</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <span class="nav-icon">⚙️</span>
+                            <span>Preferências</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+        
+        <!-- Conteúdo principal -->
+        <main class="main-content">
+            <!-- VoxMind e AIHologram -->
+            <section class="voxmind-container">
+                <div class="ai-hologram">
+                    <div class="hologram-ring hologram-ring-1">
+                        <div class="hologram-dot hologram-dot-1"></div>
+                        <div class="hologram-dot hologram-dot-2"></div>
+                        <div class="hologram-dot hologram-dot-3"></div>
+                        <div class="hologram-dot hologram-dot-4"></div>
+                    </div>
+                    <div class="hologram-ring hologram-ring-2">
+                        <div class="hologram-dot hologram-dot-1"></div>
+                        <div class="hologram-dot hologram-dot-2"></div>
+                        <div class="hologram-dot hologram-dot-3"></div>
+                        <div class="hologram-dot hologram-dot-4"></div>
+                    </div>
+                    <div class="hologram-ring hologram-ring-3">
+                        <div class="hologram-dot hologram-dot-1"></div>
+                        <div class="hologram-dot hologram-dot-2"></div>
+                        <div class="hologram-dot hologram-dot-3"></div>
+                        <div class="hologram-dot hologram-dot-4"></div>
+                    </div>
+                    <div class="vox-avatar">VOX</div>
+                    <div class="hologram-metrics">
+                        <div>Processamento: 78%</div>
+                        <div>Estado: Calmo</div>
+                        <div>Confiança: 92%</div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Interface de comandos -->
+            <section class="command-interface">
+                <div class="command-history">
+                    <div class="message">
+                        <div class="message-user">
+                            <div class="message-user-avatar">JP</div>
+                            <div class="message-content">
+                                <div class="message-header">
+                                    <div class="message-name">João Paulo</div>
+                                    <div class="message-time">09:45</div>
+                                </div>
+                                <div class="message-text">
+                                    Bom dia, Kairós. Quais são minhas tarefas para hoje?
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="message">
+                        <div class="message-system">
+                            <div class="message-system-avatar">K</div>
+                            <div class="message-content">
+                                <div class="message-header">
+                                    <div class="message-name">Kairós</div>
+                                    <div class="message-time">09:45</div>
+                                </div>
+                                <div class="message-text">
+                                    Bom dia, João Paulo. Você tem 3 tarefas prioritárias para hoje:<br>
+                                    1. Reunião com cliente às 10:30<br>
+                                    2. Finalizar proposta de projeto até 14:00<br>
+                                    3. Revisar estratégia de monetização do blog
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="message">
+                        <div class="message-user">
+                            <div class="message-user-avatar">JP</div>
+                            <div class="message-content">
+                                <div class="message-header">
+                                    <div class="message-name">João Paulo</div>
+                                    <div class="message-time">09:46</div>
+                                </div>
+                                <div class="message-text">
+                                    Obrigado. Pode me mostrar as métricas do meu último artigo publicado?
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="message">
+                        <div class="message-system">
+                            <div class="message-system-avatar">K</div>
+                            <div class="message-content">
+                                <div class="message-header">
+                                    <div class="message-name">Kairós</div>
+                                    <div class="message-time">09:46</div>
+                                </div>
+                                <div class="message-text">
+                                    Seu último artigo "Estratégias de IA para Pequenos Negócios" teve:<br>
+                                    - 342 visualizações<br>
+                                    - 28 compartilhamentos<br>
+                                    - 15 comentários<br>
+                                    - Taxa de conversão: 3.8%<br>
+                                    <br>
+                                    Isso representa um aumento de 12% em relação à média dos seus últimos 5 artigos.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="command-input">
+                    <input type="text" class="command-input-field" placeholder="Digite um comando ou faça uma pergunta...">
+                    <button class="command-input-button">Enviar</button>
+                </div>
+            </section>
+            
+            <!-- Agentes e Status -->
+            <div class="panels-container">
+                <!-- Painel de Agentes -->
+                <section class="panel">
+                    <div class="panel-header">
+                        <h2 class="panel-title">Agentes Especializados</h2>
+                        <div class="panel-actions">
+                            <button class="panel-action">+</button>
+                        </div>
+                    </div>
+                    
+                    <div class="agents-tabs">
+                        <button class="agent-tab active">Mente</button>
+                        <button class="agent-tab">Corpo</button>
+                        <button class="agent-tab">Carreira</button>
+                    </div>
+                    
+                    <div class="agent-content">
+                        <p>Análise do Agente Mente:</p>
+                        <p>Seu foco está em 82% hoje, acima da média semanal de 75%. Recomendo:</p>
+                        <ul>
+                            <li>Técnica Pomodoro para a proposta de projeto</li>
+                            <li>Preparação de 15min antes da reunião com cliente</li>
+                            <li>Sessão de revisão estratégica no período da tarde</li>
+                        </ul>
+                        <p>Seu nível de estresse está baixo, ótimo momento para tarefas criativas.</p>
+                    </div>
+                </section>
+                
+                <!-- Painel de Status -->
+                <section class="panel">
+                    <div class="panel-header">
+                        <h2 class="panel-title">Análise Emocional</h2>
+                        <div class="panel-actions">
+                            <button class="panel-action">↻</button>
+                        </div>
+                    </div>
+                    
+                    <div class="status-metrics">
+                        <div class="status-metric">
+                            <div class="status-metric-label">Foco</div>
+                            <div class="status-metric-value">82%</div>
+                        </div>
+                        <div class="status-metric">
+                            <div class="status-metric-label">Energia</div>
+                            <div class="status-metric-value">75%</div>
+                        </div>
+                        <div class="status-metric">
+                            <div class="status-metric-label">Estresse</div>
+                            <div class="status-metric-value">18%</div>
+                        </div>
+                        <div class="status-metric">
+                            <div class="status-metric-label">Criatividade</div>
+                            <div class="status-metric-value">90%</div>
+                        </div>
+                    </div>
+                    
+                    <div class="status-logs">
+                        <div class="status-log">
+                            <span class="status-log-time">09:30</span>
+                            <span class="status-log-message">Início de sessão de trabalho</span>
+                        </div>
+                        <div class="status-log">
+                            <span class="status-log-time">09:35</span>
+                            <span class="status-log-message">Análise de voz: Tom calmo, ritmo moderado</span>
+                        </div>
+                        <div class="status-log">
+                            <span class="status-log-time">09:42</span>
+                            <span class="status-log-message">Padrão de digitação: Consistente e focado</span>
+                        </div>
+                        <div class="status-log">
+                            <span class="status-log-time">09:45</span>
+                            <span class="status-log-message">Consulta de agenda: Organização proativa</span>
+                        </div>
+                        <div class="status-log">
+                            <span class="status-log-time">09:46</span>
+                            <span class="status-log-message">Interesse em métricas: Foco em resultados</span>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

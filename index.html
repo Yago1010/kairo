@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kairós - Assistente Pessoal de IA</title>
+    <style>
+        :root {
+            --primary: #0066ff;
+            --secondary: #001133;
+            --accent: #00ccff;
+            --background: #ffffff;
+            --text: #001133;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background);
+            color: var(--text);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background-color: var(--secondary);
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+        
+        h1, h2, h3, h4 {
+            color: var(--primary);
+        }
+        
+        header h1 {
+            color: white;
+            margin: 0;
+        }
+        
+        .logo {
+            width: 80px;
+            height: 80px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .hero {
+            text-align: center;
+            padding: 60px 0;
+            background: linear-gradient(to bottom, var(--secondary), #002266);
+            color: white;
+        }
+        
+        .hero h1 {
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: var(--accent);
+            transform: scale(1.05);
+        }
+        
+        .features {
+            padding: 60px 0;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .feature-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid var(--primary);
+            transition: transform 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            color: white;
+            font-size: 24px;
+        }
+        
+        .agents {
+            background-color: #f5f8ff;
+            padding: 60px 0;
+        }
+        
+        .agent-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .agent-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .agent-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .agent-icon {
+            width: 80px;
+            height: 80px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: white;
+            font-size: 30px;
+        }
+        
+        .monetization {
+            padding: 60px 0;
+        }
+        
+        .monetization-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .monetization-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-top: 5px solid var(--primary);
+            transition: transform 0.3s;
+        }
+        
+        .monetization-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .cta {
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            padding: 60px 0;
+            text-align: center;
+            color: white;
+        }
+        
+        .cta h2 {
+            color: white;
+            margin-bottom: 20px;
+        }
+        
+        .cta p {
+            max-width: 600px;
+            margin: 0 auto 30px;
+            font-size: 1.2rem;
+        }
+        
+        .qr-section {
+            background-color: #f5f8ff;
+            padding: 60px 0;
+            text-align: center;
+        }
+        
+        .qr-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        
+        .qr-code {
+            width: 200px;
+            height: 200px;
+            background-color: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .qr-code::before {
+            content: "";
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-color: var(--primary);
+            top: 15px;
+            left: 15px;
+            border-radius: 5px;
+        }
+        
+        .qr-code::after {
+            content: "";
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-color: var(--primary);
+            top: 15px;
+            right: 15px;
+            border-radius: 5px;
+        }
+        
+        .qr-code-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .qr-code-inner::before {
+            content: "";
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-color: var(--primary);
+            bottom: 0;
+            left: 0;
+            border-radius: 5px;
+        }
+        
+        .qr-code-inner::after {
+            content: "";
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background-color: white;
+            border: 10px solid var(--primary);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        footer {
+            background-color: var(--secondary);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+        }
+        
+        .footer-links a:hover {
+            text-decoration: underline;
+            color: var(--accent);
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .feature-grid, .agent-cards, .monetization-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">K</div>
+            <h1>Kairós</h1>
+            <p>Assistente Pessoal de IA</p>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <div class="container">
+            <h1>Revolucione sua Produtividade e Monetização Digital</h1>
+            <p>O Kairós é um assistente pessoal de IA com interface minimalista que integra produtividade, análise emocional e estratégias de monetização digital em um único sistema.</p>
+            <a href="#features" class="btn">Conheça os Recursos</a>
+        </div>
+    </section>
+    
+    <section id="features" class="features">
+        <div class="container">
+            <h2>Recursos Principais</h2>
+            <p>O Kairós combina tecnologia de ponta com design intuitivo para oferecer uma experiência completa e personalizada.</p>
+            
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🧠</div>
+                    <h3>VoxMind™</h3>
+                    <p>Núcleo de processamento avançado com análise emocional e coordenação entre agentes especializados.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">⚙️</div>
+                    <h3>Automações Configuráveis</h3>
+                    <p>Crie fluxos de trabalho personalizados para qualquer nicho, categoria ou assunto com interface visual intuitiva.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>Conexão via QR Code</h3>
+                    <p>Sincronize dispositivos instantaneamente e compartilhe configurações com outros usuários de forma segura.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">💰</div>
+                    <h3>Fluxos de Monetização</h3>
+                    <p>Implemente estratégias comprovadas para ganhar dinheiro online com automação inteligente.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <h3>Integrações Externas</h3>
+                    <p>Conecte-se com Notion, Android Auto e diversas outras plataformas para uma experiência unificada.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">♿</div>
+                    <h3>Acessibilidade Total</h3>
+                    <p>Design inclusivo com suporte para deficientes visuais, auditivos e compatibilidade com Libras.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="agents">
+        <div class="container">
+            <h2>Agentes Especializados</h2>
+            <p>O Kairós conta com três agentes principais, cada um focado em uma área específica da sua vida.</p>
+            
+            <div class="agent-cards">
+                <div class="agent-card">
+                    <div class="agent-icon">🧠</div>
+                    <h3>Agente Mente</h3>
+                    <p>Foco em produtividade, organização e bem-estar mental. Gerencia tarefas, projetos e técnicas de foco.</p>
+                    <ul style="text-align: left;">
+                        <li>Gestão de tarefas e projetos</li>
+                        <li>Técnicas de foco e concentração</li>
+                        <li>Meditação guiada</li>
+                        <li>Organização de informações</li>
+                    </ul>
+                </div>
+                
+                <div class="agent-card">
+                    <div class="agent-icon">💪</div>
+                    <h3>Agente Corpo</h3>
+                    <p>Especializado em saúde física, exercícios e hábitos saudáveis para seu bem-estar completo.</p>
+                    <ul style="text-align: left;">
+                        <li>Acompanhamento de atividades físicas</li>
+                        <li>Monitoramento de hidratação</li>
+                        <li>Análise de padrões de sono</li>
+                        <li>Recomendações nutricionais</li>
+                    </ul>
+                </div>
+                
+                <div class="agent-card">
+                    <div class="agent-icon">💼</div>
+                    <h3>Agente Carreira</h3>
+                    <p>Focado em desenvolvimento profissional, networking e estratégias de monetização digital.</p>
+                    <ul style="text-align: left;">
+                        <li>Gestão de projetos profissionais</li>
+                        <li>Fluxos de monetização digital</li>
+                        <li>Análise de mercado e tendências</li>
+                        <li>Automação de marketing digital</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="monetization">
+        <div class="container">
+            <h2>Estratégias de Monetização Digital</h2>
+            <p>O Kairós integra fluxos completos para monetização digital, permitindo que qualquer usuário implemente modelos de negócio online.</p>
+            
+            <div class="monetization-cards">
+                <div class="monetization-card">
+                    <h3>Web Design Automatizado</h3>
+                    <p>Crie sites, landing pages e aplicativos completos sem conhecimento técnico, utilizando IA para gerar layouts, conteúdo e código.</p>
+                    <p><strong>Potencial:</strong> R$ 3.000 - R$ 10.000/mês</p>
+                </div>
+                
+                <div class="monetization-card">
+                    <h3>Negócios Digitais Automatizados</h3>
+                    <p>Desenvolva infoprodutos, cursos e serviços digitais com criação, marketing e vendas totalmente automatizados.</p>
+                    <p><strong>Potencial:</strong> R$ 5.000 - R$ 20.000/mês</p>
+                </div>
+                
+                <div class="monetization-card">
+                    <h3>Agência de Serviços Digitais</h3>
+                    <p>Ofereça serviços de copywriting, design e marketing utilizando IA para executar o trabalho que normalmente exigiria equipes.</p>
+                    <p><strong>Potencial:</strong> R$ 8.000 - R$ 30.000/mês</p>
+                </div>
+                
+                <div class="monetization-card">
+                    <h3>Monetização de Conteúdo</h3>
+                    <p>Crie canais de conteúdo em diferentes plataformas com produção totalmente automatizada por IA.</p>
+                    <p><strong>Potencial:</strong> R$ 2.000 - R$ 15.000/mês</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="qr-section">
+        <div class="container">
+            <h2>Conecte-se ao Kairós</h2>
+            <p>Escaneie o QR Code ou use o código de convite para sincronizar seus dispositivos.</p>
+            
+            <div class="qr-container">
+                <div class="qr-code">
+                    <div class="qr-code-inner"></div>
+                </div>
+                <p>Código de Convite: <strong>KAIROS-2025</strong></p>
+                <a href="#" class="btn">Baixar Aplicativo</a>
+            </div>
+        </div>
+    </section>
+    
+    <section class="cta">
+        <div class="container">
+            <h2>Comece a Transformar sua Vida Digital Hoje</h2>
+            <p>Junte-se aos milhares de usuários que já estão revolucionando sua produtividade e monetização com o Kairós.</p>
+            <a href="#" class="btn">Acessar Protótipo</a>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <div class="logo" style="margin-bottom: 20px;">K</div>
+            <p>Kairós - Assistente Pessoal de IA</p>
+            
+            <div class="footer-links">
+                <a href="#">Sobre</a>
+                <a href="#">Recursos</a>
+                <a href="#">Documentação</a>
+                <a href="#">Suporte</a>
+                <a href="#">Contato</a>
+            </div>
+            
+            <p>&copy; 2025 Kairós. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+</body>
+</html>
