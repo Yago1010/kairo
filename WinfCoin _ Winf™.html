@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WinfCoin | Winf™</title>
+    <style>
+        :root {
+            --color-black: #0D0D0D;
+            --color-white: #FFFFFF;
+            --color-accent: #AAFF00;
+            --color-secondary: #00FFFF;
+            --color-tertiary: #FF00FF;
+            --font-family: 'Inter', sans-serif;
+            --spacing-unit: 8px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--color-black);
+            color: var(--color-white);
+            line-height: 1.5;
+            min-height: 100vh;
+            display: flex;
+        }
+
+        .sidebar {
+            width: 280px;
+            background-color: rgba(255, 255, 255, 0.03);
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            padding: calc(var(--spacing-unit) * 3);
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--color-white);
+            text-decoration: none;
+            margin-bottom: calc(var(--spacing-unit) * 4);
+            display: block;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: calc(var(--spacing-unit) * 2);
+            padding: calc(var(--spacing-unit) * 2);
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            margin-bottom: calc(var(--spacing-unit) * 4);
+        }
+
+        .avatar {
+            width: 48px;
+            height: 48px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+
+        .user-info {
+            flex-grow: 1;
+        }
+
+        .user-name {
+            font-weight: 600;
+        }
+
+        .user-level {
+            font-size: 14px;
+            color: var(--color-accent);
+        }
+
+        .nav-section {
+            margin-bottom: calc(var(--spacing-unit) * 3);
+        }
+
+        .nav-title {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: calc(var(--spacing-unit) * 1.5);
+        }
+
+        .nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-unit);
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: calc(var(--spacing-unit) * 1.5);
+            padding: calc(var(--spacing-unit) * 1.5);
+            border-radius: 4px;
+            color: var(--color-white);
+            text-decoration: none;
+            transition: background-color 0.2s ease;
+        }
+
+        .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-link.active {
+            background-color: rgba(170, 255, 0, 0.1);
+            color: var(--color-accent);
+        }
+
+        .nav-icon {
+            width: 20px;
+            height: 20px;
+            background-color: currentColor;
+            opacity: 0.7;
+            border-radius: 4px;
+        }
+
+        .main-content {
+            flex-grow: 1;
+            margin-left: 280px;
+            padding: calc(var(--spacing-unit) * 4);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: calc(var(--spacing-unit) * 4);
+        }
+
+        .page-title {
+            font-size: 32px;
+            font-weight: 700;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: calc(var(--spacing-unit) * 2);
+        }
+
+        .btn {
+            padding: calc(var(--spacing-unit) * 1.5) calc(var(--spacing-unit) * 3);
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-unit);
+        }
+
+        .btn-primary {
+            background-color: var(--color-accent);
+            color: var(--color-black);
+        }
+
+        .btn-secondary {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--color-white);
+        }
+
+        .winfcoin-overview {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: calc(var(--spacing-unit) * 4);
+            margin-bottom: calc(var(--spacing-unit) * 6);
+        }
+
+        @media (min-width: 768px) {
+            .winfcoin-overview {
+                grid-template-columns: 1fr 2fr;
+            }
+        }
+
+        .winfcoin-balance {
+            background-color: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            padding: calc(var(--spacing-unit) * 4);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .winfcoin-icon {
+            width: 120px;
+            height: 120px;
+            background-color: rgba(170, 255, 0, 0.1);
+            border-radius: 50%;
+            margin-bottom: calc(var(--spacing-unit) * 3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            font-weight: 700;
+        }
+
+        .winfcoin-amount {
+            font-size: 64px;
+            font-weight: 700;
+            margin-bottom: calc(var(--spacing-unit) * 2);
+            background: linear-gradient(to right, var(--color-accent), var(--color-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+
+        .winfcoin-label {
+            font-size: 18px;
+            opacity: 0.8;
+            margin-bottom: calc(var(--spacing-unit) * 3);
+        }
+
+        .winfcoin-actions {
+            display: flex;
+            gap: calc(var(--spacing-unit) * 2);
+        }
+
+        .winfcoin-stats {
+            background-color: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            padding: calc(var(--spacing-unit) * 4);
+        }
+
+        .stats-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: calc(var(--spacing-unit) * 3);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: calc(var(--spacing-unit) * 3);
+        }
+
+        .stat-card {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: calc(var(--spacing-unit) * 3);
+        }
+
+        .stat-title {
+            font-size: 14px;
+            opacity: 0.7;
+            margin-bottom: var(--spacing-unit);
+        }
+
+        .stat-value {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: var(--spacing-unit);
+        }
+
+        .stat-change {
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-unit);
+        }
+
+        .stat-change.positive {
+            color: var(--color-accent);
+        }
+
+        .stat-change.negative {
+            color: var(--color-tertiary);
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: calc(var(--spacing-unit) * 3);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: calc(var(--spacing-unit) * 3);
+        }
+
+        .history-section {
+            margin-bottom: calc(var(--spacing-unit) * 6);
+        }
+
+        .history-filters {
+            display: flex;
+            gap: calc(var(--spacing-unit) * 2);
+            margin-bottom: calc(var(--spacing-unit) * 3);
+        }
+
+        .history-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .history-table th,
+        .history-table td {
+            padding: calc(var(--spacing-unit) * 2);
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .history-table th {
+            font-weight: 600;
+            opacity: 0.7;
+            font-size: 14px;
+        }
+
+        .history-table tr:hover {
+            background-color: rgba(255, 255, 255, 0.03);
+        }
+
+        .transaction-type {
+            display: inline-block;
+            padding: calc(var(--spacing-unit) * 0.5) calc(var(--spacing-unit) * 1);
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .type-earned {
+            background-color: rgba(170, 255, 0, 0.1);
+            color: var(--color-accent);
+        }
+
+        .type-spent {
+            background-color: rgba(255, 0, 255, 0.1);
+            color: var(--color-tertiary);
+        }
+
+        .amount-earned {
+            color: var(--color-accent);
+            font-weight: 600;
+        }
+
+        .amount-spent {
+            color: var(--color-tertiary);
+            font-weight: 600;
+        }
+
+        .rewards-section {
+            margin-bottom: calc(var(--spacing-unit) * 6);
+        }
+
+        .rewards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: calc(var(--spacing-unit) * 3);
+        }
+
+        .reward-card {
+            background-color: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.2s ease;
+        }
+
+        .reward-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .reward-image {
+            aspect-ratio: 16 / 9;
+            background-color: rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+
+        .reward-badge {
+            position: absolute;
+            top: calc(var(--spacing-unit) * 2);
+            right: calc(var(--spacing-unit) * 2);
+            padding: var(--spacing-unit) calc(var(--spacing-unit) * 1.5);
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            background-color: rgba(170, 255, 0, 0.2);
+            color: var(--color-accent);
+        }
+
+        .reward-info {
+            padding: calc(var(--spacing-unit) * 3);
+        }
+
+        .reward-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: calc(var(--spacing-unit) * 2);
+        }
+
+        .reward-description {
+            opacity: 0.8;
+            margin-bottom: calc(var(--spacing-unit) * 3);
+        }
+
+        .reward-cost {
+            display: flex;
+            align-items: center;
+            gap: calc(var(--spacing-unit) * 2);
+            margin-bottom: calc(var(--spacing-unit) * 3);
+        }
+
+        .reward-coin {
+            width: 32px;
+            height: 32px;
+            background-color: rgba(170, 255, 0, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        .reward-price {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .reward-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .reward-availability {
+            font-size: 14px;
+            opacity: 0.7;
+        }
+
+        .earn-section {
+            margin-bottom: calc(var(--spacing-unit) * 6);
+        }
+
+        .earn-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: calc(var(--spacing-unit) * 3);
+        }
+
+        .earn-card {
+            background-color: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            padding: calc(var(--spacing-unit) * 3);
+        }
+
+        .earn-header {
+            display: flex;
+            align-items: center;
+            gap: calc(var(--spacing-unit) * 2);
+            margin-bottom: calc(var(--spacing-unit) * 2);
+        }
+
+        .earn-icon {
+            width: 48px;
+            height: 48px;
+            background-color: rgba(170, 255, 0, 0.1);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .earn-title {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .earn-description {
+            margin-bottom: calc(var(--spacing-unit) * 3);
+            opacity: 0.8;
+        }
+
+        .earn-reward {
+            display: flex;
+            align-items: center;
+            gap: calc(var(--spacing-unit) * 2);
+            margin-bottom: calc(var(--spacing-unit) * 3);
+        }
+
+        .earn-coin {
+            width: 24px;
+            height: 24px;
+            background-color: rgba(170, 255, 0, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 12px;
+        }
+
+        .earn-amount {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--color-accent);
+        }
+
+        .settings-section {
+            margin-bottom: calc(var(--spacing-unit) * 6);
+        }
+
+        .settings-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: calc(var(--spacing-unit) * 3);
+        }
+
+        @media (min-width: 768px) {
+            .settings-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .settings-card {
+            background-color: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            padding: calc(var(--spacing-unit) * 3);
+        }
+
+        .settings-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: calc(var(--spacing-unit) * 2);
+        }
+
+        .settings-description {
+            opacity: 0.8;
+            margin-bottom: calc(var(--spacing-unit) * 3);
+        }
+
+        .settings-form {
+            display: flex;
+            flex-direction: column;
+            gap: calc(var(--spacing-unit) * 2);
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-unit);
+        }
+
+        .form-label {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .form-input {
+            padding: calc(var(--spacing-unit) * 1.5);
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            color: var(--color-white);
+            font-family: var(--font-family);
+        }
+
+        .form-select {
+            padding: calc(var(--spacing-unit) * 1.5);
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            color: var(--color-white);
+            font-family: var(--font-family);
+        }
+
+        .form-toggle {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .toggle-switch {
+            width: 40px;
+            height: 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .toggle-switch::after {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            background-color: var(--color-white);
+            border-radius: 50%;
+            top: 2px;
+            left: 2px;
+            transition: transform 0.2s ease;
+        }
+
+        .active .toggle-switch {
+            background-color: rgba(170, 255, 0, 0.3);
+        }
+
+        .active .toggle-switch::after {
+            transform: translateX(20px);
+            background-color: var(--color-accent);
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                border-right: none;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            body {
+                flex-direction: column;
+            }
+
+            .stats-grid,
+            .rewards-grid,
+            .earn-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .history-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <aside class="sidebar">
+        <a href="#" class="logo">WINFCOIN</a>
+        
+        <div class="user-profile">
+            <div class="avatar"></div>
+            <div class="user-info">
+                <div class="user-name">Ricardo Mendes</div>
+                <div class="user-level">Membro Elite • Nível 42</div>
+            </div>
+        </div>
+        
+        <div class="nav-section">
+            <div class="nav-title">Principal</div>
+            <div class="nav-links">
+                <a href="#" class="nav-link active">
+                    <div class="nav-icon"></div>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#" class="nav-link">
+                    <div class="nav-icon"></div>
+                    <span>Histórico</span>
+                </a>
+                <a href="#" class="nav-link">
+                    <div class="nav-icon"></div>
+                    <span>Recompensas</span>
+                </a>
+                <a href="#" class="nav-link">
+                    <div class="nav-icon"></div>
+                    <span>Como Ganhar</span>
+                </a>
+            </div>
+        </div>
+        
+        <div class="nav-section">
+            <div class="nav-title">Integração</div>
+            <div class="nav-links">
+                <a href="#" class="nav-link">
+                    <div class="nav-icon"></div>
+                    <span>Blackshop</span>
+                </a>
+                <a href="#" class="nav-link">
+                    <div class="nav-icon"></div>
+                    <span>Área de Membros</span>
+                </a>
+                <a href="#" class="nav-link">
+                    <div class="nav-icon"></div>
+                    <span>W-Rank</span>
+                </a>
+            </div>
+        </div>
+        
+        <div class="nav-section">
+            <div class="nav-title">Configurações</div>
+            <div class="nav-links">
+                <a href="#" class="nav-link">
+                    <div class="nav-icon"></div>
+                    <span>Preferências</span>
+                </a>
+                <a href="#" class="nav-link">
+                    <div class="nav-icon"></div>
+                    <span>Notificações</span>
+                </a>
+                <a href="#" class="nav-link">
+                    <div class="nav-icon"></div>
+                    <span>Segurança</span>
+                </a>
+            </div>
+        </div>
+    </aside>
+    
+    <main class="main-content">
+        <header class="header">
+            <h1 class="page-title">WinfCoin Dashboard</h1>
+            <div class="header-actions">
+                <button class="btn btn-secondary">Transferir</button>
+                <button class="btn btn-primary">Resgatar</button>
+            </div>
+        </header>
+        
+        <section class="winfcoin-overview">
+            <div class="winfcoin-balance">
+                <div class="winfcoin-icon">W</div>
+                <div class="winfcoin-amount">1,250</div>
+                <div class="winfcoin-label">WinfCoins Disponíveis</div>
+                <div class="winfcoin-actions">
+                    <button class="btn btn-secondary">Histórico</button>
+                    <button class="btn btn-primary">Resgatar</button>
+                </div>
+            </div>
+            
+            <div class="winfcoin-stats">
+                <h2 class="stats-title">Estatísticas</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-title">Total Ganho</div>
+                        <div class="stat-value">3,750</div>
+                        <div class="stat-change positive">+850 este mês</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-title">Total Gasto</div>
+                        <div class="stat-value">2,500</div>
+                        <div class="stat-change negative">-500 este mês</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-title">Maior Transação</div>
+                        <div class="stat-value">750</div>
+                        <div class="stat-change">Compra AeroCore™</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-title">Recompensas Resgatadas</div>
+                        <div class="stat-value">8</div>
+                        <div class="stat-change positive">+2 este mês</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="history-section">
+            <div class="section-header">
+                <h2 class="section-title">Histórico de Transações</h2>
+                <div class="header-actions">
+                    <button class="btn btn-secondary">Exportar</button>
+                    <button class="btn btn-secondary">Filtrar</button>
+                </div>
+            </div>
+            
+            <div class="history-filters">
+                <button class="btn btn-secondary">Todos</button>
+                <button class="btn btn-secondary">Ganhos</button>
+                <button class="btn btn-secondary">Gastos</button>
+            </div>
+            
+            <table class="history-table">
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Descrição</th>
+                        <th>Tipo</th>
+                        <th>Quantidade</th>
+                        <th>Saldo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>25/05/2025</td>
+                        <td>Conclusão do Módulo 3 - Masterclass AeroCore™</td>
+                        <td><span class="transaction-type type-earned">Ganho</span></td>
+                        <td class="amount-earned">+150</td>
+                        <td>1,250</td>
+                    </tr>
+                    <tr>
+                        <td>22/05/2025</td>
+                        <td>Resgate de Desconto Premium</td>
+                        <td><span class="transaction-type type-spent">Gasto</span></td>
+                        <td class="amount-spent">-500</td>
+                        <td>1,100</td>
+                    </tr>
+                    <tr>
+                        <td>20/05/2025</td>
+                        <td>Bônus de Aniversário de Membro</td>
+                        <td><span class="transaction-type type-earned">Ganho</span></td>
+                        <td class="amount-earned">+250</td>
+                        <td>1,600</td>
+                    </tr>
+                    <tr>
+                        <td>15/05/2025</td>
+                        <td>Compra de AeroCore™ Pro Elite</td>
+                        <td><span class="transaction-type type-earned">Ganho</span></td>
+                        <td class="amount-earned">+500</td>
+                        <td>1,350</td>
+                    </tr>
+                    <tr>
+                        <td>10/05/2025</td>
+                        <td>Participação em Evento Exclusivo</td>
+                        <td><span class="transaction-type type-earned">Ganho</span></td>
+                        <td class="amount-earned">+200</td>
+                        <td>850</td>
+                    </tr>
+                    <tr>
+                        <td>05/05/2025</td>
+                        <td>Resgate de Acesso VIP Workshop</td>
+                        <td><span class="transaction-type type-spent">Gasto</span></td>
+                        <td class="amount-spent">-350</td>
+                        <td>650</td>
+                    </tr>
+                    <tr>
+                        <td>01/05/2025</td>
+                        <td>Indicação de Novo Membro</td>
+                        <td><span class="transaction-type type-earned">Ganho</span></td>
+                        <td class="amount-earned">+300</td>
+                        <td>1,000</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        
+        <section class="rewards-section">
+            <div class="section-header">
+                <h2 class="section-title">Recompensas Disponíveis</h2>
+                <button class="btn btn-secondary">Ver Todas</button>
+            </div>
+            
+            <div class="rewards-grid">
+                <div class="reward-card">
+                    <div class="reward-image">
+                        <div class="reward-badge">Exclusivo</div>
+                    </div>
+                    <div class="reward-info">
+                        <h3 class="reward-title">Desconto Exclusivo 25%</h3>
+                        <p class="reward-description">Cupom de 25% de desconto para qualquer produto da linha Winf Select™. Válido por 30 dias após o resgate.</p>
+                        <div class="reward-cost">
+                            <div class="reward-coin">W</div>
+                            <div class="reward-price">750 WinfCoins</div>
+                        </div>
+                        <div class="reward-actions">
+                            <button class="btn btn-primary">Resgatar</button>
+                            <div class="reward-availability">Disponível: 15</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="reward-card">
+                    <div class="reward-image">
+                        <div class="reward-badge">VIP</div>
+                    </div>
+                    <div class="reward-info">
+                        <h3 class="reward-title">Acesso VIP Evento Anual</h3>
+                        <p class="reward-description">Ingresso para área VIP no evento anual Winf™ com acesso a palestras exclusivas e networking com especialistas.</p>
+                        <div class="reward-cost">
+                            <div class="reward-coin">W</div>
+                            <div class="reward-price">1,500 WinfCoins</div>
+                        </div>
+                        <div class="reward-actions">
+                            <button class="btn btn-primary">Resgatar</button>
+                            <div class="reward-availability">Disponível: 5</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="reward-card">
+                    <div class="reward-image">
+                        <div class="reward-badge">Limited</div>
+                    </div>
+                    <div class="reward-info">
+                        <h3 class="reward-title">Kit Exclusivo Limited Edition</h3>
+                        <p class="reward-description">Kit com produtos exclusivos da edição limitada Winf™ não disponíveis para venda, incluindo itens colecionáveis.</p>
+                        <div class="reward-cost">
+                            <div class="reward-coin">W</div>
+                            <div class="reward-price">2,000 WinfCoins</div>
+                        </div>
+                        <div class="reward-actions">
+                            <button class="btn btn-primary">Resgatar</button>
+                            <div class="reward-availability">Disponível: 3</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="earn-section">
+            <div class="section-header">
+                <h2 class="section-title">Como Ganhar WinfCoins</h2>
+                <button class="btn btn-secondary">Ver Mais</button>
+            </div>
+            
+            <div class="earn-grid">
+                <div class="earn-card">
+                    <div class="earn-header">
+                        <div class="earn-icon"></div>
+                        <div class="earn-title">Compras na Blackshop</div>
+                    </div>
+                    <p class="earn-description">Ganhe WinfCoins em todas as compras realizadas na Blackshop. Quanto maior o valor, mais coins você acumula.</p>
+                    <div class="earn-reward">
+                        <div class="earn-coin">W</div>
+                        <div class="earn-amount">10% do valor em WinfCoins</div>
+                    </div>
+                    <button class="btn btn-secondary">Ir para Blackshop</button>
+                </div>
+                
+                <div class="earn-card">
+                    <div class="earn-header">
+                        <div class="earn-icon"></div>
+                        <div class="earn-title">Conclusão de Cursos</div>
+                    </div>
+                    <p class="earn-description">Complete cursos e módulos na plataforma Winf Ascend™ para ganhar WinfCoins e aumentar seu nível.</p>
+                    <div class="earn-reward">
+                        <div class="earn-coin">W</div>
+                        <div class="earn-amount">50-200 WinfCoins por curso</div>
+                    </div>
+                    <button class="btn btn-secondary">Ver Cursos</button>
+                </div>
+                
+                <div class="earn-card">
+                    <div class="earn-header">
+                        <div class="earn-icon"></div>
+                        <div class="earn-title">Indicação de Amigos</div>
+                    </div>
+                    <p class="earn-description">Indique novos membros para o ecossistema Winf™ e ganhe WinfCoins quando eles realizarem a primeira compra.</p>
+                    <div class="earn-reward">
+                        <div class="earn-coin">W</div>
+                        <div class="earn-amount">300 WinfCoins por indicação</div>
+                    </div>
+                    <button class="btn btn-secondary">Programa de Indicação</button>
+                </div>
+                
+                <div class="earn-card">
+                    <div class="earn-header">
+                        <div class="earn-icon"></div>
+                        <div class="earn-title">Participação em Eventos</div>
+                    </div>
+                    <p class="earn-description">Participe de eventos, webinars e workshops exclusivos para membros e ganhe WinfCoins extras.</p>
+                    <div class="earn-reward">
+                        <div class="earn-coin">W</div>
+                        <div class="earn-amount">100-500 WinfCoins por evento</div>
+                    </div>
+                    <button class="btn btn-secondary">Calendário de Eventos</button>
+                </div>
+            </div>
+        </section>
+        
+        <section class="settings-section">
+            <h2 class="section-title">Configurações de WinfCoin</h2>
+            
+            <div class="settings-grid">
+                <div class="settings-card">
+                    <h3 class="settings-title">Preferências de Notificação</h3>
+                    <p class="settings-description">Configure como e quando deseja receber notificações sobre suas transações de WinfCoin.</p>
+                    <div class="settings-form">
+                        <div class="form-group form-toggle active">
+                            <span>Notificações por email</span>
+                            <div class="toggle-switch active"></div>
+                        </div>
+                        <div class="form-group form-toggle active">
+                            <span>Notificações no aplicativo</span>
+                            <div class="toggle-switch active"></div>
+                        </div>
+                        <div class="form-group form-toggle">
+                            <span>Notificações por SMS</span>
+                            <div class="toggle-switch"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Frequência de resumo</label>
+                            <select class="form-select">
+                                <option>Diário</option>
+                                <option selected>Semanal</option>
+                                <option>Mensal</option>
+                                <option>Nunca</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="settings-card">
+                    <h3 class="settings-title">Segurança e Autenticação</h3>
+                    <p class="settings-description">Configure opções de segurança para proteger suas transações de WinfCoin.</p>
+                    <div class="settings-form">
+                        <div class="form-group form-toggle active">
+                            <span>Autenticação de dois fatores para resgates</span>
+                            <div class="toggle-switch active"></div>
+                        </div>
+                        <div class="form-group form-toggle">
+                            <span>Confirmação por email para transferências</span>
+                            <div class="toggle-switch"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Limite de resgate diário</label>
+                            <select class="form-select">
+                                <option>500 WinfCoins</option>
+                                <option selected>1,000 WinfCoins</option>
+                                <option>2,000 WinfCoins</option>
+                                <option>Sem limite</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">PIN de segurança</label>
+                            <input type="password" class="form-input" value="••••••">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

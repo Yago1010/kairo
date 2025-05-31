@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WINF CONCIERGE™ | Assistente IA Premium</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos Globais */
+        :root {
+            --black-deep: #000000;
+            --black-secondary: #111111;
+            --white-premium: #FFFFFF;
+            --white-secondary: rgba(255, 255, 255, 0.7);
+            --blue-accent: #0066FF;
+            --purple-accent: #CC33FF;
+            --cyan-accent: #00CCCC;
+            --pink-accent: #FF3399;
+            --orange-accent: #FF9900;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        body {
+            background-color: var(--black-deep);
+            color: var(--white-premium);
+            min-height: 100vh;
+            overflow-x: hidden;
+            letter-spacing: 0.05em;
+        }
+        
+        /* Cabeçalho */
+        header {
+            padding: 2rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 300;
+            letter-spacing: 0.5rem;
+            color: var(--white-premium);
+            text-decoration: none;
+        }
+        
+        .logo span {
+            color: var(--cyan-accent);
+            font-weight: 600;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 3rem;
+        }
+        
+        nav a {
+            color: var(--white-premium);
+            text-decoration: none;
+            font-size: 0.9rem;
+            letter-spacing: 0.2rem;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+        
+        nav a:hover {
+            color: var(--white-secondary);
+        }
+        
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--black-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            border: 1px solid var(--white-secondary);
+        }
+        
+        .user-info {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .user-name {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        .user-level {
+            font-size: 0.7rem;
+            color: var(--white-secondary);
+            letter-spacing: 0.1rem;
+        }
+        
+        /* Main Container */
+        .main-container {
+            display: flex;
+            height: calc(100vh - 80px);
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            width: 300px;
+            background-color: var(--black-secondary);
+            border-right: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .sidebar-title {
+            font-size: 1.2rem;
+            font-weight: 300;
+            letter-spacing: 0.2rem;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+        }
+        
+        .sidebar-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        
+        .sidebar-menu-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: var(--white-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+        
+        .sidebar-menu-item:hover {
+            color: var(--white-premium);
+        }
+        
+        .sidebar-menu-item.active {
+            color: var(--cyan-accent);
+        }
+        
+        .sidebar-menu-icon {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .sidebar-divider {
+            height: 1px;
+            background-color: rgba(255, 255, 255, 0.05);
+            margin: 1rem 0 2rem;
+        }
+        
+        .recent-conversations {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            overflow-y: auto;
+        }
+        
+        .recent-title {
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.1rem;
+            text-transform: uppercase;
+            color: var(--white-secondary);
+            margin-bottom: 1rem;
+        }
+        
+        .conversation-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.8rem;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .conversation-item:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+        
+        .conversation-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: rgba(0, 204, 204, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            color: var(--cyan-accent);
+        }
+        
+        .conversation-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .conversation-title {
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-bottom: 0.3rem;
+        }
+        
+        .conversation-preview {
+            font-size: 0.7rem;
+            color: var(--white-secondary);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .conversation-time {
+            font-size: 0.6rem;
+            color: var(--white-secondary);
+        }
+        
+        /* Chat Container */
+        .chat-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .chat-header {
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .chat-title {
+            font-size: 1.2rem;
+            font-weight: 300;
+            letter-spacing: 0.2rem;
+        }
+        
+        .chat-actions {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .chat-action {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .chat-action:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .chat-messages {
+            flex: 1;
+            padding: 2rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        
+        .message {
+            display: flex;
+            gap: 1rem;
+            max-width: 80%;
+        }
+        
+        .message.user {
+            align-self: flex-end;
+            flex-direction: row-reverse;
+        }
+        
+        .message-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--black-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+        
+        .message.assistant .message-avatar {
+            background-color: rgba(0, 204, 204, 0.1);
+            color: var(--cyan-accent);
+        }
+        
+        .message.user .message-avatar {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .message-content {
+            background-color: var(--black-secondary);
+            padding: 1.5rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        
+        .message.user .message-content {
+            background-color: rgba(0, 204, 204, 0.1);
+        }
+        
+        .message-time {
+            font-size: 0.7rem;
+            color: var(--white-secondary);
+            margin-top: 0.5rem;
+        }
+        
+        .chat-input-container {
+            padding: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .chat-input-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background-color: var(--black-secondary);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            padding: 1rem;
+        }
+        
+        .chat-input {
+            flex: 1;
+            background-color: transparent;
+            border: none;
+            color: var(--white-premium);
+            font-size: 0.9rem;
+            outline: none;
+        }
+        
+        .chat-input::placeholder {
+            color: var(--white-secondary);
+        }
+        
+        .chat-input-actions {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .chat-input-action {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .chat-input-action:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .chat-input-action.send {
+            background-color: var(--cyan-accent);
+            color: var(--black-deep);
+        }
+        
+        /* Integrations Panel */
+        .integrations-panel {
+            width: 300px;
+            background-color: var(--black-secondary);
+            border-left: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .integrations-title {
+            font-size: 1.2rem;
+            font-weight: 300;
+            letter-spacing: 0.2rem;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+        }
+        
+        .integration-section {
+            margin-bottom: 2rem;
+        }
+        
+        .integration-section-title {
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.1rem;
+            text-transform: uppercase;
+            color: var(--white-secondary);
+            margin-bottom: 1rem;
+        }
+        
+        .integration-items {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .integration-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background-color: rgba(255, 255, 255, 0.03);
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .integration-item:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+        
+        .integration-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+        
+        .integration-icon.quantum {
+            background-color: rgba(0, 102, 255, 0.1);
+            color: var(--blue-accent);
+        }
+        
+        .integration-icon.ascend {
+            background-color: rgba(0, 204, 102, 0.1);
+            color: #00CC66;
+        }
+        
+        .integration-icon.warp {
+            background-color: rgba(0, 204, 204, 0.1);
+            color: var(--cyan-accent);
+        }
+        
+        .integration-icon.dark {
+            background-color: rgba(255, 51, 153, 0.1);
+            color: var(--pink-accent);
+        }
+        
+        .integration-info {
+            flex: 1;
+        }
+        
+        .integration-name {
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 0.3rem;
+        }
+        
+        .integration-status {
+            font-size: 0.7rem;
+            color: var(--white-secondary);
+        }
+        
+        .integration-status.connected {
+            color: #00CC66;
+        }
+        
+        /* Responsividade */
+        @media (max-width: 1400px) {
+            .integrations-panel {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .sidebar {
+                width: 80px;
+                padding: 2rem 1rem;
+            }
+            
+            .sidebar-title,
+            .sidebar-menu-item span,
+            .recent-title,
+            .conversation-info,
+            .conversation-time {
+                display: none;
+            }
+            
+            .sidebar-menu {
+                align-items: center;
+            }
+            
+            .conversation-item {
+                justify-content: center;
+                padding: 0.8rem 0;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            header {
+                padding: 1.5rem;
+            }
+            
+            .logo {
+                font-size: 1.5rem;
+            }
+            
+            nav ul {
+                display: none;
+            }
+            
+            .chat-messages {
+                padding: 1.5rem;
+            }
+            
+            .message {
+                max-width: 90%;
+            }
+            
+            .chat-input-container {
+                padding: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .sidebar {
+                display: none;
+            }
+            
+            .message {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="#" class="logo">WINF <span>CONCIERGE™</span></a>
+        
+        <nav>
+            <ul>
+                <li><a href="#">Início</a></li>
+                <li><a href="#">Assistente</a></li>
+                <li><a href="#">Integrações</a></li>
+                <li><a href="#">Configurações</a></li>
+                <li><a href="#">Suporte</a></li>
+            </ul>
+        </nav>
+        
+        <div class="user-profile">
+            <div class="user-info">
+                <div class="user-name">Carlos Mendes</div>
+                <div class="user-level">PREMIUM USER</div>
+            </div>
+            <div class="user-avatar">C</div>
+        </div>
+    </header>
+    
+    <div class="main-container">
+        <aside class="sidebar">
+            <h2 class="sidebar-title">Menu</h2>
+            
+            <div class="sidebar-menu">
+                <a href="#" class="sidebar-menu-item active">
+                    <div class="sidebar-menu-icon">💬</div>
+                    <span>Conversas</span>
+                </a>
+                <a href="#" class="sidebar-menu-item">
+                    <div class="sidebar-menu-icon">🔍</div>
+                    <span>Explorar</span>
+                </a>
+                <a href="#" class="sidebar-menu-item">
+                    <div class="sidebar-menu-icon">📊</div>
+                    <span>Dashboards</span>
+                </a>
+                <a href="#" class="sidebar-menu-item">
+                    <div class="sidebar-menu-icon">⚙️</div>
+                    <span>Configurações</span>
+                </a>
+            </div>
+            
+            <div class="sidebar-divider"></div>
+            
+            <div class="recent-conversations">
+                <h3 class="recent-title">Conversas Recentes</h3>
+                
+                <div class="conversation-item">
+                    <div class="conversation-icon">AI</div>
+                    <div class="conversation-info">
+                        <div class="conversation-title">Orçamento AeroCore™</div>
+                        <div class="conversation-preview">Simulação de orçamento para cliente premium...</div>
+                    </div>
+                    <div class="conversation-time">2h</div>
+                </div>
+                
+                <div class="conversation-item">
+                    <div class="conversation-icon">AI</div>
+                    <div class="conversation-info">
+                        <div class="conversation-title">Integração W.A.R.P.</div>
+                        <div class="conversation-preview">Configuração do sistema para credenciados...</div>
+                    </div>
+                    <div class="conversation-time">5h</div>
+                </div>
+                
+                <div class="conversation-item">
+                    <div class="conversation-icon">AI</div>
+                    <div class="conversation-info">
+                        <div class="conversation-title">Suporte Técnico</div>
+                        <div class="conversation-preview">Resolução de dúvidas sobre instalação...</div>
+                    </div>
+                    <div class="conversation-time">1d</div>
+                </div>
+                
+                <div class="conversation-item">
+                    <div class="conversation-icon">AI</div>
+                    <div class="conversation-info">
+                        <div class="conversation-title">Análise de Mercado</div>
+                        <div class="conversation-preview">Relatório de tendências do setor premium...</div>
+                    </div>
+                    <div class="conversation-time">2d</div>
+                </div>
+                
+                <div class="conversation-item">
+                    <div class="conversation-icon">AI</div>
+                    <div class="conversation-info">
+                        <div class="conversation-title">Treinamento Ascend</div>
+                        <div class="conversation-preview">Preparação para certificação premium...</div>
+                    </div>
+                    <div class="conversation-time">3d</div>
+                </div>
+            </div>
+        </aside>
+        
+        <main class="chat-container">
+            <div class="chat-header">
+                <h2 class="chat-title">ASSISTENTE PREMIUM</h2>
+                
+                <div class="chat-actions">
+                    <div class="chat-action">🔍</div>
+                    <div class="chat-action">📋</div>
+                    <div class="chat-action">⚙️</div>
+                </div>
+            </div>
+            
+            <div class="chat-messages">
+                <div class="message assistant">
+                    <div class="message-avatar">AI</div>
+                    <div class="message-content">
+                        Olá, Carlos! Bem-vindo ao Winf Concierge™. Como posso ajudá-lo hoje? Estou conectado a todo o ecossistema Winf e posso auxiliar com orçamentos premium, configurações do sistema, informações sobre produtos, agendamentos e muito mais.
+                        <div class="message-time">14:30</div>
+                    </div>
+                </div>
+                
+                <div class="message user">
+                    <div class="message-avatar">C</div>
+                    <div class="message-content">
+                        Preciso gerar um orçamento para um cliente interessado em AeroCore™ MOBILE para uma frota de 5 veículos de luxo. Pode me ajudar com isso?
+                        <div class="message-time">14:32</div>
+                    </div>
+                </div>
+                
+                <div class="message assistant">
+                    <div class="message-avatar">AI</div>
+                    <div class="message-content">
+                        Com certeza! Vou conectar ao NEUROMESH.AI para gerar um orçamento premium para AeroCore™ MOBILE. Preciso de algumas informações:
+                        <br><br>
+                        1. Quais são os modelos dos veículos?<br>
+                        2. Qual tecnologia específica da linha AeroCore™ MOBILE interessa ao cliente? (NanoCarbon, Nanoceramic, MetalFusion ou Shield-S)<br>
+                        3. Deseja incluir instalação e garantia premium?
+                        <div class="message-time">14:33</div>
+                    </div>
+                </div>
+                
+                <div class="message user">
+                    <div class="message-avatar">C</div>
+                    <div class="message-content">
+                        São 3 Mercedes-Benz Classe S e 2 BMW X7. O cliente está interessado na tecnologia NanoCarbon com proteção máxima. Sim, quero incluir instalação e garantia premium de 5 anos.
+                        <div class="message-time">14:35</div>
+                    </div>
+                </div>
+                
+                <div class="message assistant">
+                    <div class="message-avatar">AI</div>
+                    <div class="message-content">
+                        Excelente escolha! Estou processando o orçamento premium com o NEUROMESH.AI. A tecnologia NanoCarbon da linha AeroCore™ MOBILE oferece a máxima proteção contra raios UV, calor extremo e impactos, ideal para veículos de luxo.
+                        <br><br>
+                        Seu orçamento está sendo gerado com os seguintes benefícios exclusivos:
+                        <br><br>
+                        • Instalação por técnicos certificados Winf Ascend™<br>
+                        • Garantia premium de 5 anos com cobertura total<br>
+                        • Certificado de autenticidade digital<br>
+                        • Acesso ao programa Cuidar & Conectar™<br>
+                        • Manutenção preventiva anual incluída
+                        <br><br>
+                        O orçamento detalhado estará disponível em instantes. Deseja que eu envie diretamente ao cliente ou prefere revisá-lo primeiro?
+                        <div class="message-time">14:37</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chat-input-container">
+                <div class="chat-input-wrapper">
+                    <input type="text" class="chat-input" placeholder="Digite sua mensagem...">
+                    
+                    <div class="chat-input-actions">
+                        <div class="chat-input-action">📎</div>
+                        <div class="chat-input-action">🎤</div>
+                        <div class="chat-input-action send">➤</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <aside class="integrations-panel">
+            <h2 class="integrations-title">Integrações</h2>
+            
+            <div class="integration-section">
+                <h3 class="integration-section-title">Sistemas Ativos</h3>
+                
+                <div class="integration-items">
+                    <div class="integration-item">
+                        <div class="integration-icon quantum">Q</div>
+                        <div class="integration-info">
+                            <div class="integration-name">Quantum Driver</div>
+                            <div class="integration-status connected">Conectado</div>
+                        </div>
+                    </div>
+                    
+                    <div class="integration-item">
+                        <div class="integration-icon ascend">A</div>
+                        <div class="integration-info">
+                            <div class="integration-name">Winf Ascend™</div>
+                            <div class="integration-status connected">Conectado</div>
+                        </div>
+                    </div>
+                    
+                    <div class="integration-item">
+                        <div class="integration-icon warp">W</div>
+                        <div class="integration-info">
+                            <div class="integration-name">W.A.R.P.™</div>
+                            <div class="integration-status connected">Conectado</div>
+                        </div>
+                    </div>
+                    
+                    <div class="integration-item">
+                        <div class="integration-icon dark">D</div>
+                        <div class="integration-info">
+                            <div class="integration-name">Universo Dark™</div>
+                            <div class="integration-status connected">Conectado</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="integration-section">
+                <h3 class="integration-section-title">Ações Rápidas</h3>
+                
+                <div class="integration-items">
+                    <div class="integration-item">
+                        <div class="integration-icon" style="background-color: rgba(255, 153, 0, 0.1); color: #FF9900;">$</div>
+                        <div class="integration-info">
+                            <div class="integration-name">Gerar Orçamento</div>
+                            <div class="integration-status">NEUROMESH.AI</div>
+                        </div>
+                    </div>
+                    
+                    <div class="integration-item">
+                        <div class="integration-icon" style="background-color: rgba(153, 102, 255, 0.1); color: #9966FF;">📊</div>
+                        <div class="integration-info">
+                            <div class="integration-name">Dashboard</div>
+                            <div class="integration-status">Multiplataforma</div>
+                        </div>
+                    </div>
+                    
+                    <div class="integration-item">
+                        <div class="integration-icon" style="background-color: rgba(255, 51, 51, 0.1); color: #FF3333;">📅</div>
+                        <div class="integration-info">
+                            <div class="integration-name">Agendar Cliente</div>
+                            <div class="integration-status">Sistema de Captação</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </div>
+</body>
+</html>

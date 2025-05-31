@@ -1,0 +1,1377 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ghostbuster MAW™ | Tecnologia Invisível, Proteção Extraordinária | Winf™</title>
+    <style>
+        :root {
+            --primary-color: #000000;
+            --secondary-color: #ffffff;
+            --accent-color: #c9a87c;
+            --highlight-color: #2a6496;
+            --dark-gray: #1a1a1a;
+            --medium-gray: #333333;
+            --light-gray: #666666;
+            --font-main: 'Montserrat', sans-serif;
+            --font-secondary: 'Raleway', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--primary-color);
+            color: var(--secondary-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: rgba(0, 0, 0, 0.9);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(201, 168, 124, 0.3);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--secondary-color);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--accent-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)), url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(42, 100, 150, 0.1) 0%, rgba(0, 0, 0, 0.8) 70%);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero h1 span {
+            color: var(--accent-color);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .cta-button:hover {
+            background-color: #b69669;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Sinapses Animation */
+        .sinapses {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            opacity: 0.3;
+        }
+
+        .sinapse {
+            position: absolute;
+            background-color: var(--accent-color);
+            border-radius: 50%;
+            opacity: 0;
+            animation: pulse 3s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            50% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(3);
+                opacity: 0;
+            }
+        }
+
+        /* Features Section */
+        .features {
+            padding: 100px 0;
+            background-color: var(--dark-gray);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--accent-color);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .feature-card {
+            background-color: var(--medium-gray);
+            padding: 40px 30px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background-color: var(--accent-color);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .feature-card p {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            padding: 100px 0;
+            background-color: var(--primary-color);
+        }
+
+        .testimonials-slider {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .testimonial-card {
+            background-color: var(--medium-gray);
+            padding: 40px;
+            border-radius: 8px;
+            margin: 20px;
+            position: relative;
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 6rem;
+            color: rgba(201, 168, 124, 0.2);
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+
+        .testimonial-content {
+            font-size: 1.1rem;
+            font-style: italic;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+
+        .author-image {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 15px;
+        }
+
+        .author-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .author-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .author-info p {
+            color: var(--accent-color);
+            font-size: 0.9rem;
+        }
+
+        /* Pricing Section */
+        .pricing {
+            padding: 100px 0;
+            background-color: var(--dark-gray);
+        }
+
+        .pricing-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+
+        .pricing-card {
+            background-color: var(--medium-gray);
+            border-radius: 8px;
+            overflow: hidden;
+            width: 350px;
+            transition: all 0.3s ease;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .pricing-header {
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .pricing-header h3 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .pricing-price {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .pricing-price span {
+            font-size: 1rem;
+            font-weight: 400;
+        }
+
+        .pricing-features {
+            padding: 30px;
+        }
+
+        .pricing-features ul {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        .pricing-features li {
+            margin-bottom: 15px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .pricing-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+        }
+
+        .pricing-cta {
+            text-align: center;
+            padding-bottom: 30px;
+        }
+
+        /* Avatar Section */
+        .avatar-section {
+            padding: 100px 0;
+            background-color: var(--primary-color);
+        }
+
+        .avatar-container {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .avatar-image {
+            flex: 1;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .avatar-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .avatar-content {
+            flex: 1;
+        }
+
+        .avatar-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .avatar-content h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 80px;
+            height: 3px;
+            background-color: var(--accent-color);
+        }
+
+        .avatar-content p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .avatar-quote {
+            font-style: italic;
+            font-size: 1.2rem;
+            color: var(--accent-color);
+            margin: 30px 0;
+            padding-left: 20px;
+            border-left: 3px solid var(--accent-color);
+        }
+
+        /* FAQ Section */
+        .faq {
+            padding: 100px 0;
+            background-color: var(--dark-gray);
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            margin-bottom: 20px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            background-color: var(--medium-gray);
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .faq-question::after {
+            content: '+';
+            font-size: 1.5rem;
+            color: var(--accent-color);
+        }
+
+        .faq-answer {
+            background-color: rgba(51, 51, 51, 0.7);
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+
+        .faq-item.active .faq-question::after {
+            content: '-';
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 20px;
+            max-height: 1000px;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 100px 0;
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            text-align: center;
+        }
+
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta-content h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .cta-content p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+
+        .countdown-item {
+            margin: 0 15px;
+            text-align: center;
+        }
+
+        .countdown-number {
+            font-size: 3rem;
+            font-weight: 700;
+            background-color: var(--medium-gray);
+            color: var(--accent-color);
+            width: 80px;
+            height: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .countdown-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Upsell Section */
+        .upsell-section {
+            padding: 100px 0;
+            background-color: var(--primary-color);
+            display: none;
+        }
+
+        .upsell-container {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .upsell-image {
+            flex: 1;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .upsell-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .upsell-content {
+            flex: 1;
+        }
+
+        .upsell-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .upsell-content h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 80px;
+            height: 3px;
+            background-color: var(--accent-color);
+        }
+
+        .upsell-content p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .upsell-price {
+            display: flex;
+            align-items: center;
+            margin: 30px 0;
+        }
+
+        .original-price {
+            font-size: 1.5rem;
+            text-decoration: line-through;
+            color: var(--light-gray);
+            margin-right: 15px;
+        }
+
+        .discount-price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent-color);
+        }
+
+        /* Downsell Section */
+        .downsell-section {
+            padding: 100px 0;
+            background-color: var(--dark-gray);
+            display: none;
+        }
+
+        .downsell-container {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .downsell-container h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .downsell-container p {
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .book-cover {
+            max-width: 300px;
+            margin: 0 auto 30px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .book-cover img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 15px;
+            border-radius: 4px;
+            border: none;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--secondary-color);
+            font-size: 1rem;
+        }
+
+        .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            padding: 50px 0;
+            border-top: 1px solid rgba(201, 168, 124, 0.3);
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .footer-logo {
+            flex: 1;
+            min-width: 200px;
+            margin-bottom: 30px;
+        }
+
+        .footer-logo a {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--secondary-color);
+            text-decoration: none;
+        }
+
+        .footer-logo span {
+            color: var(--accent-color);
+        }
+
+        .footer-logo p {
+            margin-top: 20px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .footer-links {
+            flex: 1;
+            min-width: 200px;
+            margin-bottom: 30px;
+        }
+
+        .footer-links h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-links h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--accent-color);
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .footer-contact {
+            flex: 1;
+            min-width: 200px;
+            margin-bottom: 30px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .contact-icon {
+            margin-right: 15px;
+            color: var(--accent-color);
+        }
+
+        .contact-text {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .avatar-container,
+            .upsell-container {
+                flex-direction: column;
+            }
+
+            .avatar-image,
+            .upsell-image {
+                margin-bottom: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .countdown-number {
+                font-size: 2rem;
+                width: 60px;
+                height: 60px;
+            }
+
+            .footer-container {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .section-title h2,
+            .avatar-content h2,
+            .upsell-content h2,
+            .cta-content h2,
+            .downsell-container h2 {
+                font-size: 2rem;
+            }
+
+            .countdown {
+                flex-wrap: wrap;
+            }
+
+            .countdown-item {
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="#" class="logo">Winf<span>™</span></a>
+            <div class="header-cta">
+                <a href="#pricing" class="cta-button">Adquirir Agora</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="sinapses">
+            <!-- Sinapses will be added dynamically with JavaScript -->
+        </div>
+        <div class="container hero-content">
+            <h1>Ghostbuster <span>MAW™</span></h1>
+            <p>Tecnologia invisível de nível aeroespacial que elimina fantasmas de reflexo e protege sua visão com clareza cristalina. Uma revolução em proteção de vidros desenvolvida com tecnologia exclusiva Winf™.</p>
+            <a href="#pricing" class="cta-button">Descubra a Tecnologia</a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Tecnologia Revolucionária</h2>
+                <p>Descubra os benefícios exclusivos do Ghostbuster MAW™</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Eliminação Total de Reflexos</h3>
+                    <p>A tecnologia avançada elimina 99,8% dos reflexos indesejados, proporcionando visibilidade cristalina em qualquer condição de iluminação.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-sun"></i>
+                    </div>
+                    <h3>Proteção UV Completa</h3>
+                    <p>Bloqueia 99,9% dos raios UV prejudiciais, protegendo sua visão e os interiores contra desbotamento e danos solares.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-tint-slash"></i>
+                    </div>
+                    <h3>Repelente de Água e Sujeira</h3>
+                    <p>Superfície hidrofóbica avançada que repele água, poeira e impressões digitais, mantendo os vidros limpos por mais tempo.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <h3>Clareza Visual Superior</h3>
+                    <p>Transmissão de luz otimizada que proporciona cores mais vivas e contraste aprimorado, sem distorções.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-temperature-low"></i>
+                    </div>
+                    <h3>Controle Térmico Inteligente</h3>
+                    <p>Regula a temperatura interior, bloqueando o calor no verão e retendo-o no inverno, reduzindo custos de energia.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-infinity"></i>
+                    </div>
+                    <h3>Garantia Lifetime</h3>
+                    <p>Confiamos tanto na durabilidade do Ghostbuster MAW™ que oferecemos garantia vitalícia contra defeitos de fabricação.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Avatar Section -->
+    <section class="avatar-section">
+        <div class="container avatar-container">
+            <div class="avatar-image">
+                <img src="https://via.placeholder.com/600x800" alt="Leon V. Kael - Chief of Armor Innovation">
+            </div>
+            <div class="avatar-content">
+                <h2>Desenvolvido por Especialistas</h2>
+                <p>O Ghostbuster MAW™ é resultado de anos de pesquisa e desenvolvimento liderados por Leon V. Kael, Chief of Armor Innovation da NeoSkin™ ADV-X.</p>
+                <p>Utilizando tecnologia de nível aeroespacial, nossa equipe criou uma solução que redefine os padrões de proteção e clareza visual para vidros.</p>
+                <div class="avatar-quote">
+                    "Ghostbuster MAW™ não é apenas um produto, é uma revolução na forma como interagimos com superfícies de vidro. Eliminamos os fantasmas que comprometem sua visão e experiência."
+                </div>
+                <p>Leon V. Kael lidera uma equipe de engenheiros e cientistas dedicados a criar as soluções mais avançadas em proteção de superfícies, combinando nanotecnologia com materiais de última geração.</p>
+                <a href="#pricing" class="cta-button">Adquira Agora</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>O Que Dizem Nossos Clientes</h2>
+                <p>Experiências reais com o Ghostbuster MAW™</p>
+            </div>
+            <div class="testimonials-slider">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        "Instalei o Ghostbuster MAW™ nos vidros do meu escritório que ficam de frente para o sol. A diferença é impressionante - zero reflexos, temperatura agradável e uma clareza visual que nunca experimentei antes. Um investimento que valeu cada centavo."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-image">
+                            <img src="https://via.placeholder.com/60x60" alt="Carlos Mendes">
+                        </div>
+                        <div class="author-info">
+                            <h4>Carlos Mendes</h4>
+                            <p>Arquiteto, São Paulo</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        "Como fotógrafa, preciso de clareza visual perfeita. O Ghostbuster MAW™ transformou meu estúdio - as fotos ficaram mais nítidas, as cores mais vibrantes e os reflexos indesejados simplesmente desapareceram. É como se os vidros nem existissem."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-image">
+                            <img src="https://via.placeholder.com/60x60" alt="Marina Costa">
+                        </div>
+                        <div class="author-info">
+                            <h4>Marina Costa</h4>
+                            <p>Fotógrafa Profissional, Rio de Janeiro</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        "Apliquei o Ghostbuster MAW™ nos vidros da minha concessionária de carros de luxo. Os clientes imediatamente notaram a diferença - os veículos ficam mais bonitos, a luz é perfeita e a temperatura interna é sempre agradável, mesmo nos dias mais quentes."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-image">
+                            <img src="https://via.placeholder.com/60x60" alt="Roberto Almeida">
+                        </div>
+                        <div class="author-info">
+                            <h4>Roberto Almeida</h4>
+                            <p>Empresário, Belo Horizonte</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <div class="section-title">
+                <h2>Invista em Excelência</h2>
+                <p>Escolha o pacote ideal para suas necessidades</p>
+            </div>
+            <div class="pricing-container">
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>Ghostbuster MAW™ Standard</h3>
+                        <div class="pricing-price">R$ 1.997<span>/m²</span></div>
+                        <p>Para residências e pequenos escritórios</p>
+                    </div>
+                    <div class="pricing-features">
+                        <ul>
+                            <li>Eliminação de reflexos (95%)</li>
+                            <li>Proteção UV (99%)</li>
+                            <li>Repelente básico de água</li>
+                            <li>Garantia de 10 anos</li>
+                            <li>Instalação profissional</li>
+                        </ul>
+                        <div class="pricing-cta">
+                            <a href="#" class="cta-button" onclick="showUpsell()">Selecionar</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>Ghostbuster MAW™ Premium</h3>
+                        <div class="pricing-price">R$ 2.997<span>/m²</span></div>
+                        <p>Para quem busca o máximo em proteção</p>
+                    </div>
+                    <div class="pricing-features">
+                        <ul>
+                            <li>Eliminação de reflexos (99,8%)</li>
+                            <li>Proteção UV (99,9%)</li>
+                            <li>Repelente avançado de água e sujeira</li>
+                            <li>Controle térmico inteligente</li>
+                            <li>Garantia Lifetime</li>
+                            <li>Instalação profissional premium</li>
+                            <li>Manutenção anual gratuita</li>
+                        </ul>
+                        <div class="pricing-cta">
+                            <a href="#" class="cta-button" onclick="showUpsell()">Selecionar</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>Ghostbuster MAW™ Corporate</h3>
+                        <div class="pricing-price">Sob consulta</div>
+                        <p>Soluções personalizadas para empresas</p>
+                    </div>
+                    <div class="pricing-features">
+                        <ul>
+                            <li>Solução personalizada</li>
+                            <li>Consultoria especializada</li>
+                            <li>Projeto técnico detalhado</li>
+                            <li>Instalação em larga escala</li>
+                            <li>Suporte técnico dedicado</li>
+                            <li>Garantia estendida</li>
+                            <li>Manutenção programada</li>
+                        </ul>
+                        <div class="pricing-cta">
+                            <a href="#" class="cta-button" onclick="showUpsell()">Solicitar Orçamento</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container cta-content">
+            <h2>Oferta por Tempo Limitado</h2>
+            <p>Adquira o Ghostbuster MAW™ hoje e ganhe 20% de desconto + instalação gratuita</p>
+            <div class="countdown">
+                <div class="countdown-item">
+                    <div class="countdown-number" id="days">02</div>
+                    <div class="countdown-label">Dias</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="hours">12</div>
+                    <div class="countdown-label">Horas</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="minutes">45</div>
+                    <div class="countdown-label">Minutos</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="seconds">30</div>
+                    <div class="countdown-label">Segundos</div>
+                </div>
+            </div>
+            <a href="#pricing" class="cta-button">Aproveitar Oferta</a>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq" id="faq">
+        <div class="container">
+            <div class="section-title">
+                <h2>Perguntas Frequentes</h2>
+                <p>Tudo o que você precisa saber sobre o Ghostbuster MAW™</p>
+            </div>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">O que é exatamente o Ghostbuster MAW™?</div>
+                    <div class="faq-answer">
+                        <p>O Ghostbuster MAW™ (Marketing Advanced Windowfilm) é uma película de proteção de vidros de nível aeroespacial desenvolvida com tecnologia exclusiva Winf™. Ela elimina reflexos indesejados ("fantasmas"), oferece proteção UV completa, repele água e sujeira, proporciona clareza visual superior e controle térmico inteligente.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Quanto tempo dura a instalação?</div>
+                    <div class="faq-answer">
+                        <p>O tempo de instalação varia de acordo com a área a ser coberta. Em média, para uma residência padrão, o processo leva de 1 a 2 dias. Para projetos corporativos maiores, pode levar até uma semana. Nossa equipe trabalha com eficiência para minimizar transtornos durante a instalação.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">A garantia lifetime realmente cobre todo o período de vida útil?</div>
+                    <div class="faq-answer">
+                        <p>Sim, a garantia lifetime do Ghostbuster MAW™ Premium cobre todo o período de vida útil do produto contra defeitos de fabricação, descolamento, bolhas, rachaduras, descoloração e perda de propriedades. Esta garantia é transferível em caso de venda do imóvel e representa nosso compromisso com a qualidade superior do produto.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">O Ghostbuster MAW™ funciona em qualquer tipo de vidro?</div>
+                    <div class="faq-answer">
+                        <p>O Ghostbuster MAW™ foi desenvolvido para funcionar em praticamente todos os tipos de vidro, incluindo vidros temperados, laminados, duplos, triplos e low-e. No entanto, recomendamos uma avaliação técnica prévia para garantir a compatibilidade e o melhor desempenho possível em cada caso específico.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Qual a diferença entre o Ghostbuster MAW™ e outras películas convencionais?</div>
+                    <div class="faq-answer">
+                        <p>O Ghostbuster MAW™ utiliza tecnologia de nível aeroespacial com nanocamadas múltiplas que proporcionam desempenho superior em todos os aspectos: eliminação de reflexos, proteção UV, repelência a água e sujeira, clareza visual e controle térmico. Películas convencionais geralmente focam em apenas um ou dois desses aspectos, com desempenho inferior e durabilidade limitada.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">É possível remover o Ghostbuster MAW™ caso necessário?</div>
+                    <div class="faq-answer">
+                        <p>Sim, o Ghostbuster MAW™ pode ser removido por profissionais qualificados sem danificar o vidro. No entanto, após a remoção, o vidro perderá todos os benefícios proporcionados pelo produto. Recomendamos que a remoção seja feita apenas em casos de absoluta necessidade.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Upsell Section (Hidden by default) -->
+    <section class="upsell-section" id="upsell">
+        <div class="container upsell-container">
+            <div class="upsell-image">
+                <img src="https://via.placeholder.com/600x400" alt="Kit Completo Ghostbuster MAW™">
+            </div>
+            <div class="upsell-content">
+                <h2>Oferta Especial: Kit Completo Ghostbuster MAW™</h2>
+                <p>Parabéns pela escolha! Aproveite esta oferta exclusiva e potencialize sua experiência com o Kit Completo Ghostbuster MAW™.</p>
+                <p>O kit inclui:</p>
+                <ul>
+                    <li>Ghostbuster MAW™ Premium para toda a área contratada</li>
+                    <li>Kit de limpeza e manutenção profissional</li>
+                    <li>Certificado de autenticidade com QR Code</li>
+                    <li>Consultoria personalizada de iluminação</li>
+                    <li>Garantia estendida adicional de 5 anos</li>
+                </ul>
+                <div class="upsell-price">
+                    <div class="original-price">R$ 4.997</div>
+                    <div class="discount-price">R$ 3.497</div>
+                </div>
+                <p>Economize R$ 1.500 adicionando este kit à sua compra!</p>
+                <div class="upsell-cta">
+                    <a href="#" class="cta-button" onclick="acceptUpsell()">Adicionar à Compra</a>
+                    <a href="#" onclick="rejectUpsell()">Não, obrigado</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Downsell Section (Hidden by default) -->
+    <section class="downsell-section" id="downsell">
+        <div class="container downsell-container">
+            <h2>Antes de Finalizar...</h2>
+            <p>Gostaríamos de oferecer nosso e-book exclusivo "Segredos da Proteção Invisível" gratuitamente!</p>
+            <div class="book-cover">
+                <img src="https://via.placeholder.com/300x400" alt="E-book Segredos da Proteção Invisível">
+            </div>
+            <p>Este guia completo revela técnicas avançadas para maximizar a durabilidade e desempenho de películas de proteção, além de dicas exclusivas de especialistas.</p>
+            <form id="downsell-form">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Seu Nome" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" class="form-control" placeholder="Seu E-mail" required>
+                </div>
+                <div class="form-group">
+                    <input type="tel" class="form-control" placeholder="Seu Telefone" required>
+                </div>
+                <button type="submit" class="cta-button">Receber E-book Grátis</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-container">
+            <div class="footer-logo">
+                <a href="#">Winf<span>™</span></a>
+                <p>Tecnologia de nível aeroespacial para proteção e performance superior em vidros.</p>
+            </div>
+            <div class="footer-links">
+                <h3>Links Rápidos</h3>
+                <ul>
+                    <li><a href="#features">Características</a></li>
+                    <li><a href="#testimonials">Depoimentos</a></li>
+                    <li><a href="#pricing">Preços</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h3>Produtos</h3>
+                <ul>
+                    <li><a href="#">Ghostbuster MAW™</a></li>
+                    <li><a href="#">AeroCore™</a></li>
+                    <li><a href="#">Winf Select™</a></li>
+                    <li><a href="#">NeoSkin™ ADV-X</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h3>Contato</h3>
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="contact-text">
+                        Av. Paulista, 1000, São Paulo - SP
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <div class="contact-text">
+                        +55 (11) 99999-9999
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="contact-text">
+                        contato@winf.com.br
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2025 Winf™. Todos os direitos reservados. Ghostbuster MAW™ é uma marca registrada.</p>
+        </div>
+    </footer>
+
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+    <!-- Custom JavaScript -->
+    <script>
+        // Create sinapses effect
+        function createSinapses() {
+            const sinapsesContainer = document.querySelector('.sinapses');
+            const containerWidth = sinapsesContainer.offsetWidth;
+            const containerHeight = sinapsesContainer.offsetHeight;
+            
+            for (let i = 0; i < 20; i++) {
+                const sinapse = document.createElement('div');
+                sinapse.classList.add('sinapse');
+                
+                // Random position
+                const left = Math.random() * containerWidth;
+                const top = Math.random() * containerHeight;
+                
+                // Random size
+                const size = Math.random() * 5 + 2;
+                
+                // Random animation delay
+                const delay = Math.random() * 5;
+                
+                sinapse.style.left = `${left}px`;
+                sinapse.style.top = `${top}px`;
+                sinapse.style.width = `${size}px`;
+                sinapse.style.height = `${size}px`;
+                sinapse.style.animationDelay = `${delay}s`;
+                
+                sinapsesContainer.appendChild(sinapse);
+            }
+        }
+
+        // FAQ functionality
+        function initFAQ() {
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                
+                question.addEventListener('click', () => {
+                    item.classList.toggle('active');
+                });
+            });
+        }
+
+        // Countdown functionality
+        function initCountdown() {
+            // Set the countdown date (48 hours from now)
+            const countdownDate = new Date();
+            countdownDate.setHours(countdownDate.getHours() + 48);
+            
+            // Update the countdown every second
+            const countdownInterval = setInterval(() => {
+                const now = new Date().getTime();
+                const distance = countdownDate - now;
+                
+                // Calculate days, hours, minutes, and seconds
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                
+                // Display the countdown
+                document.getElementById('days').textContent = days.toString().padStart(2, '0');
+                document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+                document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+                document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+                
+                // If the countdown is over, clear the interval
+                if (distance < 0) {
+                    clearInterval(countdownInterval);
+                    document.getElementById('days').textContent = '00';
+                    document.getElementById('hours').textContent = '00';
+                    document.getElementById('minutes').textContent = '00';
+                    document.getElementById('seconds').textContent = '00';
+                }
+            }, 1000);
+        }
+
+        // Upsell and Downsell functionality
+        function showUpsell() {
+            document.getElementById('upsell').style.display = 'block';
+            window.scrollTo({
+                top: document.getElementById('upsell').offsetTop,
+                behavior: 'smooth'
+            });
+        }
+
+        function acceptUpsell() {
+            alert('Parabéns! O Kit Completo Ghostbuster MAW™ foi adicionado à sua compra. Você será redirecionado para finalizar o pagamento.');
+            // Redirect to checkout page
+        }
+
+        function rejectUpsell() {
+            document.getElementById('upsell').style.display = 'none';
+            document.getElementById('downsell').style.display = 'block';
+            window.scrollTo({
+                top: document.getElementById('downsell').offsetTop,
+                behavior: 'smooth'
+            });
+        }
+
+        // Form submission
+        document.getElementById('downsell-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Obrigado! Seu e-book será enviado para o e-mail informado. Você será redirecionado para finalizar sua compra original.');
+            // Redirect to checkout page
+        });
+
+        // Initialize everything when the DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            createSinapses();
+            initFAQ();
+            initCountdown();
+        });
+    </script>
+</body>
+</html>

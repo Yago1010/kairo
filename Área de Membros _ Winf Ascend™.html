@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Área de Membros | Winf Ascend™</title>
+    <style>
+        :root {
+            --color-black: #0D0D0D;
+            --color-white: #FFFFFF;
+            --color-accent: #AAFF00;
+            --color-error: #FF3B30;
+            --color-info: #00FFFF;
+            --font-family: 'Inter', sans-serif;
+            --spacing-unit: 8px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--color-black);
+            color: var(--color-white);
+            line-height: 1.5;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 280px;
+            background-color: rgba(255, 255, 255, 0.03);
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            padding: calc(var(--spacing-unit) * 3);
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--color-white);
+            text-decoration: none;
+            margin-bottom: calc(var(--spacing-unit) * 4);
+            display: block;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: calc(var(--spacing-unit) * 2);
+            padding: calc(var(--spacing-unit) * 2);
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            margin-bottom: calc(var(--spacing-unit) * 4);
+        }
+
+        .avatar {
+            width: 48px;
+            height: 48px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+
+        .user-info {
+            flex-grow: 1;
+        }
+
+        .user-name {
+            font-weight: 600;
+        }
+
+        .user-level {
+            font-size: 14px;
+            color: var(--color-accent);
+        }
+
+        .nav-section {
+            margin-bottom: calc(var(--spacing-unit) * 3);
+        }
+
+        .nav-title {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: calc(var(--spacing-unit) * 1.5);
+        }
+
+        .nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-unit);
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: calc(var(--spacing-unit) * 1.5);
+            padding: calc(var(--spacing-unit) * 1.5);
+            border-radius: 4px;
+            color: var(--color-white);
+            text-decoration: none;
+            transition: background-color 0.2s ease;
+        }
+
+        .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-link.active {
+            background-color: rgba(170, 255, 0, 0.1);
+            color: var(--color-accent);
+        }
+
+        .nav-icon {
+            width: 20px;
+            height: 20px;
+            background-color: currentColor;
+            opacity: 0.7;
+            border-radius: 4px;
+        }
+
+        .winfcoin-balance {
+            margin-top: auto;
+            padding: calc(var(--spacing-unit) * 2);
+            background-color: rgba(170, 255, 0, 0.05);
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .winfcoin-amount {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--color-accent);
+            margin-bottom: var(--spacing-unit);
+        }
+
+        .winfcoin-label {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        .main-content {
+            flex-grow: 1;
+            margin-left: 280px;
+            padding: calc(var(--spacing-unit) * 4);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: calc(var(--spacing-unit) * 4);
+        }
+
+        .page-title {
+            font-size: 32px;
+            font-weight: 700;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: calc(var(--spacing-unit) * 2);
+        }
+
+        .btn {
+            padding: calc(var(--spacing-unit) * 1.5) calc(var(--spacing-unit) * 3);
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-unit);
+        }
+
+        .btn-primary {
+            background-color: var(--color-accent);
+            color: var(--color-black);
+        }
+
+        .btn-secondary {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--color-white);
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: calc(var(--spacing-unit) * 3);
+            margin-bottom: calc(var(--spacing-unit) * 4);
+        }
+
+        .dashboard-card {
+            background-color: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            padding: calc(var(--spacing-unit) * 3);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: calc(var(--spacing-unit) * 2);
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .card-icon {
+            width: 24px;
+            height: 24px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: var(--spacing-unit);
+        }
+
+        .stat-label {
+            font-size: 14px;
+            opacity: 0.7;
+        }
+
+        .progress-container {
+            margin-top: calc(var(--spacing-unit) * 2);
+        }
+
+        .progress-bar {
+            height: 8px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: var(--color-accent);
+            width: 65%;
+        }
+
+        .progress-stats {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            margin-top: var(--spacing-unit);
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: calc(var(--spacing-unit) * 3);
+        }
+
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: calc(var(--spacing-unit) * 3);
+            margin-bottom: calc(var(--spacing-unit) * 4);
+        }
+
+        .course-card {
+            background-color: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.2s ease;
+        }
+
+        .course-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .course-image {
+            aspect-ratio: 16 / 9;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .course-content {
+            padding: calc(var(--spacing-unit) * 2);
+        }
+
+        .course-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: var(--spacing-unit);
+        }
+
+        .course-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            opacity: 0.7;
+            margin-bottom: calc(var(--spacing-unit) * 2);
+        }
+
+        .course-progress {
+            height: 4px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .course-progress-fill {
+            height: 100%;
+            background-color: var(--color-accent);
+        }
+
+        .achievements-section {
+            margin-bottom: calc(var(--spacing-unit) * 4);
+        }
+
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: calc(var(--spacing-unit) * 2);
+        }
+
+        .achievement {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .achievement-icon {
+            width: 64px;
+            height: 64px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            margin-bottom: calc(var(--spacing-unit) * 1.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .achievement-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: var(--spacing-unit);
+        }
+
+        .achievement-description {
+            font-size: 12px;
+            opacity: 0.7;
+        }
+
+        .locked .achievement-icon {
+            opacity: 0.3;
+        }
+
+        .locked .achievement-title,
+        .locked .achievement-description {
+            opacity: 0.5;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                border-right: none;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            body {
+                flex-direction: column;
+            }
+
+            .dashboard-grid,
+            .courses-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <aside class="sidebar">
+        <a href="#" class="logo">WINF ASCEND™</a>
+        
+        <div class="user-profile">
+            <div class="avatar"></div>
+            <div class="user-info">
+                <div class="user-name">Ricardo Mendes</div>
+                <div class="user-level">Nível Platinum</div>
+            </div>
+        </div>
+        
+        <div class="nav-section">
+            <div class="nav-title">Principal</div>
+            <div class="nav-links">
+                <a href="#" class="nav-link active">
+                    <div class="nav-icon"></div>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#" class="nav-link">
+                    <div class="nav-icon"></div>
+                    <span>Meus Cursos</span>
+                </a>
+                <a href="#" class="nav-link">
+                    <div class="nav-icon"></div>
+                    <span>Certificações</span>
+                </a>
+                <a href="#" class="nav-link">
+                    <div class="nav-icon"></div>
+                    <span>Conquistas</span>
+                </a>
+            </div>
+        </div>
+        
+        <div class="nav-section">
+            <div class="nav-title">Comunidade</div>
+            <div class="nav-links">
+                <a href="#" class="nav-link">
+                    <div class="nav-icon"></div>
+                    <span>Fórum</span>
+                </a>
+                <a href="#" class="nav-link">
+                    <div class="nav-icon"></div>
+                    <span>Eventos</span>
+                </a>
+                <a href="#" class="nav-link">
+                    <div class="nav-icon"></div>
+                    <span>Networking</span>
+                </a>
+            </div>
+        </div>
+        
+        <div class="nav-section">
+            <div class="nav-title">Recursos</div>
+            <div class="nav-links">
+                <a href="#" class="nav-link">
+                    <div class="nav-icon"></div>
+                    <span>Biblioteca</span>
+                </a>
+                <a href="#" class="nav-link">
+                    <div class="nav-icon"></div>
+                    <span>Downloads</span>
+                </a>
+                <a href="#" class="nav-link">
+                    <div class="nav-icon"></div>
+                    <span>Suporte</span>
+                </a>
+            </div>
+        </div>
+        
+        <div class="winfcoin-balance">
+            <div class="winfcoin-amount">1,250</div>
+            <div class="winfcoin-label">WinfCoins Disponíveis</div>
+        </div>
+    </aside>
+    
+    <main class="main-content">
+        <header class="header">
+            <h1 class="page-title">Dashboard</h1>
+            <div class="header-actions">
+                <button class="btn btn-secondary">Notificações</button>
+                <button class="btn btn-primary">Explorar Cursos</button>
+            </div>
+        </header>
+        
+        <section class="dashboard-grid">
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h2 class="card-title">Progresso Geral</h2>
+                    <div class="card-icon"></div>
+                </div>
+                <div class="stat-value">65%</div>
+                <div class="stat-label">Caminho para Certificação Elite</div>
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                    <div class="progress-stats">
+                        <span>0%</span>
+                        <span>100%</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h2 class="card-title">Cursos Concluídos</h2>
+                    <div class="card-icon"></div>
+                </div>
+                <div class="stat-value">7</div>
+                <div class="stat-label">De 12 cursos necessários</div>
+            </div>
+            
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h2 class="card-title">Conquistas</h2>
+                    <div class="card-icon"></div>
+                </div>
+                <div class="stat-value">15</div>
+                <div class="stat-label">5 conquistas desbloqueadas este mês</div>
+            </div>
+            
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h2 class="card-title">Ranking</h2>
+                    <div class="card-icon"></div>
+                </div>
+                <div class="stat-value">#42</div>
+                <div class="stat-label">Entre os membros Platinum</div>
+            </div>
+        </section>
+        
+        <section class="courses-section">
+            <h2 class="section-title">Cursos em Andamento</h2>
+            <div class="courses-grid">
+                <div class="course-card">
+                    <div class="course-image">
+                        <span>IMAGEM DO CURSO</span>
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title">Masterclass AeroCore™ Pro</h3>
+                        <div class="course-info">
+                            <span>7 de 10 módulos</span>
+                            <span>70%</span>
+                        </div>
+                        <div class="course-progress">
+                            <div class="course-progress-fill" style="width: 70%"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="course-card">
+                    <div class="course-image">
+                        <span>IMAGEM DO CURSO</span>
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title">Certificação NeoSkin™ Advanced</h3>
+                        <div class="course-info">
+                            <span>3 de 8 módulos</span>
+                            <span>38%</span>
+                        </div>
+                        <div class="course-progress">
+                            <div class="course-progress-fill" style="width: 38%"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="course-card">
+                    <div class="course-image">
+                        <span>IMAGEM DO CURSO</span>
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title">Especialização Winf Select™</h3>
+                        <div class="course-info">
+                            <span>1 de 6 módulos</span>
+                            <span>17%</span>
+                        </div>
+                        <div class="course-progress">
+                            <div class="course-progress-fill" style="width: 17%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="achievements-section">
+            <h2 class="section-title">Conquistas Recentes</h2>
+            <div class="achievements-grid">
+                <div class="achievement">
+                    <div class="achievement-icon">
+                        <span>🏆</span>
+                    </div>
+                    <div class="achievement-title">Pioneiro</div>
+                    <div class="achievement-description">Completou 5 cursos da plataforma</div>
+                </div>
+                
+                <div class="achievement">
+                    <div class="achievement-icon">
+                        <span>🔥</span>
+                    </div>
+                    <div class="achievement-title">Consistente</div>
+                    <div class="achievement-description">30 dias consecutivos de atividade</div>
+                </div>
+                
+                <div class="achievement">
+                    <div class="achievement-icon">
+                        <span>💎</span>
+                    </div>
+                    <div class="achievement-title">Especialista</div>
+                    <div class="achievement-description">Certificação AeroCore™ Basic</div>
+                </div>
+                
+                <div class="achievement">
+                    <div class="achievement-icon">
+                        <span>🚀</span>
+                    </div>
+                    <div class="achievement-title">Colaborador</div>
+                    <div class="achievement-description">10 contribuições no fórum</div>
+                </div>
+                
+                <div class="achievement locked">
+                    <div class="achievement-icon">
+                        <span>🔒</span>
+                    </div>
+                    <div class="achievement-title">Mestre</div>
+                    <div class="achievement-description">Complete todos os cursos avançados</div>
+                </div>
+                
+                <div class="achievement locked">
+                    <div class="achievement-icon">
+                        <span>🔒</span>
+                    </div>
+                    <div class="achievement-title">Influenciador</div>
+                    <div class="achievement-description">Convide 5 novos membros</div>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

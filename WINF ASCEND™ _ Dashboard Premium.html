@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WINF ASCEND™ | Dashboard Premium</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset e estilos globais */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --black-deep: #000000;
+            --black-secondary: #0A0A0A;
+            --white-premium: #FFFFFF;
+            --white-secondary: #AAAAAA;
+            --text-description: #DDDDDD;
+            --border-subtle: rgba(255, 255, 255, 0.1);
+            --blue-accent: #0066FF;
+            --orange-accent: #FF9900;
+            --purple-accent: #CC33FF;
+            --cyan-accent: #00CCCC;
+            --pink-accent: #FF3399;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--black-deep);
+            color: var(--white-premium);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        /* Container principal */
+        .container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0;
+        }
+        
+        /* Cabeçalho e navegação */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            color: var(--white-premium);
+            text-decoration: none;
+            border: 2px solid var(--blue-accent);
+            padding: 0.5rem 1rem;
+            margin-right: 1rem;
+        }
+        
+        .nav {
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav-item {
+            margin: 0 1rem;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            color: var(--white-premium);
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-item:nth-child(1) {
+            color: var(--blue-accent);
+        }
+        
+        .nav-item:nth-child(2) {
+            color: var(--orange-accent);
+        }
+        
+        .nav-item:nth-child(3) {
+            color: var(--purple-accent);
+        }
+        
+        .nav-item:nth-child(4) {
+            color: var(--cyan-accent);
+        }
+        
+        .nav-item:nth-child(5) {
+            color: var(--pink-accent);
+        }
+        
+        .nav-item:nth-child(6) {
+            color: var(--white-premium);
+        }
+        
+        .nav-item::before {
+            content: attr(data-index);
+            position: absolute;
+            top: -10px;
+            left: 0;
+            font-size: 0.7rem;
+            font-weight: 700;
+        }
+        
+        .user-profile {
+            display: flex;
+            align-items: center;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--black-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 1rem;
+            font-weight: 600;
+            border: 1px solid var(--border-subtle);
+        }
+        
+        .user-info {
+            text-align: right;
+            margin-right: 0.5rem;
+        }
+        
+        .user-name {
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        
+        .user-level {
+            font-size: 0.7rem;
+            color: var(--blue-accent);
+        }
+        
+        /* Conteúdo principal */
+        main {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 2rem;
+            padding: 2rem;
+        }
+        
+        /* Welcome Card */
+        .welcome-card {
+            background-color: var(--black-secondary);
+            border-radius: 8px;
+            padding: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border-subtle);
+        }
+        
+        .welcome-text {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .welcome-title {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+        }
+        
+        .welcome-subtitle {
+            font-size: 1rem;
+            color: var(--white-secondary);
+            max-width: 500px;
+            line-height: 1.5;
+        }
+        
+        .welcome-cta {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background-color: transparent;
+            border: 1px solid var(--blue-accent);
+            color: var(--blue-accent);
+            font-size: 0.9rem;
+            font-weight: 500;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+            text-decoration: none;
+        }
+        
+        .welcome-cta:hover {
+            background-color: var(--blue-accent);
+            color: var(--white-premium);
+        }
+        
+        .welcome-image {
+            width: 150px;
+            height: 150px;
+            background-color: var(--black-secondary);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white-secondary);
+            font-size: 0.8rem;
+            border: 1px solid var(--border-subtle);
+        }
+        
+        /* Seção de Progresso */
+        .progress-section {
+            margin-bottom: 2rem;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+        
+        .section-action {
+            color: var(--blue-accent);
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .section-action:hover {
+            text-decoration: underline;
+        }
+        
+        .progress-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+        
+        .progress-card {
+            background-color: var(--black-secondary);
+            border-radius: 8px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            border: 1px solid var(--border-subtle);
+            transition: transform 0.3s ease;
+        }
+        
+        .progress-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .progress-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .progress-card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        
+        .progress-card-icon {
+            width: 30px;
+            height: 30px;
+            background-color: var(--black-deep);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--blue-accent);
+            font-weight: 600;
+        }
+        
+        .progress-bar-container {
+            width: 100%;
+            height: 6px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            border-radius: 3px;
+        }
+        
+        .progress-card:nth-child(1) .progress-bar {
+            background-color: var(--blue-accent);
+            width: 75%;
+        }
+        
+        .progress-card:nth-child(2) .progress-bar {
+            background-color: var(--orange-accent);
+            width: 45%;
+        }
+        
+        .progress-card:nth-child(3) .progress-bar {
+            background-color: var(--purple-accent);
+            width: 90%;
+        }
+        
+        .progress-stats {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+        }
+        
+        .progress-percentage {
+            font-weight: 600;
+        }
+        
+        .progress-remaining {
+            color: var(--white-secondary);
+        }
+        
+        /* Seção de Próximos Eventos */
+        .upcoming-section {
+            margin-bottom: 2rem;
+        }
+        
+        .upcoming-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .upcoming-card {
+            background-color: var(--black-secondary);
+            border-radius: 8px;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            border: 1px solid var(--border-subtle);
+            transition: transform 0.3s ease;
+        }
+        
+        .upcoming-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .upcoming-card-icon {
+            width: 50px;
+            height: 50px;
+            background-color: var(--black-deep);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--cyan-accent);
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        
+        .upcoming-card:nth-child(2) .upcoming-card-icon {
+            color: var(--orange-accent);
+        }
+        
+        .upcoming-card:nth-child(3) .upcoming-card-icon {
+            color: var(--purple-accent);
+        }
+        
+        .upcoming-card-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .upcoming-card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        
+        .upcoming-card-subtitle {
+            font-size: 0.9rem;
+            color: var(--white-secondary);
+        }
+        
+        .upcoming-card-date {
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        .upcoming-card:nth-child(1) .upcoming-card-date {
+            color: var(--cyan-accent);
+        }
+        
+        .upcoming-card:nth-child(2) .upcoming-card-date {
+            color: var(--orange-accent);
+        }
+        
+        .upcoming-card:nth-child(3) .upcoming-card-date {
+            color: var(--purple-accent);
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        
+        /* Card de Certificação */
+        .certification-card {
+            background-color: var(--black-secondary);
+            border-radius: 8px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            border: 1px solid var(--border-subtle);
+        }
+        
+        .certification-header {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .certification-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        
+        .certification-subtitle {
+            font-size: 0.9rem;
+            color: var(--white-secondary);
+        }
+        
+        .certification-badge {
+            width: 100%;
+            height: 150px;
+            background-color: var(--black-deep);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white-secondary);
+            font-size: 0.9rem;
+            border: 1px solid var(--border-subtle);
+        }
+        
+        .certification-progress {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+        
+        .certification-progress-text {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+        }
+        
+        .certification-progress-percentage {
+            font-weight: 600;
+            color: var(--purple-accent);
+        }
+        
+        .certification-progress-bar {
+            width: 100%;
+            height: 6px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        
+        .certification-progress-fill {
+            height: 100%;
+            background-color: var(--purple-accent);
+            width: 65%;
+            border-radius: 3px;
+        }
+        
+        /* Card de Comunidade */
+        .community-card {
+            background-color: var(--black-secondary);
+            border-radius: 8px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            border: 1px solid var(--border-subtle);
+        }
+        
+        .community-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .community-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        
+        .community-action {
+            color: var(--cyan-accent);
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .community-action:hover {
+            text-decoration: underline;
+        }
+        
+        .community-members {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+        
+        .community-member {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--black-deep);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border: 1px solid var(--border-subtle);
+        }
+        
+        .community-member:nth-child(1) {
+            background-color: var(--blue-accent);
+        }
+        
+        .community-member:nth-child(2) {
+            background-color: var(--orange-accent);
+        }
+        
+        .community-member:nth-child(3) {
+            background-color: var(--purple-accent);
+        }
+        
+        .community-member:nth-child(4) {
+            background-color: var(--cyan-accent);
+        }
+        
+        .community-member:nth-child(5) {
+            background-color: var(--pink-accent);
+        }
+        
+        .community-stats {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .community-stat {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+        
+        .community-stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .community-stat-label {
+            font-size: 0.8rem;
+            color: var(--white-secondary);
+        }
+        
+        /* Card de Pontos Quantum */
+        .quantum-points-card {
+            background-color: var(--black-secondary);
+            border-radius: 8px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            border: 1px solid var(--border-subtle);
+        }
+        
+        .quantum-points-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .quantum-points-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        
+        .quantum-points-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--pink-accent);
+        }
+        
+        .quantum-points-history {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .quantum-points-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .quantum-points-item-label {
+            font-size: 0.9rem;
+        }
+        
+        .quantum-points-item-value {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--pink-accent);
+        }
+        
+        .quantum-points-item-value.negative {
+            color: var(--orange-accent);
+        }
+        
+        /* Responsividade */
+        @media (max-width: 1200px) {
+            .progress-cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 992px) {
+            main {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav {
+                display: none;
+            }
+            
+            .welcome-card {
+                flex-direction: column;
+                text-align: center;
+                gap: 1.5rem;
+            }
+            
+            .welcome-text {
+                align-items: center;
+            }
+            
+            .progress-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <a href="#" class="logo-text">WINF ASCEND™</a>
+            </div>
+            
+            <nav class="nav">
+                <a href="#" class="nav-item" data-index="1">DASHBOARD</a>
+                <a href="#" class="nav-item" data-index="2">APRENDIZAGEM</a>
+                <a href="#" class="nav-item" data-index="3">CERTIFICAÇÕES</a>
+                <a href="#" class="nav-item" data-index="4">COMUNIDADE</a>
+                <a href="#" class="nav-item" data-index="5">FERRAMENTAS</a>
+                <a href="#" class="nav-item" data-index="6">SUPORTE</a>
+            </nav>
+            
+            <div class="user-profile">
+                <div class="user-info">
+                    <div class="user-name">Ricardo Almeida</div>
+                    <div class="user-level">ESPECIALISTA NÍVEL 2</div>
+                </div>
+                <div class="user-avatar">R</div>
+            </div>
+        </header>
+        
+        <main>
+            <div class="content">
+                <div class="welcome-card">
+                    <div class="welcome-text">
+                        <h1 class="welcome-title">Bem-vindo de volta, Ricardo</h1>
+                        <p class="welcome-subtitle">Continue sua jornada para se tornar um especialista certificado em tecnologia de proteção premium Winf™.</p>
+                        <a href="#" class="welcome-cta">CONTINUAR APRENDIZADO</a>
+                    </div>
+                    <div class="welcome-image">
+                        [Imagem do Dr. Marcus Quantum]
+                    </div>
+                </div>
+                
+                <div class="progress-section">
+                    <div class="section-header">
+                        <h2 class="section-title">SEU PROGRESSO</h2>
+                        <span class="section-action">Ver todos</span>
+                    </div>
+                    <div class="progress-cards">
+                        <div class="progress-card">
+                            <div class="progress-card-header">
+                                <h3 class="progress-card-title">Tecnologia NeoSkin™</h3>
+                                <div class="progress-card-icon">N</div>
+                            </div>
+                            <div class="progress-bar-container">
+                                <div class="progress-bar"></div>
+                            </div>
+                            <div class="progress-stats">
+                                <div class="progress-percentage">75% Completo</div>
+                                <div class="progress-remaining">2 módulos restantes</div>
+                            </div>
+                        </div>
+                        
+                        <div class="progress-card">
+                            <div class="progress-card-header">
+                                <h3 class="progress-card-title">AeroCore™ Mobile</h3>
+                                <div class="progress-card-icon">A</div>
+                            </div>
+                            <div class="progress-bar-container">
+                                <div class="progress-bar"></div>
+                            </div>
+                            <div class="progress-stats">
+                                <div class="progress-percentage">45% Completo</div>
+                                <div class="progress-remaining">4 módulos restantes</div>
+                            </div>
+                        </div>
+                        
+                        <div class="progress-card">
+                            <div class="progress-card-header">
+                                <h3 class="progress-card-title">Winf Select™</h3>
+                                <div class="progress-card-icon">W</div>
+                            </div>
+                            <div class="progress-bar-container">
+                                <div class="progress-bar"></div>
+                            </div>
+                            <div class="progress-stats">
+                                <div class="progress-percentage">90% Completo</div>
+                                <div class="progress-remaining">1 módulo restante</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="upcoming-section">
+                    <div class="section-header">
+                        <h2 class="section-title">PRÓXIMOS EVENTOS</h2>
+                        <span class="section-action">Ver todos</span>
+                    </div>
+                    <div class="upcoming-cards">
+                        <div class="upcoming-card">
+                            <div class="upcoming-card-icon">L</div>
+                            <div class="upcoming-card-content">
+                                <h3 class="upcoming-card-title">Live: Aplicação de NeoSkin™ em Superfícies Complexas</h3>
+                                <p class="upcoming-card-subtitle">Com Dr. Marcus Quantum, Especialista Master em Proteção Premium</p>
+                            </div>
+                            <div class="upcoming-card-date">Hoje, 19:00</div>
+                        </div>
+                        
+                        <div class="upcoming-card">
+                            <div class="upcoming-card-icon">W</div>
+                            <div class="upcoming-card-content">
+                                <h3 class="upcoming-card-title">Workshop: Técnicas Avançadas de Aplicação AeroCore™</h3>
+                                <p class="upcoming-card-subtitle">Sessão prática com demonstração em tempo real</p>
+                            </div>
+                            <div class="upcoming-card-date">Amanhã, 15:00</div>
+                        </div>
+                        
+                        <div class="upcoming-card">
+                            <div class="upcoming-card-icon">C</div>
+                            <div class="upcoming-card-content">
+                                <h3 class="upcoming-card-title">Certificação: Especialista em Winf Select™</h3>
+                                <p class="upcoming-card-subtitle">Avaliação final para obtenção do certificado premium</p>
+                            </div>
+                            <div class="upcoming-card-date">Sex, 10:00</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="sidebar">
+                <div class="certification-card">
+                    <div class="certification-header">
+                        <h3 class="certification-title">Sua Próxima Certificação</h3>
+                        <p class="certification-subtitle">Especialista em Tecnologia NeoSkin™</p>
+                    </div>
+                    <div class="certification-badge">
+                        [Badge de Certificação NeoSkin™]
+                    </div>
+                    <div class="certification-progress">
+                        <div class="certification-progress-text">
+                            <span>Progresso para Certificação</span>
+                            <span class="certification-progress-percentage">65%</span>
+                        </div>
+                        <div class="certification-progress-bar">
+                            <div class="certification-progress-fill"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="community-card">
+                    <div class="community-header">
+                        <h3 class="community-title">Comunidade Elite</h3>
+                        <span class="community-action">Ver todos</span>
+                    </div>
+                    <div class="community-members">
+                        <div class="community-member">M</div>
+                        <div class="community-member">J</div>
+                        <div class="community-member">A</div>
+                        <div class="community-member">L</div>
+                        <div class="community-member">S</div>
+                        <div class="community-member">+</div>
+                    </div>
+                    <div class="community-stats">
+                        <div class="community-stat">
+                            <div class="community-stat-value">128</div>
+                            <div class="community-stat-label">Membros</div>
+                        </div>
+                        <div class="community-stat">
+                            <div class="community-stat-value">47</div>
+                            <div class="community-stat-label">Discussões</div>
+                        </div>
+                        <div class="community-stat">
+                            <div class="community-stat-value">12</div>
+                            <div class="community-stat-label">Eventos</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="quantum-points-card">
+                    <div class="quantum-points-header">
+                        <h3 class="quantum-points-title">Pontos Quantum</h3>
+                        <div class="quantum-points-value">2,450</div>
+                    </div>
+                    <div class="quantum-points-history">
+                        <div class="quantum-points-item">
+                            <div class="quantum-points-item-label">Conclusão do Módulo 3 - NeoSkin™</div>
+                            <div class="quantum-points-item-value">+250</div>
+                        </div>
+                        <div class="quantum-points-item">
+                            <div class="quantum-points-item-label">Participação em Workshop AeroCore™</div>
+                            <div class="quantum-points-item-value">+150</div>
+                        </div>
+                        <div class="quantum-points-item">
+                            <div class="quantum-points-item-label">Contribuição no Fórum Elite</div>
+                            <div class="quantum-points-item-value">+75</div>
+                        </div>
+                        <div class="quantum-points-item">
+                            <div class="quantum-points-item-label">Troca por Material Exclusivo</div>
+                            <div class="quantum-points-item-value negative">-200</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

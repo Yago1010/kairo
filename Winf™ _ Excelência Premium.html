@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Winf™ | Excelência Premium</title>
+    <style>
+        :root {
+            --color-black: #0D0D0D;
+            --color-white: #FFFFFF;
+            --color-accent: #AAFF00;
+            --color-error: #FF3B30;
+            --color-info: #00FFFF;
+            --font-family: 'Inter', sans-serif;
+            --spacing-unit: 8px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--color-black);
+            color: var(--color-white);
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-unit);
+        }
+
+        header {
+            padding: calc(var(--spacing-unit) * 2) 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            background-color: rgba(13, 13, 13, 0.95);
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--color-white);
+            text-decoration: none;
+        }
+
+        .main-nav {
+            display: flex;
+            gap: calc(var(--spacing-unit) * 3);
+        }
+
+        .nav-link {
+            color: var(--color-white);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            padding: var(--spacing-unit) 0;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--color-accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .login-btn {
+            padding: calc(var(--spacing-unit) * 1.5) calc(var(--spacing-unit) * 3);
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            color: var(--color-white);
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+
+        .login-btn:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            margin-top: 60px;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: -1;
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 800px;
+            padding: calc(var(--spacing-unit) * 4);
+            z-index: 1;
+        }
+
+        .hero-title {
+            font-size: 64px;
+            font-weight: 700;
+            margin-bottom: calc(var(--spacing-unit) * 3);
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-size: 24px;
+            margin-bottom: calc(var(--spacing-unit) * 4);
+            opacity: 0.9;
+        }
+
+        .cta-btn {
+            padding: calc(var(--spacing-unit) * 2) calc(var(--spacing-unit) * 4);
+            background-color: var(--color-accent);
+            color: var(--color-black);
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 18px;
+            transition: transform 0.3s ease;
+            display: inline-block;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-4px);
+        }
+
+        .section {
+            padding: calc(var(--spacing-unit) * 12) 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .section-title {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: calc(var(--spacing-unit) * 6);
+            text-align: center;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: calc(var(--spacing-unit) * 6);
+        }
+
+        @media (min-width: 768px) {
+            .about-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .about-image {
+            aspect-ratio: 16 / 9;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .about-text {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .about-text p {
+            margin-bottom: calc(var(--spacing-unit) * 3);
+            font-size: 18px;
+        }
+
+        .product-showcase {
+            margin-top: calc(var(--spacing-unit) * 6);
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: calc(var(--spacing-unit) * 4);
+        }
+
+        .product-card {
+            background-color: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .product-image {
+            aspect-ratio: 16 / 9;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .product-info {
+            padding: calc(var(--spacing-unit) * 3);
+        }
+
+        .product-name {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: calc(var(--spacing-unit) * 2);
+        }
+
+        .product-description {
+            margin-bottom: calc(var(--spacing-unit) * 3);
+            opacity: 0.8;
+        }
+
+        .product-link {
+            color: var(--color-accent);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .technology-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .technology-description {
+            font-size: 18px;
+            margin-bottom: calc(var(--spacing-unit) * 6);
+        }
+
+        .tech-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: calc(var(--spacing-unit) * 4);
+            margin-top: calc(var(--spacing-unit) * 6);
+        }
+
+        .tech-feature {
+            background-color: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            padding: calc(var(--spacing-unit) * 3);
+            text-align: center;
+        }
+
+        .feature-icon {
+            width: 64px;
+            height: 64px;
+            background-color: rgba(170, 255, 0, 0.1);
+            border-radius: 50%;
+            margin: 0 auto calc(var(--spacing-unit) * 3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .feature-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: calc(var(--spacing-unit) * 2);
+        }
+
+        .feature-description {
+            opacity: 0.8;
+        }
+
+        .testimonials-slider {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .testimonial {
+            background-color: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            padding: calc(var(--spacing-unit) * 4);
+            text-align: center;
+        }
+
+        .testimonial-text {
+            font-size: 20px;
+            font-style: italic;
+            margin-bottom: calc(var(--spacing-unit) * 3);
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+        }
+
+        .testimonial-role {
+            opacity: 0.7;
+        }
+
+        .cta-section {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta-title {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: calc(var(--spacing-unit) * 3);
+        }
+
+        .cta-description {
+            font-size: 18px;
+            margin-bottom: calc(var(--spacing-unit) * 4);
+            opacity: 0.9;
+        }
+
+        footer {
+            padding: calc(var(--spacing-unit) * 8) 0;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: calc(var(--spacing-unit) * 4);
+        }
+
+        .footer-column h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: calc(var(--spacing-unit) * 3);
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: calc(var(--spacing-unit) * 1.5);
+        }
+
+        .footer-link {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+        }
+
+        .footer-link:hover {
+            color: var(--color-white);
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: var(--spacing-unit);
+            margin-top: calc(var(--spacing-unit) * 2);
+        }
+
+        .newsletter-input {
+            flex-grow: 1;
+            padding: calc(var(--spacing-unit) * 1.5);
+            background-color: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 4px;
+            color: var(--color-white);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: calc(var(--spacing-unit) * 2);
+            margin-top: calc(var(--spacing-unit) * 2);
+        }
+
+        .social-icon {
+            width: 32px;
+            height: 32px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: calc(var(--spacing-unit) * 2);
+            }
+
+            .main-nav {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .hero-title {
+                font-size: 36px;
+            }
+
+            .hero-subtitle {
+                font-size: 18px;
+            }
+
+            .section-title {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">WINF™</a>
+                <nav class="main-nav">
+                    <a href="#about" class="nav-link">Sobre</a>
+                    <a href="#products" class="nav-link">Produtos</a>
+                    <a href="#technology" class="nav-link">Tecnologia</a>
+                    <a href="#testimonials" class="nav-link">Depoimentos</a>
+                    <a href="#contact" class="nav-link">Contato</a>
+                </nav>
+                <a href="#" class="login-btn">Área de Membros</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Excelência Premium em Cada Detalhe</h1>
+                <p class="hero-subtitle">Descubra a experiência Winf™ e eleve seus padrões para um novo nível de sofisticação e performance.</p>
+                <a href="#" class="cta-btn">Explorar Produtos</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title">Sobre a Winf™</h2>
+            <div class="about-content">
+                <div class="about-image">
+                    <span>IMAGEM INSTITUCIONAL</span>
+                </div>
+                <div class="about-text">
+                    <p>A Winf™ nasceu da busca incessante pela perfeição. Fundada por visionários que não aceitavam o comum, nossa marca representa a convergência entre tecnologia de ponta, design sofisticado e performance excepcional.</p>
+                    <p>Cada produto Winf™ é resultado de anos de pesquisa, desenvolvimento e refinamento, criado para atender às expectativas dos mais exigentes conhecedores. Não fabricamos apenas produtos — criamos experiências que transformam a percepção do que é possível.</p>
+                    <p>Nossa filosofia é simples: excelência sem concessões. É esse compromisso que nos posiciona como referência global em produtos premium e nos permite oferecer a você o que há de melhor em cada categoria.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="products" class="section">
+        <div class="container">
+            <h2 class="section-title">Produtos de Elite</h2>
+            <div class="product-showcase">
+                <div class="product-grid">
+                    <div class="product-card">
+                        <div class="product-image">
+                            <span>AEROCORE™</span>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">AeroCore™</h3>
+                            <p class="product-description">A revolucionária tecnologia AeroCore™ redefine os padrões de performance e conforto, com materiais exclusivos e design patenteado.</p>
+                            <a href="#" class="product-link">Conhecer Linha →</a>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-image">
+                            <span>NEOSKIN™</span>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">NeoSkin™</h3>
+                            <p class="product-description">Experimente a sensação única do NeoSkin™, desenvolvido com nanotecnologia para proporcionar proteção superior e toque incomparável.</p>
+                            <a href="#" class="product-link">Conhecer Linha →</a>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-image">
+                            <span>ADV-X</span>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">ADV-X</h3>
+                            <p class="product-description">A série ADV-X combina engenharia avançada e materiais de última geração para entregar performance extrema em qualquer condição.</p>
+                            <a href="#" class="product-link">Conhecer Linha →</a>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-image">
+                            <span>WINF SELECT™</span>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">Winf Select™</h3>
+                            <p class="product-description">Nossa linha mais exclusiva, produzida em edições limitadas e com acabamentos artesanais para os verdadeiros conhecedores.</p>
+                            <a href="#" class="product-link">Conhecer Linha →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="technology" class="section">
+        <div class="container">
+            <h2 class="section-title">Tecnologia Proprietária</h2>
+            <div class="technology-content">
+                <p class="technology-description">Na Winf™, a inovação não é apenas um objetivo — é nosso DNA. Nossas tecnologias proprietárias são desenvolvidas em laboratórios de ponta e testadas nas condições mais extremas para garantir performance excepcional.</p>
+                
+                <div class="tech-features">
+                    <div class="tech-feature">
+                        <div class="feature-icon">
+                            <span>ÍCONE</span>
+                        </div>
+                        <h3 class="feature-title">Quantum Drive</h3>
+                        <p class="feature-description">Sistema avançado de processamento que potencializa todos os produtos Winf™, garantindo resposta imediata e eficiência máxima.</p>
+                    </div>
+                    <div class="tech-feature">
+                        <div class="feature-icon">
+                            <span>ÍCONE</span>
+                        </div>
+                        <h3 class="feature-title">NanoMatrix™</h3>
+                        <p class="feature-description">Estrutura molecular revolucionária que confere resistência superior e leveza incomparável aos materiais Winf™.</p>
+                    </div>
+                    <div class="tech-feature">
+                        <div class="feature-icon">
+                            <span>ÍCONE</span>
+                        </div>
+                        <h3 class="feature-title">ThermoSync</h3>
+                        <p class="feature-description">Tecnologia de regulação térmica que adapta-se automaticamente às condições ambientais para conforto ideal.</p>
+                    </div>
+                    <div class="tech-feature">
+                        <div class="feature-icon">
+                            <span>ÍCONE</span>
+                        </div>
+                        <h3 class="feature-title">UltraFusion</h3>
+                        <p class="feature-description">Processo exclusivo de fusão de materiais que elimina pontos de falha e aumenta a durabilidade em até 300%.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials" class="section">
+        <div class="container">
+            <h2 class="section-title">O que Dizem Nossos Clientes</h2>
+            <div class="testimonials-slider">
+                <div class="testimonial">
+                    <p class="testimonial-text">"Depois de experimentar a linha AeroCore™, não consigo mais voltar aos produtos convencionais. A diferença é simplesmente impressionante em todos os aspectos."</p>
+                    <div class="testimonial-author">Ricardo Mendes</div>
+                    <div class="testimonial-role">CEO, Apex Ventures</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section">
+        <div class="container">
+            <div class="cta-section">
+                <h2 class="cta-title">Eleve Sua Experiência</h2>
+                <p class="cta-description">Junte-se à comunidade exclusiva Winf™ e descubra um mundo de possibilidades premium. Nossos especialistas estão prontos para guiá-lo na escolha perfeita.</p>
+                <a href="#" class="cta-btn">Fale Conosco</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Winf™</h3>
+                    <div class="footer-links">
+                        <a href="#" class="footer-link">Sobre Nós</a>
+                        <a href="#" class="footer-link">Carreiras</a>
+                        <a href="#" class="footer-link">Responsabilidade</a>
+                        <a href="#" class="footer-link">Imprensa</a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Produtos</h3>
+                    <div class="footer-links">
+                        <a href="#" class="footer-link">AeroCore™</a>
+                        <a href="#" class="footer-link">NeoSkin™</a>
+                        <a href="#" class="footer-link">ADV-X</a>
+                        <a href="#" class="footer-link">Winf Select™</a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Suporte</h3>
+                    <div class="footer-links">
+                        <a href="#" class="footer-link">Contato</a>
+                        <a href="#" class="footer-link">FAQ</a>
+                        <a href="#" class="footer-link">Garantia</a>
+                        <a href="#" class="footer-link">Manutenção</a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Newsletter</h3>
+                    <p>Receba novidades e conteúdo exclusivo.</p>
+                    <div class="newsletter-form">
+                        <input type="email" class="newsletter-input" placeholder="Seu e-mail">
+                        <button class="cta-btn">Assinar</button>
+                    </div>
+                    <div class="social-icons">
+                        <div class="social-icon"></div>
+                        <div class="social-icon"></div>
+                        <div class="social-icon"></div>
+                        <div class="social-icon"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>W.A.R.P.™ | Sistema para Credenciados</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset e estilos globais */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --black-deep: #000000;
+            --black-secondary: #0A0A0A;
+            --black-tertiary: #121212;
+            --white-premium: #FFFFFF;
+            --white-secondary: #AAAAAA;
+            --text-description: #DDDDDD;
+            --border-subtle: rgba(255, 255, 255, 0.1);
+            --blue-accent: #0066FF;
+            --orange-accent: #FF9900;
+            --purple-accent: #CC33FF;
+            --cyan-accent: #00CCCC;
+            --pink-accent: #FF3399;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--black-deep);
+            color: var(--white-premium);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        /* Container principal */
+        .container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0;
+        }
+        
+        /* Cabeçalho e navegação */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid var(--border-subtle);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            background-color: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            color: var(--white-premium);
+            text-decoration: none;
+            border: 2px solid var(--cyan-accent);
+            padding: 0.5rem 1rem;
+            margin-right: 1rem;
+        }
+        
+        .nav {
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav-item {
+            margin: 0 1rem;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            color: var(--white-premium);
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-item:nth-child(1) {
+            color: var(--blue-accent);
+        }
+        
+        .nav-item:nth-child(2) {
+            color: var(--orange-accent);
+        }
+        
+        .nav-item:nth-child(3) {
+            color: var(--purple-accent);
+        }
+        
+        .nav-item:nth-child(4) {
+            color: var(--cyan-accent);
+        }
+        
+        .nav-item:nth-child(5) {
+            color: var(--pink-accent);
+        }
+        
+        .nav-item::before {
+            content: attr(data-index);
+            position: absolute;
+            top: -10px;
+            left: 0;
+            font-size: 0.7rem;
+            font-weight: 700;
+        }
+        
+        .user-profile {
+            display: flex;
+            align-items: center;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--black-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 1rem;
+            font-weight: 600;
+            border: 1px solid var(--cyan-accent);
+        }
+        
+        .user-info {
+            text-align: right;
+            margin-right: 0.5rem;
+        }
+        
+        .user-name {
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        
+        .user-level {
+            font-size: 0.7rem;
+            color: var(--cyan-accent);
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background-color: var(--black-deep);
+            overflow: hidden;
+            padding-top: 80px;
+        }
+        
+        .hero-content {
+            text-align: center;
+            max-width: 800px;
+            padding: 0 2rem;
+            z-index: 2;
+        }
+        
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            color: var(--white-secondary);
+            margin-bottom: 3rem;
+            line-height: 1.6;
+        }
+        
+        .hero-cta {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background-color: transparent;
+            border: 1px solid var(--cyan-accent);
+            color: var(--cyan-accent);
+            font-size: 1rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .hero-cta:hover {
+            background-color: var(--cyan-accent);
+            color: var(--black-deep);
+        }
+        
+        .hero-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(to right, rgba(0, 204, 204, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0, 204, 204, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: 1;
+        }
+        
+        /* Dashboard Section */
+        .dashboard {
+            padding: 6rem 2rem;
+            background-color: var(--black-secondary);
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+        
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--white-secondary);
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        .dashboard-preview {
+            width: 100%;
+            height: 600px;
+            background-color: var(--black-deep);
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            border: 1px solid var(--border-subtle);
+            margin-bottom: 4rem;
+        }
+        
+        .dashboard-preview-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            padding: 2rem;
+        }
+        
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .dashboard-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+        
+        .dashboard-controls {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .dashboard-control {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--black-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--border-subtle);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .dashboard-control:hover {
+            border-color: var(--cyan-accent);
+            color: var(--cyan-accent);
+        }
+        
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 1.5rem;
+            flex: 1;
+        }
+        
+        .dashboard-card {
+            background-color: var(--black-tertiary);
+            border-radius: 8px;
+            padding: 1.5rem;
+            border: 1px solid var(--border-subtle);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .dashboard-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .dashboard-card-title {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--white-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .dashboard-card-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: var(--black-deep);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+        }
+        
+        .dashboard-card:nth-child(1) .dashboard-card-icon {
+            color: var(--blue-accent);
+        }
+        
+        .dashboard-card:nth-child(2) .dashboard-card-icon {
+            color: var(--orange-accent);
+        }
+        
+        .dashboard-card:nth-child(3) .dashboard-card-icon {
+            color: var(--purple-accent);
+        }
+        
+        .dashboard-card-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .dashboard-card-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .dashboard-card-description {
+            font-size: 0.9rem;
+            color: var(--white-secondary);
+        }
+        
+        .dashboard-card:nth-child(1) {
+            grid-column: 1;
+            grid-row: 1 / span 2;
+        }
+        
+        .dashboard-card:nth-child(1) .dashboard-card-content {
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .dashboard-map {
+            width: 100%;
+            height: 100%;
+            background-color: var(--black-deep);
+            border-radius: 4px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .dashboard-map::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(to right, rgba(0, 102, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0, 102, 255, 0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+            z-index: 1;
+        }
+        
+        .map-point {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: var(--blue-accent);
+            z-index: 2;
+        }
+        
+        .map-point:nth-child(1) {
+            top: 30%;
+            left: 20%;
+        }
+        
+        .map-point:nth-child(2) {
+            top: 50%;
+            left: 60%;
+        }
+        
+        .map-point:nth-child(3) {
+            top: 70%;
+            left: 40%;
+        }
+        
+        .map-point:nth-child(4) {
+            top: 20%;
+            left: 80%;
+        }
+        
+        .map-point::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: rgba(0, 102, 255, 0.3);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(3);
+                opacity: 0;
+            }
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 6rem 2rem;
+            background-color: var(--black-deep);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+        
+        .feature-card {
+            background-color: var(--black-secondary);
+            border-radius: 8px;
+            padding: 2rem;
+            border: 1px solid var(--border-subtle);
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--cyan-accent);
+        }
+        
+        .feature-number {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--cyan-accent);
+            opacity: 0.5;
+        }
+        
+        .feature-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+        
+        .feature-description {
+            font-size: 1rem;
+            color: var(--white-secondary);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .feature-link {
+            display: inline-block;
+            color: var(--cyan-accent);
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-link:hover {
+            text-decoration: underline;
+        }
+        
+        /* Narrative Section */
+        .narrative {
+            padding: 6rem 2rem;
+            background-color: var(--black-secondary);
+            text-align: center;
+        }
+        
+        .narrative-quotes {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            max-width: 800px;
+            margin: 4rem auto 0;
+        }
+        
+        .narrative-quote {
+            font-size: 2rem;
+            font-weight: 300;
+            line-height: 1.4;
+            position: relative;
+            padding: 0 3rem;
+        }
+        
+        .narrative-quote::before,
+        .narrative-quote::after {
+            content: '"';
+            position: absolute;
+            font-size: 4rem;
+            color: var(--cyan-accent);
+            opacity: 0.3;
+            line-height: 1;
+        }
+        
+        .narrative-quote::before {
+            top: -1rem;
+            left: 0;
+        }
+        
+        .narrative-quote::after {
+            bottom: -2rem;
+            right: 0;
+        }
+        
+        /* CTA Section */
+        .cta {
+            padding: 6rem 2rem;
+            background-color: var(--black-deep);
+            text-align: center;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background-color: var(--cyan-accent);
+            color: var(--black-deep);
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            text-decoration: none;
+            margin-top: 3rem;
+            transition: all 0.3s ease;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 204, 204, 0.3);
+        }
+        
+        /* Footer */
+        footer {
+            padding: 4rem 2rem;
+            background-color: var(--black-tertiary);
+            border-top: 1px solid var(--border-subtle);
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .footer-link {
+            color: var(--white-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-link:hover {
+            color: var(--white-premium);
+        }
+        
+        .footer-copyright {
+            margin-top: 2rem;
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--white-secondary);
+        }
+        
+        /* Responsividade */
+        @media (max-width: 1200px) {
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+                grid-template-rows: repeat(3, 1fr);
+            }
+            
+            .dashboard-card:nth-child(1) {
+                grid-column: 1;
+                grid-row: 1;
+            }
+            
+            .dashboard-preview {
+                height: 800px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav {
+                display: none;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                gap: 2rem;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="#" class="logo-text">W.A.R.P.™</a>
+        </div>
+        
+        <nav class="nav">
+            <a href="#" class="nav-item" data-index="1">DASHBOARD</a>
+            <a href="#" class="nav-item" data-index="2">CREDENCIADOS</a>
+            <a href="#" class="nav-item" data-index="3">RELATÓRIOS</a>
+            <a href="#" class="nav-item" data-index="4">CONFIGURAÇÕES</a>
+            <a href="#" class="nav-item" data-index="5">SUPORTE</a>
+        </nav>
+        
+        <div class="user-profile">
+            <div class="user-info">
+                <div class="user-name">Carlos Mendes</div>
+                <div class="user-level">CREDENCIADO PREMIUM</div>
+            </div>
+            <div class="user-avatar">C</div>
+        </div>
+    </header>
+    
+    <main>
+        <section class="hero">
+            <div class="hero-grid"></div>
+            <div class="hero-content">
+                <h1 class="hero-title">SISTEMA W.A.R.P.™</h1>
+                <p class="hero-subtitle">Dashboard futurista que integra todos os sistemas do universo dark da Winf para parceiros de negócio. Monitore, analise e expanda seu território de proteção invisível.</p>
+                <a href="#dashboard" class="hero-cta">ACESSAR DASHBOARD</a>
+            </div>
+        </section>
+        
+        <section id="dashboard" class="dashboard">
+            <div class="section-header">
+                <h2 class="section-title">VISUALIZAÇÃO CONCEITUAL</h2>
+                <p class="section-subtitle">Mockup visual do dashboard W.A.R.P.™ com interface inspirada em centros de comando de missões espaciais</p>
+            </div>
+            
+            <div class="dashboard-preview">
+                <div class="dashboard-preview-content">
+                    <div class="dashboard-header">
+                        <h3 class="dashboard-title">CENTRO DE COMANDO WINF™</h3>
+                        <div class="dashboard-controls">
+                            <div class="dashboard-control">⟳</div>
+                            <div class="dashboard-control">⚙</div>
+                            <div class="dashboard-control">?</div>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-grid">
+                        <div class="dashboard-card">
+                            <div class="dashboard-card-header">
+                                <h4 class="dashboard-card-title">Território de Proteção</h4>
+                                <div class="dashboard-card-icon">M</div>
+                            </div>
+                            <div class="dashboard-card-content">
+                                <div class="dashboard-map">
+                                    <div class="map-point"></div>
+                                    <div class="map-point"></div>
+                                    <div class="map-point"></div>
+                                    <div class="map-point"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="dashboard-card">
+                            <div class="dashboard-card-header">
+                                <h4 class="dashboard-card-title">Vendas Mensais</h4>
+                                <div class="dashboard-card-icon">V</div>
+                            </div>
+                            <div class="dashboard-card-content">
+                                <div class="dashboard-card-value">R$ 87.450</div>
+                                <div class="dashboard-card-description">Crescimento de 12% em relação ao mês anterior</div>
+                            </div>
+                        </div>
+                        
+                        <div class="dashboard-card">
+                            <div class="dashboard-card-header">
+                                <h4 class="dashboard-card-title">Estoque Atual</h4>
+                                <div class="dashboard-card-icon">E</div>
+                            </div>
+                            <div class="dashboard-card-content">
+                                <div class="dashboard-card-value">78%</div>
+                                <div class="dashboard-card-description">Reposição recomendada para 3 produtos</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="features">
+            <div class="section-header">
+                <h2 class="section-title">ELEMENTOS ESTRATÉGICOS</h2>
+                <p class="section-subtitle">Recursos avançados que transformam a experiência dos credenciados Winf™</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-number">1</div>
+                    <h3 class="feature-title">W-Core AI™ Personalizada</h3>
+                    <p class="feature-description">Assistente virtual com aprendizado contínuo que se adapta às necessidades específicas de cada credenciado.</p>
+                    <a href="#" class="feature-link">Saiba mais</a>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-number">2</div>
+                    <h3 class="feature-title">W-Vision™ Aprimorado</h3>
+                    <p class="feature-description">Dashboards em tempo real com visualizações holográficas e previsões de vendas baseadas em IA.</p>
+                    <a href="#" class="feature-link">Saiba mais</a>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-number">3</div>
+                    <h3 class="feature-title">W-Refill Automático</h3>
+                    <p class="feature-description">Sistema que sugere reposições baseado em IA preditiva, garantindo estoque otimizado sem intervenção manual.</p>
+                    <a href="#" class="feature-link">Saiba mais</a>
+                </div>
+            </div>
+        </section>
+        
+        <section class="narrative">
+            <div class="section-header">
+                <h2 class="section-title">NARRATIVA ENVOLVENTE</h2>
+                <p class="section-subtitle">A experiência imersiva que transforma a gestão do seu negócio</p>
+            </div>
+            
+            <div class="narrative-quotes">
+                <div class="narrative-quote">Você agora tem acesso ao centro de comando Winf™</div>
+                <div class="narrative-quote">Monitore, analise e expanda seu território de proteção invisível</div>
+                <div class="narrative-quote">Sua operação nunca dorme, assim como nossa tecnologia</div>
+            </div>
+        </section>
+        
+        <section class="cta">
+            <div class="section-header">
+                <h2 class="section-title">ENTRE NO UNIVERSO W.A.R.P.™</h2>
+                <p class="section-subtitle">Transforme sua operação com a tecnologia mais avançada do mercado</p>
+            </div>
+            
+            <a href="#" class="cta-button">Solicitar Acesso</a>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">WINF™</div>
+            <div class="footer-links">
+                <a href="#" class="footer-link">Sobre</a>
+                <a href="#" class="footer-link">Termos de Uso</a>
+                <a href="#" class="footer-link">Privacidade</a>
+                <a href="#" class="footer-link">Contato</a>
+            </div>
+        </div>
+        <div class="footer-copyright">© 2025 Winf™. Todos os direitos reservados.</div>
+    </footer>
+</body>
+</html>

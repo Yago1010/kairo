@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UNIVERSO DARK™ | Investidores Premium</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos Globais */
+        :root {
+            --black-deep: #000000;
+            --black-secondary: #111111;
+            --white-premium: #FFFFFF;
+            --white-secondary: rgba(255, 255, 255, 0.7);
+            --gold-accent: #D4AF37;
+            --silver-accent: #C0C0C0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        body {
+            background-color: var(--black-deep);
+            color: var(--white-premium);
+            min-height: 100vh;
+            overflow-x: hidden;
+            letter-spacing: 0.05em;
+        }
+        
+        /* Cabeçalho */
+        header {
+            padding: 2rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 300;
+            letter-spacing: 0.5rem;
+            color: var(--white-premium);
+            text-decoration: none;
+        }
+        
+        .logo span {
+            color: var(--white-premium);
+            font-weight: 600;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 3rem;
+        }
+        
+        nav a {
+            color: var(--white-premium);
+            text-decoration: none;
+            font-size: 0.9rem;
+            letter-spacing: 0.2rem;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+        
+        nav a:hover {
+            color: var(--white-secondary);
+        }
+        
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--black-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            border: 1px solid var(--white-secondary);
+        }
+        
+        .user-info {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .user-name {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        .user-level {
+            font-size: 0.7rem;
+            color: var(--white-secondary);
+            letter-spacing: 0.1rem;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 6rem 4rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 300;
+            letter-spacing: 0.5rem;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+        }
+        
+        .hero-title span {
+            font-weight: 600;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            letter-spacing: 0.2rem;
+            margin-bottom: 5rem;
+            max-width: 800px;
+            color: var(--white-secondary);
+            line-height: 1.8;
+        }
+        
+        /* Visualização Conceitual */
+        .concept-section {
+            padding: 6rem 4rem;
+            background-color: rgba(255, 255, 255, 0.02);
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 300;
+            letter-spacing: 0.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            text-transform: uppercase;
+        }
+        
+        .section-title span {
+            font-weight: 600;
+        }
+        
+        .section-subtitle {
+            font-size: 1.1rem;
+            font-weight: 300;
+            letter-spacing: 0.1rem;
+            margin-bottom: 5rem;
+            max-width: 800px;
+            color: var(--white-secondary);
+            line-height: 1.8;
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .mockup-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: var(--black-secondary);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .mockup-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+        }
+        
+        .mockup-title {
+            font-size: 1.8rem;
+            font-weight: 300;
+            letter-spacing: 0.3rem;
+            text-transform: uppercase;
+        }
+        
+        .mockup-controls {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .mockup-control {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(255, 255, 255, 0.05);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .mockup-control:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .mockup-content {
+            display: flex;
+            gap: 3rem;
+        }
+        
+        .mockup-visualization {
+            flex: 2;
+            height: 500px;
+            background-color: var(--black-deep);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hud-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        
+        .hud-element {
+            position: absolute;
+            font-size: 0.8rem;
+            color: var(--white-premium);
+            letter-spacing: 0.1rem;
+        }
+        
+        .hud-top-left {
+            top: 2rem;
+            left: 2rem;
+        }
+        
+        .hud-top-right {
+            top: 2rem;
+            right: 2rem;
+            text-align: right;
+        }
+        
+        .hud-bottom-left {
+            bottom: 2rem;
+            left: 2rem;
+        }
+        
+        .hud-bottom-right {
+            bottom: 2rem;
+            right: 2rem;
+            text-align: right;
+        }
+        
+        .hud-center {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 300;
+            letter-spacing: 0.3rem;
+        }
+        
+        .hud-line {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .hud-line-horizontal {
+            height: 1px;
+            width: 100%;
+        }
+        
+        .hud-line-vertical {
+            width: 1px;
+            height: 100%;
+        }
+        
+        .hud-line-top {
+            top: 5rem;
+        }
+        
+        .hud-line-bottom {
+            bottom: 5rem;
+        }
+        
+        .hud-line-left {
+            left: 5rem;
+        }
+        
+        .hud-line-right {
+            right: 5rem;
+        }
+        
+        .mockup-data {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        
+        .data-card {
+            background-color: var(--black-deep);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .data-card:hover {
+            transform: translateX(10px);
+            border-color: var(--white-secondary);
+        }
+        
+        .data-title {
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.1rem;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+        }
+        
+        .data-value {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .data-description {
+            font-size: 0.8rem;
+            color: var(--white-secondary);
+            line-height: 1.8;
+        }
+        
+        /* Elementos Estratégicos */
+        .elements-section {
+            padding: 6rem 4rem;
+        }
+        
+        .elements-container {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .element-card {
+            display: flex;
+            gap: 3rem;
+            background-color: var(--black-secondary);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 3rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .element-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--white-secondary);
+        }
+        
+        .element-number {
+            font-size: 5rem;
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.1);
+            line-height: 1;
+        }
+        
+        .element-content {
+            flex: 1;
+        }
+        
+        .element-title {
+            font-size: 1.5rem;
+            font-weight: 500;
+            letter-spacing: 0.2rem;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+        }
+        
+        .element-description {
+            font-size: 1rem;
+            color: var(--white-secondary);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+        
+        .element-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        
+        .element-feature {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .feature-title {
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 0.8rem;
+            letter-spacing: 0.1rem;
+        }
+        
+        .feature-description {
+            font-size: 0.8rem;
+            color: var(--white-secondary);
+            line-height: 1.8;
+        }
+        
+        /* Narrativa Envolvente */
+        .narrative-section {
+            padding: 6rem 4rem;
+            background-color: rgba(255, 255, 255, 0.02);
+            text-align: center;
+        }
+        
+        .quotes-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 4rem;
+        }
+        
+        .quote {
+            font-size: 2.5rem;
+            font-weight: 300;
+            line-height: 1.4;
+            letter-spacing: 0.2rem;
+            position: relative;
+            padding: 0 4rem;
+        }
+        
+        .quote::before,
+        .quote::after {
+            content: '"';
+            position: absolute;
+            font-size: 6rem;
+            color: rgba(255, 255, 255, 0.1);
+            line-height: 1;
+        }
+        
+        .quote::before {
+            top: -2rem;
+            left: 0;
+        }
+        
+        .quote::after {
+            bottom: -4rem;
+            right: 0;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            padding: 6rem 4rem;
+            text-align: center;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 1.5rem 4rem;
+            background-color: transparent;
+            border: 1px solid var(--white-premium);
+            color: var(--white-premium);
+            font-size: 1.2rem;
+            font-weight: 300;
+            letter-spacing: 0.3rem;
+            text-transform: uppercase;
+            text-decoration: none;
+            margin-top: 3rem;
+            transition: all 0.3s ease;
+        }
+        
+        .cta-button:hover {
+            background-color: var(--white-premium);
+            color: var(--black-deep);
+        }
+        
+        /* Footer */
+        footer {
+            padding: 4rem;
+            background-color: var(--black-secondary);
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 300;
+            letter-spacing: 0.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-logo span {
+            font-weight: 600;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+        
+        .footer-link {
+            color: var(--white-secondary);
+            text-decoration: none;
+            font-size: 0.8rem;
+            letter-spacing: 0.1rem;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-link:hover {
+            color: var(--white-premium);
+        }
+        
+        .footer-copyright {
+            font-size: 0.8rem;
+            color: var(--white-secondary);
+        }
+        
+        /* Responsividade */
+        @media (max-width: 1200px) {
+            .mockup-content {
+                flex-direction: column;
+            }
+            
+            .mockup-visualization {
+                height: 400px;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            header {
+                padding: 2rem;
+            }
+            
+            .hero,
+            .concept-section,
+            .elements-section,
+            .narrative-section,
+            .cta-section {
+                padding: 4rem 2rem;
+            }
+            
+            .element-card {
+                flex-direction: column;
+                gap: 1.5rem;
+                padding: 2rem;
+            }
+            
+            .element-number {
+                font-size: 3rem;
+            }
+            
+            .quote {
+                font-size: 2rem;
+                padding: 0 2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .mockup-container {
+                padding: 1.5rem;
+            }
+            
+            .mockup-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            
+            .element-features {
+                flex-direction: column;
+            }
+            
+            .quote {
+                font-size: 1.5rem;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="#" class="logo">UNIVERSO <span>DARK™</span></a>
+        
+        <nav>
+            <ul>
+                <li><a href="#">Visão Geral</a></li>
+                <li><a href="#">Simulador ROI</a></li>
+                <li><a href="#">Portal Exclusivo</a></li>
+                <li><a href="#">Certificados</a></li>
+                <li><a href="#">Contato</a></li>
+            </ul>
+        </nav>
+        
+        <div class="user-profile">
+            <div class="user-info">
+                <div class="user-name">Marcos Oliveira</div>
+                <div class="user-level">INNER CIRCLE</div>
+            </div>
+            <div class="user-avatar">M</div>
+        </div>
+    </header>
+    
+    <main>
+        <section class="hero">
+            <h1 class="hero-title">UNIVERSO <span>DARK™</span></h1>
+            <p class="hero-subtitle">Materiais de apresentação imersivos que posicionam o grupo Winf como oportunidade de investimento em tecnologia disruptiva. Entre no círculo interno da revolução tecnológica.</p>
+        </section>
+        
+        <section class="concept-section">
+            <h2 class="section-title">VISUALIZAÇÃO <span>CONCEITUAL</span></h2>
+            <p class="section-subtitle">Mockup visual da apresentação cinemática para investidores com interface tipo HUD para visualização de projeções financeiras</p>
+            
+            <div class="mockup-container">
+                <div class="mockup-header">
+                    <h3 class="mockup-title">PROJEÇÕES FINANCEIRAS</h3>
+                    <div class="mockup-controls">
+                        <div class="mockup-control">⟳</div>
+                        <div class="mockup-control">⚙</div>
+                        <div class="mockup-control">?</div>
+                    </div>
+                </div>
+                
+                <div class="mockup-content">
+                    <div class="mockup-visualization">
+                        <div class="hud-overlay">
+                            <div class="hud-element hud-top-left">WINF GROUP / FINANCIAL PROJECTION</div>
+                            <div class="hud-element hud-top-right">ACCESS LEVEL: INNER CIRCLE</div>
+                            <div class="hud-element hud-bottom-left">CONFIDENTIAL DATA</div>
+                            <div class="hud-element hud-bottom-right">Q3 2025 - Q4 2027</div>
+                            <div class="hud-element hud-center">PROJEÇÃO DE CRESCIMENTO EXPONENCIAL</div>
+                            
+                            <div class="hud-line hud-line-horizontal hud-line-top"></div>
+                            <div class="hud-line hud-line-horizontal hud-line-bottom"></div>
+                            <div class="hud-line hud-line-vertical hud-line-left"></div>
+                            <div class="hud-line hud-line-vertical hud-line-right"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="mockup-data">
+                        <div class="data-card">
+                            <h4 class="data-title">ROI Projetado</h4>
+                            <div class="data-value">327%</div>
+                            <p class="data-description">Retorno sobre investimento projetado para os próximos 36 meses, considerando expansão territorial e novos produtos.</p>
+                        </div>
+                        
+                        <div class="data-card">
+                            <h4 class="data-title">Crescimento Anual</h4>
+                            <div class="data-value">68%</div>
+                            <p class="data-description">Taxa composta de crescimento anual, superando em 4.2x a média do setor de tecnologia de proteção premium.</p>
+                        </div>
+                        
+                        <div class="data-card">
+                            <h4 class="data-title">Valuation Estimado</h4>
+                            <div class="data-value">R$ 175M</div>
+                            <p class="data-description">Valuation estimado para 2027, baseado em múltiplos de receita e EBITDA do setor de tecnologia premium.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="elements-section">
+            <h2 class="section-title">ELEMENTOS <span>ESTRATÉGICOS</span></h2>
+            <p class="section-subtitle">Recursos avançados que transformam a experiência dos investidores Winf™</p>
+            
+            <div class="elements-container">
+                <div class="element-card">
+                    <div class="element-number">1</div>
+                    <div class="element-content">
+                        <h3 class="element-title">Simulador de ROI Interativo</h3>
+                        <p class="element-description">Interface tipo HUD para visualização de projeções financeiras com diferentes cenários de investimento.</p>
+                        <div class="element-features">
+                            <div class="element-feature">
+                                <h4 class="feature-title">Cenários Personalizáveis</h4>
+                                <p class="feature-description">Ajuste variáveis como valor de investimento, horizonte temporal e perfil de risco.</p>
+                            </div>
+                            <div class="element-feature">
+                                <h4 class="feature-title">Visualização Avançada</h4>
+                                <p class="feature-description">Gráficos tridimensionais e projeções holográficas para análise intuitiva.</p>
+                            </div>
+                            <div class="element-feature">
+                                <h4 class="feature-title">Comparativo Setorial</h4>
+                                <p class="feature-description">Benchmark automático com empresas similares e índices de mercado.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="element-card">
+                    <div class="element-number">2</div>
+                    <div class="element-content">
+                        <h3 class="element-title">Portal de Investidores Exclusivo</h3>
+                        <p class="element-description">Área restrita com informações privilegiadas, relatórios dinâmicos e acesso ao "Inner Circle" do grupo Winf.</p>
+                        <div class="element-features">
+                            <div class="element-feature">
+                                <h4 class="feature-title">Relatórios em Tempo Real</h4>
+                                <p class="feature-description">Dados atualizados constantemente sobre performance financeira e operacional.</p>
+                            </div>
+                            <div class="element-feature">
+                                <h4 class="feature-title">Comunicação Direta</h4>
+                                <p class="feature-description">Canal exclusivo com a diretoria e principais executivos do grupo.</p>
+                            </div>
+                            <div class="element-feature">
+                                <h4 class="feature-title">Eventos Exclusivos</h4>
+                                <p class="feature-description">Acesso prioritário a lançamentos e eventos estratégicos do grupo.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="element-card">
+                    <div class="element-number">3</div>
+                    <div class="element-content">
+                        <h3 class="element-title">Certificados Digitais</h3>
+                        <p class="element-description">Tokens exclusivos para investidores do grupo, garantindo acesso a informações e oportunidades privilegiadas.</p>
+                        <div class="element-features">
+                            <div class="element-feature">
+                                <h4 class="feature-title">Autenticação Avançada</h4>
+                                <p class="feature-description">Tecnologia blockchain para garantir segurança e exclusividade.</p>
+                            </div>
+                            <div class="element-feature">
+                                <h4 class="feature-title">Níveis de Acesso</h4>
+                                <p class="feature-description">Hierarquia de privilégios baseada no perfil e histórico do investidor.</p>
+                            </div>
+                            <div class="element-feature">
+                                <h4 class="feature-title">Benefícios Tangíveis</h4>
+                                <p class="feature-description">Vantagens exclusivas no ecossistema Winf e empresas parceiras.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="narrative-section">
+            <h2 class="section-title">NARRATIVA <span>ENVOLVENTE</span></h2>
+            <p class="section-subtitle">A experiência imersiva que transforma sua visão sobre investimentos</p>
+            
+            <div class="quotes-container">
+                <div class="quote">Invista no invisível, colha o visível</div>
+                <div class="quote">Entre no círculo interno da revolução tecnológica</div>
+                <div class="quote">Não estamos vendendo um produto, estamos criando o futuro</div>
+            </div>
+        </section>
+        
+        <section class="cta-section">
+            <h2 class="section-title">ENTRE NO <span>INNER CIRCLE</span></h2>
+            <p class="section-subtitle">Faça parte do seleto grupo de investidores que está moldando o futuro da tecnologia de proteção premium</p>
+            
+            <a href="#" class="cta-button">Solicitar Acesso</a>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="footer-logo">WINF <span>GROUP™</span></div>
+        
+        <div class="footer-links">
+            <a href="#" class="footer-link">Sobre</a>
+            <a href="#" class="footer-link">Termos de Uso</a>
+            <a href="#" class="footer-link">Privacidade</a>
+            <a href="#" class="footer-link">Contato</a>
+        </div>
+        
+        <div class="footer-copyright">© 2025 Winf Group™. Todos os direitos reservados.</div>
+    </footer>
+</body>
+</html>
