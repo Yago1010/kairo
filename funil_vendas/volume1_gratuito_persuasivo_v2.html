@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volume 1 Gratuito - Desvende o Digital Sem Medo - Escola Eterna</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-bg: #000000;
+            --secondary-bg: #0A0A0A;
+            --text-color: #FFFFFF;
+            --accent-color: #00FF00;
+            --secondary-accent: #0066FF;
+            --tertiary-accent: #FFD700;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --font-family: 'Inter', sans-serif;
+            --base-font-size: 20px;
+            --h1-size: 4rem;
+            --h2-size: 3rem;
+            --h3-size: 2rem;
+            --h4-size: 1.5rem;
+            --line-height: 1.7;
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 1rem;
+            --spacing-md: 2rem;
+            --spacing-lg: 4rem;
+            --spacing-xl: 6rem;
+            --border-radius: 12px;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { font-size: var(--base-font-size); scroll-behavior: smooth; }
+        body { font-family: var(--font-family); background-color: var(--primary-bg); color: var(--text-color); line-height: var(--line-height); overflow-x: hidden; }
+        h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; margin-bottom: var(--spacing-md); }
+        h1 { font-size: var(--h1-size); }
+        h2 { font-size: var(--h2-size); }
+        h3 { font-size: var(--h3-size); }
+        h4 { font-size: var(--h4-size); }
+        p { margin-bottom: var(--spacing-md); font-size: 1.2rem; opacity: 0.9; }
+        a { color: var(--accent-color); text-decoration: none; transition: all 0.3s ease; }
+        a:hover { filter: brightness(1.2); }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 var(--spacing-md); }
+        .btn { display: inline-block; padding: 1.2rem 2.5rem; background: linear-gradient(90deg, var(--accent-color), #00cc00); color: var(--primary-bg); border: none; border-radius: 50px; font-size: 1.3rem; font-weight: 700; cursor: pointer; transition: all 0.3s ease; text-align: center; box-shadow: 0 8px 20px rgba(0, 255, 0, 0.2); }
+        .btn:hover { transform: translateY(-5px) scale(1.05); box-shadow: 0 12px 25px rgba(0, 255, 0, 0.3); }
+        .btn-large { padding: 1.5rem 3rem; font-size: 1.5rem; }
+        .section { padding: var(--spacing-xl) 0; }
+        .section-header { text-align: center; margin-bottom: var(--spacing-lg); }
+        .section-subtitle { color: var(--accent-color); font-size: 1.3rem; margin-bottom: var(--spacing-xs); font-weight: 600; }
+        .highlight { color: var(--accent-color); font-weight: 700; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-lg); align-items: center; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--spacing-md); }
+        .card { background-color: var(--secondary-bg); padding: var(--spacing-lg); border-radius: var(--border-radius); border: 1px solid var(--border-color); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3); border-color: var(--accent-color); }
+        .icon { font-size: 3rem; color: var(--accent-color); margin-bottom: var(--spacing-md); }
+        .form-group { margin-bottom: var(--spacing-md); }
+        .form-label { display: block; margin-bottom: var(--spacing-xs); font-weight: 500; font-size: 1.1rem; }
+        .form-input { width: 100%; padding: 1rem 1.5rem; background-color: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-color); border-radius: var(--border-radius); color: var(--text-color); font-size: 1.1rem; }
+        .form-input:focus { outline: none; border-color: var(--accent-color); background-color: rgba(255, 255, 255, 0.1); }
+        .text-center { text-align: center; }
+        .mt-lg { margin-top: var(--spacing-lg); }
+        .mb-0 { margin-bottom: 0; }
+        .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: var(--border-radius); border: 2px solid var(--accent-color); margin-bottom: var(--spacing-lg); }
+        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+        .gamification-link { display: block; text-align: center; margin-top: var(--spacing-md); font-size: 1.2rem; font-weight: 600; }
+        .support-highlight { background-color: rgba(0, 255, 0, 0.05); padding: var(--spacing-md); border-radius: var(--border-radius); border-left: 5px solid var(--accent-color); margin: var(--spacing-lg) 0; }
+        .support-highlight p { margin-bottom: var(--spacing-sm); }
+        .avatar-highlight { text-align: center; margin: var(--spacing-lg) 0; }
+        .avatar-highlight img { max-width: 200px; border-radius: 50%; border: 3px solid var(--accent-color); margin-bottom: var(--spacing-md); }
+        @media (max-width: 992px) {
+            :root { --h1-size: 3rem; --h2-size: 2.2rem; --h3-size: 1.8rem; }
+            .grid-2, .grid-3 { grid-template-columns: 1fr; }
+            .hero-image { order: -1; margin-bottom: var(--spacing-lg); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Hero Section -->
+    <section class="section hero">
+        <div class="container">
+            <div class="grid-2">
+                <div class="hero-content">
+                    <h2 class="section-subtitle">Chega de Medo do Digital!</h2>
+                    <h1>Sua <span class="highlight">Independência Digital</span> Começa AGORA (e é GRÁTIS!)</h1>
+                    <p>Cansado(a) de depender dos outros para usar o celular, o computador ou a internet? Sente que a tecnologia é um bicho de sete cabeças? Nós entendemos você! A Escola Eterna criou um guia <span class="highlight">simples, passo a passo e totalmente gratuito</span> para você dar os primeiros passos no mundo digital com <span class="highlight">confiança e segurança</span>.</p>
+                    <p>Neste Volume 1 Gratuito, você vai:</p>
+                    <ul>
+                        <li>✅ Perder o medo de clicar nos botões errados.</li>
+                        <li>✅ Entender os termos básicos da tecnologia sem complicação.</li>
+                        <li>✅ Aprender a usar funções essenciais do seu celular ou computador.</li>
+                        <li>✅ Descobrir como a tecnologia pode facilitar (e muito!) o seu dia a dia.</li>
+                    </ul>
+                    <a href="#download-form" class="btn btn-large mt-lg">Quero Meu Guia Gratuito AGORA!</a>
+                </div>
+                <div class="hero-image">
+                    <!-- Substituir por imagem persuasiva de idosos usando tecnologia com confiança -->
+                    <img src="placeholder-hero.jpg" alt="Idosos felizes usando celular e computador">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Diferenciais: Avatares IA -->
+    <section class="section avatars-ia" style="background-color: var(--secondary-bg);">
+        <div class="container">
+            <div class="section-header">
+                <h3 class="section-subtitle">Aprenda de um Jeito Único</h3>
+                <h2>Conheça Nossos Professores Avatares IA: <span class="highlight">Tecnologia com Carinho e Paciência</span></h2>
+                <p>Imagine ter um professor particular que nunca se cansa, explica quantas vezes for preciso e entende exatamente suas dificuldades? Na Escola Eterna, nossas aulas são guiadas por avatares IA de última geração, criados para ensinar com <span class="highlight">empatia, clareza e paciência infinita</span>. Eles tornam o aprendizado leve, divertido e muito mais eficaz!</p>
+            </div>
+            <div class="avatar-highlight">
+                <!-- Substituir por imagem de um avatar IA amigável -->
+                <img src="placeholder-avatar.png" alt="Avatar IA Professor da Escola Eterna">
+                <p>Nossos avatares usam tecnologia imersiva para que você se sinta em uma sala de aula real, mas com a conveniência e o conforto da sua casa.</p>
+                <a href="#" class="btn">Veja uma Demonstração da Aula</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Diferenciais: Suporte 24/7 -->
+    <section class="section suporte-247">
+        <div class="container">
+            <div class="section-header">
+                <h3 class="section-subtitle">Você Nunca Estará Sozinho(a)</h3>
+                <h2>Suporte <span class="highlight">24 Horas por Dia, 7 Dias por Semana</span> com Nossos Agentes IA</h2>
+                <p>Travou em alguma etapa? Surgiu uma dúvida às 3 da manhã? Não tem problema! Nossos <span class="highlight">agentes IA especializados</span> estão sempre disponíveis para ajudar você. Converse pelo WhatsApp, tire dúvidas, peça ajuda para resolver problemas... a qualquer hora, em qualquer dia. É como ter um especialista em tecnologia sempre ao seu lado!</p>
+            </div>
+            <div class="support-highlight">
+                <h4>Como funciona o Suporte 24/7?</h4>
+                <p>✅ Converse com agentes IA pacientes e que entendem suas necessidades.</p>
+                <p>✅ Receba ajuda instantânea, sem filas de espera.</p>
+                <p>✅ Tire dúvidas sobre qualquer assunto relacionado à tecnologia.</p>
+                <p>✅ Acesse facilmente pelo WhatsApp ou pela nossa plataforma.</p>
+                <a href="../suporte_24_7.html" class="btn btn-secondary">Quero Ver o Suporte em Ação!</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Diferenciais: Gamificação Pré-Curso -->
+    <section class="section gamificacao" style="background-color: var(--secondary-bg);">
+        <div class="container text-center">
+            <h3 class="section-subtitle">Comece a Aprender Brincando!</h3>
+            <h2>Experimente Nossa <span class="highlight">Jornada Gamificada</span> Antes Mesmo de Começar</h2>
+            <p>Que tal aquecer os motores e já começar a destravar suas habilidades digitais de forma divertida? Criamos uma <span class="highlight">experiência interativa e gamificada</span> para você testar seus conhecimentos, aprender conceitos básicos e sentir um gostinho do que a Escola Eterna oferece. <span class="highlight">É rápido, fácil e viciante!</span></p>
+            <a href="../experiencia_gamificada.html" class="btn btn-large">Quero Jogar e Aprender Agora!</a>
+        </div>
+    </section>
+
+    <!-- Conteúdo do Volume 1 -->
+    <section class="section conteudo">
+        <div class="container">
+            <div class="section-header">
+                <h3 class="section-subtitle">O Que Você Vai Receber GRÁTIS</h3>
+                <h2>Dentro do Volume 1: <span class="highlight">Seu Passaporte Para o Mundo Digital</span></h2>
+            </div>
+            <div class="grid-3">
+                <div class="card">
+                    <div class="icon">📱</div>
+                    <h4>Desmistificando o Celular</h4>
+                    <p>Entenda os botões, ícones e funções básicas do seu smartphone sem medo.</p>
+                </div>
+                <div class="card">
+                    <div class="icon">💻</div>
+                    <h4>Computador Sem Segredos</h4>
+                    <p>Ligar, desligar, usar o mouse, teclado e abrir programas de forma simples.</p>
+                </div>
+                <div class="card">
+                    <div class="icon">🌐</div>
+                    <h4>Navegando na Internet</h4>
+                    <p>Como pesquisar informações, acessar sites e entender o básico da navegação segura.</p>
+                </div>
+                <div class="card">
+                    <div class="icon">📧</div>
+                    <h4>Comunicação Digital Básica</h4>
+                    <p>Introdução ao E-mail e WhatsApp para se conectar com amigos e familiares.</p>
+                </div>
+                <div class="card">
+                    <div class="icon">💡</div>
+                    <h4>Dicas Práticas e Rápidas</h4>
+                    <p>Truques e atalhos para facilitar seu dia a dia usando a tecnologia.</p>
+                </div>
+                <div class="card">
+                    <div class="icon">🔒</div>
+                    <h4>Introdução à Segurança</h4>
+                    <p>Os primeiros passos para se proteger online e evitar golpes comuns.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Prova Social / Depoimentos -->
+    <section class="section depoimentos" style="background-color: var(--secondary-bg);">
+        <div class="container">
+            <div class="section-header">
+                <h3 class="section-subtitle">Histórias Reais de Transformação</h3>
+                <h2>Veja Quem Já Perdeu o Medo e Ganhou Independência</h2>
+            </div>
+            <div class="grid-2">
+                <div class="card">
+                    <p>"Eu tinha pavor de mexer no celular, sempre pedia ajuda pro meu neto. Depois do guia gratuito da Escola Eterna, já consigo mandar mensagem no WhatsApp sozinha! Me sinto outra pessoa!"</p>
+                    <h4>- Maria Lúcia, 68 anos</h4>
+                </div>
+                <div class="card">
+                    <p>"Achava que computador era coisa de jovem. O material gratuito me mostrou que não, que eu também posso aprender. Foi o empurrão que eu precisava para me sentir mais conectado."</p>
+                    <h4>- José Carlos, 72 anos</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Formulário de Download -->
+    <section class="section download" id="download-form">
+        <div class="container">
+            <div class="section-header">
+                <h3 class="section-subtitle">É GRÁTIS e é SEU!</h3>
+                <h2>Receba Agora Mesmo o Volume 1 e Comece Sua Transformação Digital!</h2>
+                <p>Preencha seus dados abaixo para receber o guia <span class="highlight">imediatamente</span> no seu e-mail ou WhatsApp. Dê o primeiro passo para conquistar sua independência digital com o apoio e a paciência que você merece!</p>
+            </div>
+            <form action="#" method="POST" style="max-width: 600px; margin: 0 auto;">
+                <div class="form-group">
+                    <label for="name" class="form-label">Seu Nome:</label>
+                    <input type="text" id="name" name="name" class="form-input" placeholder="Digite seu nome completo" required>
+                </div>
+                <div class="form-group">
+                    <label for="email" class="form-label">Seu Melhor E-mail:</label>
+                    <input type="email" id="email" name="email" class="form-input" placeholder="exemplo@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="whatsapp" class="form-label">Seu WhatsApp (Opcional):</label>
+                    <input type="tel" id="whatsapp" name="whatsapp" class="form-input" placeholder="(XX) 9XXXX-XXXX">
+                </div>
+                <div class="text-center mt-lg">
+                    <button type="submit" class="btn btn-large">QUERO MEU GUIA GRÁTIS!</button>
+                </div>
+            </form>
+            <p class="text-center mt-lg" style="font-size: 1rem; opacity: 0.7;">Respeitamos sua privacidade. Seus dados estão 100% seguros.</p>
+        </div>
+    </section>
+
+    <!-- Footer Simplificado -->
+    <footer class="section footer" style="padding: var(--spacing-md) 0; background-color: var(--secondary-bg); border-top: 1px solid var(--border-color);">
+        <div class="container text-center">
+            <p style="font-size: 1rem; opacity: 0.7; margin-bottom: 0;">&copy; 2025 Escola Eterna. Transformando vidas através da tecnologia, com carinho e paciência.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Escola Eterna</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Cores - Tema Claro */
+            --primary-bg: #FFFFFF;
+            --secondary-bg: #F8F9FA;
+            --text-color: #121212;
+            --accent-color: #00C853;
+            --secondary-accent: #2962FF;
+            --tertiary-accent: #FF4081;
+            --border-color: rgba(0, 0, 0, 0.1);
+            --card-bg: #FFFFFF;
+            --hover-bg: #F0F0F0;
+            
+            /* Tipografia */
+            --font-family: 'Inter', sans-serif;
+            --base-font-size: 20px;
+            --h1-size: 2.5rem;
+            --h2-size: 2rem;
+            --h3-size: 1.5rem;
+            --h4-size: 1.25rem;
+            --line-height: 1.6;
+            
+            /* Espaçamento */
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 1rem;
+            --spacing-md: 2rem;
+            --spacing-lg: 3rem;
+            --spacing-xl: 5rem;
+            
+            /* Bordas */
+            --border-radius: 12px;
+            --border-radius-sm: 8px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            font-size: var(--base-font-size);
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: var(--font-family);
+            background-color: var(--secondary-bg);
+            color: var(--text-color);
+            line-height: var(--line-height);
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        h1 {
+            font-size: var(--h1-size);
+        }
+        
+        h2 {
+            font-size: var(--h2-size);
+        }
+        
+        h3 {
+            font-size: var(--h3-size);
+        }
+        
+        h4 {
+            font-size: var(--h4-size);
+        }
+        
+        p {
+            margin-bottom: var(--spacing-md);
+            font-size: 1.1rem;
+        }
+        
+        a {
+            color: var(--secondary-accent);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        a:hover {
+            color: var(--accent-color);
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.8rem 1.5rem;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            gap: 0.5rem;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 200, 83, 0.2);
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            border: 2px solid var(--accent-color);
+            color: var(--accent-color);
+        }
+        
+        .btn-secondary:hover {
+            background-color: var(--accent-color);
+            color: white;
+        }
+        
+        .container {
+            width: 100%;
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            background-color: var(--primary-bg);
+            border-right: 1px solid var(--border-color);
+            padding: var(--spacing-md);
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+        }
+        
+        .sidebar-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: var(--spacing-lg);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+        
+        .sidebar-nav {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-xs);
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .sidebar-nav-title {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            color: #666;
+            margin-bottom: var(--spacing-xs);
+            padding-left: var(--spacing-sm);
+        }
+        
+        .sidebar-nav-link {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            padding: var(--spacing-sm);
+            border-radius: var(--border-radius-sm);
+            color: var(--text-color);
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .sidebar-nav-link:hover,
+        .sidebar-nav-link.active {
+            background-color: var(--hover-bg);
+            color: var(--accent-color);
+        }
+        
+        .sidebar-nav-link.active {
+            font-weight: 600;
+        }
+        
+        .sidebar-nav-icon {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .sidebar-footer {
+            margin-top: auto;
+            padding-top: var(--spacing-md);
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--accent-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+        }
+        
+        .user-info {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .user-name {
+            font-weight: 600;
+            font-size: 1rem;
+        }
+        
+        .user-role {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            padding: var(--spacing-md) var(--spacing-lg);
+            margin-left: 280px;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .header-title h1 {
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .header-title p {
+            color: #666;
+            margin-bottom: 0;
+        }
+        
+        .header-actions {
+            display: flex;
+            gap: var(--spacing-sm);
+        }
+        
+        .search-bar {
+            position: relative;
+            margin-right: var(--spacing-md);
+        }
+        
+        .search-input {
+            padding: 0.8rem 1rem 0.8rem 3rem;
+            border: 1px solid var(--border-color);
+            border-radius: 50px;
+            font-size: 1rem;
+            width: 300px;
+            background-color: var(--primary-bg);
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+        }
+        
+        .notification-btn {
+            background: none;
+            border: none;
+            position: relative;
+            cursor: pointer;
+            color: #666;
+            transition: color 0.3s ease;
+        }
+        
+        .notification-btn:hover {
+            color: var(--accent-color);
+        }
+        
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            width: 18px;
+            height: 18px;
+            background-color: var(--tertiary-accent);
+            color: white;
+            border-radius: 50%;
+            font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Dashboard Grid */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .dashboard-card {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: var(--spacing-md);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .stat-card {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .stat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .stat-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #666;
+        }
+        
+        .stat-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(0, 200, 83, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-color);
+        }
+        
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .stat-description {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background-color: #E0E0E0;
+            border-radius: 4px;
+            margin-top: var(--spacing-sm);
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background-color: var(--accent-color);
+            border-radius: 4px;
+        }
+        
+        /* Course Section */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 0;
+        }
+        
+        .section-action {
+            color: var(--secondary-accent);
+            font-weight: 500;
+        }
+        
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .course-card {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .course-image {
+            height: 160px;
+            background-color: #E0E0E0;
+            position: relative;
+        }
+        
+        .course-progress-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+        
+        .course-progress-fill {
+            height: 100%;
+            background-color: var(--accent-color);
+        }
+        
+        .course-content {
+            padding: var(--spacing-md);
+        }
+        
+        .course-title {
+            font-size: 1.2rem;
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .course-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: var(--spacing-sm);
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .course-instructor {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+        }
+        
+        .instructor-avatar {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background-color: #E0E0E0;
+        }
+        
+        .course-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .course-progress-text {
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        /* Activity Section */
+        .activity-list {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: var(--spacing-md);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .activity-item {
+            display: flex;
+            gap: var(--spacing-md);
+            padding: var(--spacing-sm) 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+        
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(0, 200, 83, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-color);
+            flex-shrink: 0;
+        }
+        
+        .activity-content {
+            flex: 1;
+        }
+        
+        .activity-title {
+            font-weight: 600;
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .activity-time {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        /* Accessibility Features */
+        .accessibility-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--primary-bg);
+            border-top: 1px solid var(--border-color);
+            padding: var(--spacing-sm) 0;
+            z-index: 100;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .accessibility-bar.active {
+            transform: translateY(0);
+        }
+        
+        .accessibility-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 var(--spacing-lg);
+        }
+        
+        .accessibility-options {
+            display: flex;
+            gap: var(--spacing-md);
+        }
+        
+        .accessibility-option {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+        }
+        
+        .accessibility-toggle {
+            width: 50px;
+            height: 26px;
+            background-color: #E0E0E0;
+            border-radius: 13px;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .accessibility-toggle::after {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+        }
+        
+        .accessibility-toggle.active::after {
+            transform: translateX(24px);
+            background-color: var(--accent-color);
+        }
+        
+        .accessibility-label {
+            font-size: 1rem;
+            color: var(--text-color);
+        }
+        
+        .accessibility-close {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .dashboard-grid,
+            .courses-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .sidebar {
+                width: 80px;
+                padding: var(--spacing-sm);
+            }
+            
+            .sidebar-logo span,
+            .sidebar-nav-link span,
+            .user-info {
+                display: none;
+            }
+            
+            .main-content {
+                margin-left: 80px;
+            }
+            
+            .search-input {
+                width: 200px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            :root {
+                --base-font-size: 18px;
+            }
+            
+            .sidebar {
+                position: fixed;
+                left: -280px;
+                width: 280px;
+                z-index: 1000;
+                transition: left 0.3s ease;
+            }
+            
+            .sidebar.active {
+                left: 0;
+            }
+            
+            .sidebar-logo span,
+            .sidebar-nav-link span,
+            .user-info {
+                display: block;
+            }
+            
+            .main-content {
+                margin-left: 0;
+            }
+            
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: var(--spacing-md);
+            }
+            
+            .header-actions {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .search-bar {
+                width: 100%;
+                margin-right: 0;
+            }
+            
+            .search-input {
+                width: 100%;
+            }
+            
+            .dashboard-grid,
+            .courses-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Accessibility Bar -->
+    <div class="accessibility-bar">
+        <div class="accessibility-container">
+            <div class="accessibility-options">
+                <div class="accessibility-option">
+                    <span class="accessibility-label">Aumentar Fonte</span>
+                    <div class="accessibility-toggle" id="font-toggle"></div>
+                </div>
+                <div class="accessibility-option">
+                    <span class="accessibility-label">Alto Contraste</span>
+                    <div class="accessibility-toggle" id="contrast-toggle"></div>
+                </div>
+                <div class="accessibility-option">
+                    <span class="accessibility-label">Leitor de Tela</span>
+                    <div class="accessibility-toggle" id="screen-reader-toggle"></div>
+                </div>
+            </div>
+            <button class="accessibility-close" id="accessibility-close">&times;</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <span>ESCOLA ETERNA</span>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <div class="sidebar-nav-title">Menu Principal</div>
+                <a href="#" class="sidebar-nav-link active">
+                    <div class="sidebar-nav-icon">📊</div>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#" class="sidebar-nav-link">
+                    <div class="sidebar-nav-icon">📚</div>
+                    <span>Meus Cursos</span>
+                </a>
+                <a href="#" class="sidebar-nav-link">
+                    <div class="sidebar-nav-icon">📝</div>
+                    <span>Anotações</span>
+                </a>
+                <a href="#" class="sidebar-nav-link">
+                    <div class="sidebar-nav-icon">🏆</div>
+                    <span>Conquistas</span>
+                </a>
+                <a href="#" class="sidebar-nav-link">
+                    <div class="sidebar-nav-icon">👥</div>
+                    <span>Comunidade</span>
+                </a>
+            </nav>
+            
+            <nav class="sidebar-nav">
+                <div class="sidebar-nav-title">Suporte</div>
+                <a href="#" class="sidebar-nav-link">
+                    <div class="sidebar-nav-icon">❓</div>
+                    <span>Ajuda</span>
+                </a>
+                <a href="#" class="sidebar-nav-link">
+                    <div class="sidebar-nav-icon">📞</div>
+                    <span>Contato</span>
+                </a>
+                <a href="#" class="sidebar-nav-link">
+                    <div class="sidebar-nav-icon">⚙️</div>
+                    <span>Configurações</span>
+                </a>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <div class="user-profile">
+                    <div class="user-avatar">MS</div>
+                    <div class="user-info">
+                        <div class="user-name">Maria Silva</div>
+                        <div class="user-role">Aluno</div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="header">
+                <div class="header-title">
+                    <h1>Olá, Maria! 👋</h1>
+                    <p>Bem-vinda de volta à sua jornada de aprendizado.</p>
+                </div>
+                <div class="header-actions">
+                    <div class="search-bar">
+                        <span class="search-icon">🔍</span>
+                        <input type="text" class="search-input" placeholder="Buscar cursos, aulas...">
+                    </div>
+                    <button class="notification-btn">
+                        🔔
+                        <span class="notification-badge">3</span>
+                    </button>
+                    <button class="btn btn-secondary" id="accessibility-btn">Acessibilidade</button>
+                </div>
+            </div>
+            
+            <!-- Dashboard Stats -->
+            <div class="dashboard-grid">
+                <div class="dashboard-card stat-card">
+                    <div class="stat-header">
+                        <div class="stat-title">Cursos em Andamento</div>
+                        <div class="stat-icon">📚</div>
+                    </div>
+                    <div class="stat-value">3</div>
+                    <div class="stat-description">Você está progredindo bem!</div>
+                </div>
+                
+                <div class="dashboard-card stat-card">
+                    <div class="stat-header">
+                        <div class="stat-title">Progresso Geral</div>
+                        <div class="stat-icon">📊</div>
+                    </div>
+                    <div class="stat-value">68%</div>
+                    <div class="stat-description">Continue assim!</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 68%;"></div>
+                    </div>
+                </div>
+                
+                <div class="dashboard-card stat-card">
+                    <div class="stat-header">
+                        <div class="stat-title">Conquistas</div>
+                        <div class="stat-icon">🏆</div>
+                    </div>
+                    <div class="stat-value">7</div>
+                    <div class="stat-description">Você ganhou 2 novas conquistas!</div>
+                </div>
+            </div>
+            
+            <!-- Continue Learning -->
+            <div class="section-header">
+                <h2 class="section-title">Continue Aprendendo</h2>
+                <a href="#" class="section-action">Ver todos</a>
+            </div>
+            
+            <div class="courses-grid">
+                <div class="course-card">
+                    <div class="course-image">
+                        <div class="course-progress-bar">
+                            <div class="course-progress-fill" style="width: 75%;"></div>
+                        </div>
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title">Primeiros Passos Digitais</h3>
+                        <div class="course-info">
+                            <div class="course-instructor">
+                                <div class="instructor-avatar"></div>
+                                <span>Prof. Carlos</span>
+                            </div>
+                            <span>12 aulas</span>
+                        </div>
+                        <div class="course-actions">
+                            <span class="course-progress-text">75% concluído</span>
+                            <a href="#" class="btn">Continuar</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="course-card">
+                    <div class="course-image">
+                        <div class="course-progress-bar">
+                            <div class="course-progress-fill" style="width: 45%;"></div>
+                        </div>
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title">Comunicação Digital</h3>
+                        <div class="course-info">
+                            <div class="course-instructor">
+                                <div class="instructor-avatar"></div>
+                                <span>Profa. Ana</span>
+                            </div>
+                            <span>10 aulas</span>
+                        </div>
+                        <div class="course-actions">
+                            <span class="course-progress-text">45% concluído</span>
+                            <a href="#" class="btn">Continuar</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="course-card">
+                    <div class="course-image">
+                        <div class="course-progress-bar">
+                            <div class="course-progress-fill" style="width: 15%;"></div>
+                        </div>
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title">Segurança Online</h3>
+                        <div class="course-info">
+                            <div class="course-instructor">
+                                <div class="instructor-avatar"></div>
+                                <span>Prof. Roberto</span>
+                            </div>
+                            <span>8 aulas</span>
+                        </div>
+                        <div class="course-actions">
+                            <span class="course-progress-text">15% concluído</span>
+                            <a href="#" class="btn">Continuar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Recent Activity -->
+            <div class="section-header">
+                <h2 class="section-title">Atividades Recentes</h2>
+                <a href="#" class="section-action">Ver todas</a>
+            </div>
+            
+            <div class="activity-list">
+                <div class="activity-item">
+                    <div class="activity-icon">📝</div>
+                    <div class="activity-content">
+                        <div class="activity-title">Você completou a aula "Introdução ao WhatsApp"</div>
+                        <div class="activity-time">Hoje, 10:30</div>
+                    </div>
+                </div>
+                
+                <div class="activity-item">
+                    <div class="activity-icon">🏆</div>
+                    <div class="activity-content">
+                        <div class="activity-title">Você ganhou a conquista "Comunicador Digital"</div>
+                        <div class="activity-time">Ontem, 15:45</div>
+                    </div>
+                </div>
+                
+                <div class="activity-item">
+                    <div class="activity-icon">📚</div>
+                    <div class="activity-content">
+                        <div class="activity-title">Você iniciou o curso "Segurança Online"</div>
+                        <div class="activity-time">Ontem, 09:15</div>
+                    </div>
+                </div>
+                
+                <div class="activity-item">
+                    <div class="activity-icon">💬</div>
+                    <div class="activity-content">
+                        <div class="activity-title">Você fez uma pergunta no fórum "Dúvidas sobre Email"</div>
+                        <div class="activity-time">2 dias atrás</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Accessibility Toggle
+        const accessibilityBtn = document.getElementById('accessibility-btn');
+        const accessibilityBar = document.querySelector('.accessibility-bar');
+        const accessibilityClose = document.getElementById('accessibility-close');
+        const fontToggle = document.getElementById('font-toggle');
+        const contrastToggle = document.getElementById('contrast-toggle');
+        const screenReaderToggle = document.getElementById('screen-reader-toggle');
+        
+        accessibilityBtn.addEventListener('click', () => {
+            accessibilityBar.classList.add('active');
+        });
+        
+        accessibilityClose.addEventListener('click', () => {
+            accessibilityBar.classList.remove('active');
+        });
+        
+        fontToggle.addEventListener('click', () => {
+            fontToggle.classList.toggle('active');
+            document.body.classList.toggle('large-font');
+            
+            if (document.body.classList.contains('large-font')) {
+                document.documentElement.style.fontSize = '24px';
+            } else {
+                document.documentElement.style.fontSize = '20px';
+            }
+        });
+        
+        contrastToggle.addEventListener('click', () => {
+            contrastToggle.classList.toggle('active');
+            document.body.classList.toggle('high-contrast');
+            
+            if (document.body.classList.contains('high-contrast')) {
+                document.documentElement.style.setProperty('--text-color', '#FFFFFF');
+                document.documentElement.style.setProperty('--primary-bg', '#000000');
+                document.documentElement.style.setProperty('--secondary-bg', '#121212');
+                document.documentElement.style.setProperty('--card-bg', '#1E1E1E');
+                document.documentElement.style.setProperty('--border-color', 'rgba(255, 255, 255, 0.1)');
+                document.documentElement.style.setProperty('--hover-bg', '#2A2A2A');
+            } else {
+                document.documentElement.style.setProperty('--text-color', '#121212');
+                document.documentElement.style.setProperty('--primary-bg', '#FFFFFF');
+                document.documentElement.style.setProperty('--secondary-bg', '#F8F9FA');
+                document.documentElement.style.setProperty('--card-bg', '#FFFFFF');
+                document.documentElement.style.setProperty('--border-color', 'rgba(0, 0, 0, 0.1)');
+                document.documentElement.style.setProperty('--hover-bg', '#F0F0F0');
+            }
+        });
+        
+        screenReaderToggle.addEventListener('click', () => {
+            screenReaderToggle.classList.toggle('active');
+            alert('Leitor de tela ativado. Esta funcionalidade seria implementada com uma API real de leitor de tela.');
+        });
+    </script>
+</body>
+</html>

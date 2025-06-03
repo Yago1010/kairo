@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funil de Alta Conversão - Escola Eterna</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-bg: #000000;
+            --secondary-bg: #0A0A0A;
+            --text-color: #FFFFFF;
+            --accent-color: #00FF00;
+            --secondary-accent: #0066FF;
+            --tertiary-accent: #FFD700;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --font-family: 'Inter', sans-serif;
+            --base-font-size: 20px;
+            --h1-size: 3.5rem;
+            --h2-size: 2.5rem;
+            --h3-size: 1.8rem;
+            --h4-size: 1.4rem;
+            --line-height: 1.6;
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 1rem;
+            --spacing-md: 2rem;
+            --spacing-lg: 4rem;
+            --spacing-xl: 6rem;
+            --border-radius: 12px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            font-size: var(--base-font-size);
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: var(--font-family);
+            background-color: var(--primary-bg);
+            color: var(--text-color);
+            line-height: var(--line-height);
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        h1 {
+            font-size: var(--h1-size);
+        }
+        
+        h2 {
+            font-size: var(--h2-size);
+        }
+        
+        h3 {
+            font-size: var(--h3-size);
+        }
+        
+        h4 {
+            font-size: var(--h4-size);
+        }
+        
+        p {
+            margin-bottom: var(--spacing-md);
+            font-size: 1.1rem;
+        }
+        
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        a:hover {
+            color: var(--text-color);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-md);
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 1.2rem 2.5rem;
+            background: linear-gradient(90deg, var(--accent-color), #00cc00);
+            color: var(--primary-bg);
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            box-shadow: 0 8px 15px rgba(0, 255, 0, 0.2);
+        }
+        
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 20px rgba(0, 255, 0, 0.3);
+            color: var(--primary-bg);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid var(--accent-color);
+            color: var(--accent-color);
+        }
+        
+        .btn-secondary:hover {
+            background-color: var(--accent-color);
+            color: var(--primary-bg);
+        }
+        
+        .btn-large {
+            padding: 1.5rem 3rem;
+            font-size: 1.4rem;
+        }
+        
+        .section {
+            padding: var(--spacing-xl) 0;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .section-subtitle {
+            color: var(--accent-color);
+            font-size: 1.2rem;
+            margin-bottom: var(--spacing-xs);
+            font-weight: 600;
+        }
+        
+        .highlight {
+            color: var(--accent-color);
+            font-weight: 700;
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+        
+        .mt-lg {
+            margin-top: var(--spacing-lg);
+        }
+        
+        .mb-0 {
+            margin-bottom: 0;
+        }
+        
+        /* Funnel Styles */
+        .funnel-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .funnel-step {
+            background-color: var(--secondary-bg);
+            border-radius: var(--border-radius);
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+        
+        .funnel-step:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            border-color: var(--accent-color);
+        }
+        
+        .funnel-step-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background-color: var(--accent-color);
+            color: var(--primary-bg);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-right: var(--spacing-md);
+            flex-shrink: 0;
+        }
+        
+        .step-title {
+            margin-bottom: 0;
+        }
+        
+        .funnel-step-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-lg);
+            align-items: center;
+        }
+        
+        .funnel-step-image {
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            border: 2px solid var(--accent-color);
+        }
+        
+        .funnel-step-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .price-tag {
+            background-color: var(--accent-color);
+            color: var(--primary-bg);
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .price-tag.free {
+            background-color: var(--secondary-accent);
+        }
+        
+        .price-tag.premium {
+            background-color: var(--tertiary-accent);
+            color: var(--primary-bg);
+        }
+        
+        .features-list {
+            list-style: none;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .features-list li {
+            margin-bottom: var(--spacing-sm);
+            position: relative;
+            padding-left: 2rem;
+        }
+        
+        .features-list li:before {
+            content: "✓";
+            color: var(--accent-color);
+            position: absolute;
+            left: 0;
+            font-weight: 700;
+        }
+        
+        .testimonial {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: var(--spacing-md);
+            border-radius: var(--border-radius);
+            margin-top: var(--spacing-md);
+            font-style: italic;
+        }
+        
+        .testimonial-author {
+            font-weight: 600;
+            font-style: normal;
+            margin-top: var(--spacing-sm);
+            color: var(--accent-color);
+        }
+        
+        .upsell-banner {
+            background: linear-gradient(135deg, var(--secondary-accent), var(--accent-color));
+            padding: var(--spacing-md);
+            border-radius: var(--border-radius);
+            margin-top: var(--spacing-lg);
+            text-align: center;
+        }
+        
+        .upsell-banner h4 {
+            color: var(--primary-bg);
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .upsell-banner p {
+            color: var(--primary-bg);
+            margin-bottom: var(--spacing-md);
+            opacity: 0.9;
+        }
+        
+        .upsell-banner .btn {
+            background-color: var(--primary-bg);
+            color: var(--text-color);
+        }
+        
+        .upsell-banner .btn:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        
+        .high-ticket {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            padding: var(--spacing-xl);
+            border-radius: var(--border-radius);
+            margin-top: var(--spacing-xl);
+            text-align: center;
+            color: var(--primary-bg);
+        }
+        
+        .high-ticket h2 {
+            font-size: 3rem;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .high-ticket p {
+            font-size: 1.3rem;
+            margin-bottom: var(--spacing-lg);
+            color: var(--primary-bg);
+        }
+        
+        .high-ticket .price-tag {
+            background-color: var(--primary-bg);
+            color: var(--tertiary-accent);
+            font-size: 2rem;
+            padding: 1rem 2rem;
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .high-ticket .btn {
+            background-color: var(--primary-bg);
+            color: var(--tertiary-accent);
+            font-size: 1.5rem;
+            padding: 1.5rem 3rem;
+        }
+        
+        .high-ticket .btn:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        
+        .guarantee {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: var(--spacing-lg);
+            gap: var(--spacing-md);
+        }
+        
+        .guarantee-icon {
+            font-size: 3rem;
+            color: var(--primary-bg);
+        }
+        
+        .guarantee-text {
+            text-align: left;
+            font-size: 1.1rem;
+            margin-bottom: 0;
+        }
+        
+        .support-highlight {
+            background-color: rgba(0, 255, 0, 0.1);
+            border-left: 5px solid var(--accent-color);
+            padding: var(--spacing-md);
+            margin-top: var(--spacing-md);
+            border-radius: var(--border-radius);
+        }
+        
+        .support-highlight h4 {
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .support-highlight p {
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .avatar-highlight {
+            background-color: rgba(0, 102, 255, 0.1);
+            border-left: 5px solid var(--secondary-accent);
+            padding: var(--spacing-md);
+            margin-top: var(--spacing-md);
+            border-radius: var(--border-radius);
+        }
+        
+        .avatar-highlight h4 {
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .avatar-highlight p {
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            :root {
+                --base-font-size: 18px;
+                --h1-size: 2.8rem;
+                --h2-size: 2.2rem;
+                --h3-size: 1.6rem;
+            }
+            
+            .funnel-step-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .funnel-step-image {
+                order: -1;
+                margin-bottom: var(--spacing-md);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            :root {
+                --base-font-size: 16px;
+            }
+            
+            .funnel-step-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .step-number {
+                margin-right: 0;
+                margin-bottom: var(--spacing-sm);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="section" style="padding-top: var(--spacing-lg); padding-bottom: 0;">
+        <div class="container text-center">
+            <h1>Funil de Alta Conversão <span class="highlight">Escola Eterna</span></h1>
+            <p>Estratégia completa para captação e conversão do público 50+</p>
+        </div>
+    </header>
+
+    <section class="section">
+        <div class="container funnel-container">
+            <!-- Volume 1 - Gratuito (Lead Magnet) -->
+            <div class="funnel-step">
+                <div class="funnel-step-header">
+                    <div class="step-number">1</div>
+                    <h2 class="step-title">Volume 1: Desvende o Digital Sem Medo</h2>
+                </div>
+                <div class="funnel-step-content">
+                    <div>
+                        <div class="price-tag free">GRÁTIS</div>
+                        <p>O primeiro passo para conquistar a independência digital do público 50+. Um guia completo e acessível que elimina o medo da tecnologia e cria confiança.</p>
+                        
+                        <h4>O que está incluído:</h4>
+                        <ul class="features-list">
+                            <li>Guia digital completo com linguagem simples e direta</li>
+                            <li>Vídeos explicativos com avatares IA pacientes</li>
+                            <li>Acesso à experiência gamificada introdutória</li>
+                            <li>Suporte 24/7 via WhatsApp por 7 dias</li>
+                            <li>Comunidade exclusiva para iniciantes</li>
+                        </ul>
+                        
+                        <div class="support-highlight">
+                            <h4>Suporte 24/7 com Agentes IA</h4>
+                            <p>Nossos agentes IA estão disponíveis a qualquer hora para tirar dúvidas e ajudar com dificuldades. Nunca mais fique travado!</p>
+                        </div>
+                        
+                        <div class="avatar-highlight">
+                            <h4>Aprenda com Avatares IA Imersivos</h4>
+                            <p>Professores virtuais que explicam com paciência infinita e se adaptam ao seu ritmo de aprendizado.</p>
+                        </div>
+                        
+                        <div class="testimonial">
+                            "Eu tinha muito medo de mexer no celular, sempre pedia ajuda para meus netos. Com o guia gratuito da Escola Eterna, já consigo usar o WhatsApp sozinha! Me sinto independente pela primeira vez."
+                            <div class="testimonial-author">- Maria Helena, 67 anos</div>
+                        </div>
+                        
+                        <div class="mt-lg">
+                            <a href="volume1_gratuito_persuasivo_v2.html" class="btn btn-large">Quero Meu Guia Gratuito!</a>
+                        </div>
+                    </div>
+                    <div class="funnel-step-image">
+                        <img src="placeholder-volume1.jpg" alt="Volume 1: Desvende o Digital Sem Medo">
+                    </div>
+                </div>
+                
+                <div class="upsell-banner">
+                    <h4>Quer ir além do básico?</h4>
+                    <p>Descubra como o Volume 2 pode transformar sua experiência digital com aplicativos úteis para o dia a dia!</p>
+                    <a href="#volume2" class="btn">Conhecer o Volume 2</a>
+                </div>
+            </div>
+            
+            <!-- Volume 2 - R$19,90 (Low Ticket) -->
+            <div class="funnel-step" id="volume2">
+                <div class="funnel-step-header">
+                    <div class="step-number">2</div>
+                    <h2 class="step-title">Volume 2: Aplicativos Que Facilitam Sua Vida</h2>
+                </div>
+                <div class="funnel-step-content">
+                    <div>
+                        <div class="price-tag">R$ 19,90</div>
+                        <p>Agora que você já perdeu o medo da tecnologia, é hora de descobrir como ela pode facilitar seu dia a dia com aplicativos práticos e úteis.</p>
+                        
+                        <h4>O que está incluído:</h4>
+                        <ul class="features-list">
+                            <li>Guia completo com 20 aplicativos essenciais</li>
+                            <li>Tutoriais passo a passo para cada aplicativo</li>
+                            <li>Aulas em vídeo com avatares IA especializados</li>
+                            <li>Suporte 24/7 via WhatsApp por 30 dias</li>
+                            <li>Acesso à comunidade de alunos intermediários</li>
+                            <li>Certificado digital de conclusão</li>
+                        </ul>
+                        
+                        <div class="support-highlight">
+                            <h4>Suporte Estendido por 30 Dias</h4>
+                            <p>Tenha ajuda personalizada para instalar e usar todos os aplicativos apresentados no Volume 2, a qualquer hora do dia ou da noite.</p>
+                        </div>
+                        
+                        <div class="testimonial">
+                            "O Volume 2 mudou minha vida! Aprendi a usar aplicativos de banco, transporte e delivery. Economizo tempo e dinheiro, e o melhor: não dependo mais dos outros para nada!"
+                            <div class="testimonial-author">- Carlos Alberto, 63 anos</div>
+                        </div>
+                        
+                        <div class="mt-lg">
+                            <a href="volume2_pago.html" class="btn btn-large">Quero o Volume 2 por Apenas R$19,90</a>
+                        </div>
+                    </div>
+                    <div class="funnel-step-image">
+                        <img src="placeholder-volume2.jpg" alt="Volume 2: Aplicativos Que Facilitam Sua Vida">
+                    </div>
+                </div>
+                
+                <div class="upsell-banner">
+                    <h4>Quer ter o material físico em suas mãos?</h4>
+                    <p>O Volume 3 inclui o livro impresso e assinado pelo fundador da Escola Eterna!</p>
+                    <a href="#volume3" class="btn">Conhecer o Volume 3</a>
+                </div>
+            </div>
+            
+            <!-- Volume 3 - R$100,00 (Mid Ticket) -->
+            <div class="funnel-step" id="volume3">
+                <div class="funnel-step-header">
+                    <div class="step-number">3</div>
+                    <h2 class="step-title">Volume 3: Dominando o Mundo Digital (Livro Físico)</h2>
+                </div>
+                <div class="funnel-step-content">
+                    <div>
+                        <div class="price-tag premium">R$ 100,00</div>
+                        <p>A experiência completa da Escola Eterna em um belíssimo livro de capa dura, assinado pessoalmente pelo fundador e enviado diretamente para sua casa.</p>
+                        
+                        <h4>O que está incluído:</h4>
+                        <ul class="features-list">
+                            <li>Livro físico de capa dura com 300 páginas</li>
+                            <li>Assinatura personalizada do fundador</li>
+                            <li>Conteúdo dos Volumes 1 e 2 + material exclusivo</li>
+                            <li>QR codes para acessar vídeos complementares</li>
+                            <li>Suporte 24/7 via WhatsApp por 90 dias</li>
+                            <li>Acesso à comunidade VIP por 3 meses</li>
+                            <li>2 sessões de mentoria individual por vídeo</li>
+                        </ul>
+                        
+                        <div class="support-highlight">
+                            <h4>Suporte Premium por 90 Dias</h4>
+                            <p>Além dos agentes IA 24/7, você terá acesso a mentores humanos para ajudar com questões mais complexas.</p>
+                        </div>
+                        
+                        <div class="avatar-highlight">
+                            <h4>Mentoria Individual com Especialistas</h4>
+                            <p>Duas sessões exclusivas por vídeo para resolver suas dúvidas específicas e personalizar seu aprendizado.</p>
+                        </div>
+                        
+                        <div class="testimonial">
+                            "Ter o livro físico faz toda diferença! Posso consultar quando quiser, fazer anotações, e a assinatura do fundador me faz sentir parte de algo especial. As mentorias individuais foram transformadoras!"
+                            <div class="testimonial-author">- Terezinha Souza, 71 anos</div>
+                        </div>
+                        
+                        <div class="mt-lg">
+                            <a href="volume3_premium.html" class="btn btn-large">Quero o Livro Físico Assinado!</a>
+                        </div>
+                    </div>
+                    <div class="funnel-step-image">
+                        <img src="placeholder-volume3.jpg" alt="Volume 3: Dominando o Mundo Digital (Livro Físico)">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- High Ticket - R$7.000,00 -->
+            <div class="high-ticket">
+                <h2>Acesso Vitalício à Escola Eterna</h2>
+                <p>Tenha acesso a <strong>TODOS</strong> os cursos, materiais e atualizações da Escola Eterna para sempre! Uma única compra para uma vida inteira de aprendizado e suporte.</p>
+                
+                <div class="price-tag">R$ 7.000,00</div>
+                <p>ou 12x de R$ 583,33 sem juros</p>
+                
+                <h3>O que está incluído:</h3>
+                <ul class="features-list" style="max-width: 600px; margin: 0 auto var(--spacing-lg);">
+                    <li>Acesso vitalício a TODOS os cursos atuais e futuros</li>
+                    <li>Todos os livros físicos enviados para sua casa</li>
+                    <li>Suporte 24/7 com agentes IA para sempre</li>
+                    <li>Mentoria individual mensal com especialistas</li>
+                    <li>Acesso à comunidade VIP exclusiva</li>
+                    <li>Encontros presenciais anuais com o fundador</li>
+                    <li>Dispositivo tablet exclusivo pré-configurado</li>
+                    <li>Atendimento prioritário para qualquer necessidade</li>
+                </ul>
+                
+                <a href="#" class="btn">Quero Acesso Vitalício!</a>
+                
+                <div class="guarantee">
+                    <div class="guarantee-icon">🛡️</div>
+                    <p class="guarantee-text">Garantia incondicional de 30 dias. Se não ficar 100% satisfeito, devolvemos seu investimento integralmente, sem perguntas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer class="section" style="padding: var(--spacing-md) 0; background-color: var(--secondary-bg);">
+        <div class="container text-center">
+            <p style="opacity: 0.7; margin-bottom: 0;">© 2025 Escola Eterna. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+</body>
+</html>

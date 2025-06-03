@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meus Cursos - Wireframe | Escola Eterna</title>
+    <style>
+        /* Estilos básicos para wireframe */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .wireframe-box {
+            background-color: #fff;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #eee;
+        }
+        
+        .logo-placeholder {
+            width: 180px;
+            height: 60px;
+            background-color: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .nav-placeholder {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .nav-item {
+            width: 80px;
+            height: 40px;
+            background-color: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .user-menu {
+            width: 120px;
+            height: 40px;
+            background-color: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .sidebar {
+            width: 250px;
+            float: left;
+            margin-right: 20px;
+        }
+        
+        .main-content {
+            margin-left: 270px;
+        }
+        
+        .menu-item {
+            height: 50px;
+            background-color: #ddd;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            padding-left: 20px;
+        }
+        
+        .menu-item.active {
+            background-color: #bbb;
+            border-left: 5px solid #666;
+        }
+        
+        .page-title {
+            margin-bottom: 30px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .filters {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .filter {
+            height: 40px;
+            background-color: #ddd;
+            padding: 0 15px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .filter.active {
+            background-color: #bbb;
+        }
+        
+        .search-box {
+            display: flex;
+            margin-bottom: 30px;
+        }
+        
+        .search-input {
+            flex-grow: 1;
+            height: 50px;
+            background-color: #ddd;
+            border-radius: 8px 0 0 8px;
+        }
+        
+        .search-button {
+            width: 50px;
+            height: 50px;
+            background-color: #bbb;
+            border-radius: 0 8px 8px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        
+        .course-card {
+            background-color: #fff;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .course-image {
+            height: 160px;
+            background-color: #ddd;
+            position: relative;
+        }
+        
+        .course-progress {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background-color: #ccc;
+        }
+        
+        .course-progress::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 65%;
+            background-color: #999;
+        }
+        
+        .course-content {
+            padding: 15px;
+        }
+        
+        .course-title {
+            height: 20px;
+            background-color: #ddd;
+            margin-bottom: 10px;
+            width: 90%;
+        }
+        
+        .course-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+        
+        .course-lessons {
+            height: 15px;
+            background-color: #ddd;
+            width: 40%;
+        }
+        
+        .course-time {
+            height: 15px;
+            background-color: #ddd;
+            width: 30%;
+        }
+        
+        .course-description {
+            height: 40px;
+            background-color: #ddd;
+            margin-bottom: 15px;
+        }
+        
+        .course-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .course-status {
+            height: 15px;
+            background-color: #ddd;
+            width: 40%;
+        }
+        
+        .course-button {
+            width: 100px;
+            height: 35px;
+            background-color: #bbb;
+            border-radius: 4px;
+        }
+        
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 30px;
+        }
+        
+        .page-number {
+            width: 40px;
+            height: 40px;
+            background-color: #ddd;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .page-number.active {
+            background-color: #bbb;
+        }
+        
+        .accessibility-panel {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background-color: #ddd;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+        
+        @media (max-width: 992px) {
+            .sidebar {
+                width: 100%;
+                float: none;
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+            
+            .main-content {
+                margin-left: 0;
+            }
+            
+            .courses-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .courses-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .filters {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="wireframe-box header">
+        <div class="logo-placeholder">LOGO</div>
+        <div class="nav-placeholder">
+            <div class="nav-item">Início</div>
+            <div class="nav-item">Cursos</div>
+            <div class="nav-item">Comunidade</div>
+            <div class="nav-item">Suporte</div>
+        </div>
+        <div class="user-menu">Usuário</div>
+    </div>
+    
+    <div class="container">
+        <div class="wireframe-box sidebar">
+            <div class="menu-item">Dashboard</div>
+            <div class="menu-item active">Meus Cursos</div>
+            <div class="menu-item">Calendário</div>
+            <div class="menu-item">Materiais</div>
+            <div class="menu-item">Certificados</div>
+            <div class="menu-item">Configurações</div>
+            <div class="menu-item">Ajuda</div>
+        </div>
+        
+        <div class="main-content">
+            <div class="page-title">Meus Cursos</div>
+            
+            <div class="filters">
+                <div class="filter active">Todos</div>
+                <div class="filter">Em andamento</div>
+                <div class="filter">Concluídos</div>
+                <div class="filter">Não iniciados</div>
+            </div>
+            
+            <div class="search-box">
+                <div class="search-input"></div>
+                <div class="search-button">🔍</div>
+            </div>
+            
+            <div class="courses-grid">
+                <!-- Curso 1 -->
+                <div class="course-card">
+                    <div class="course-image">
+                        <div class="course-progress"></div>
+                    </div>
+                    <div class="course-content">
+                        <div class="course-title"></div>
+                        <div class="course-meta">
+                            <div class="course-lessons"></div>
+                            <div class="course-time"></div>
+                        </div>
+                        <div class="course-description"></div>
+                        <div class="course-footer">
+                            <div class="course-status"></div>
+                            <div class="course-button"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Curso 2 -->
+                <div class="course-card">
+                    <div class="course-image">
+                        <div class="course-progress"></div>
+                    </div>
+                    <div class="course-content">
+                        <div class="course-title"></div>
+                        <div class="course-meta">
+                            <div class="course-lessons"></div>
+                            <div class="course-time"></div>
+                        </div>
+                        <div class="course-description"></div>
+                        <div class="course-footer">
+                            <div class="course-status"></div>
+                            <div class="course-button"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Curso 3 -->
+                <div class="course-card">
+                    <div class="course-image">
+                        <div class="course-progress"></div>
+                    </div>
+                    <div class="course-content">
+                        <div class="course-title"></div>
+                        <div class="course-meta">
+                            <div class="course-lessons"></div>
+                            <div class="course-time"></div>
+                        </div>
+                        <div class="course-description"></div>
+                        <div class="course-footer">
+                            <div class="course-status"></div>
+                            <div class="course-button"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Curso 4 -->
+                <div class="course-card">
+                    <div class="course-image">
+                        <div class="course-progress"></div>
+                    </div>
+                    <div class="course-content">
+                        <div class="course-title"></div>
+                        <div class="course-meta">
+                            <div class="course-lessons"></div>
+                            <div class="course-time"></div>
+                        </div>
+                        <div class="course-description"></div>
+                        <div class="course-footer">
+                            <div class="course-status"></div>
+                            <div class="course-button"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Curso 5 -->
+                <div class="course-card">
+                    <div class="course-image">
+                        <div class="course-progress"></div>
+                    </div>
+                    <div class="course-content">
+                        <div class="course-title"></div>
+                        <div class="course-meta">
+                            <div class="course-lessons"></div>
+                            <div class="course-time"></div>
+                        </div>
+                        <div class="course-description"></div>
+                        <div class="course-footer">
+                            <div class="course-status"></div>
+                            <div class="course-button"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Curso 6 -->
+                <div class="course-card">
+                    <div class="course-image">
+                        <div class="course-progress"></div>
+                    </div>
+                    <div class="course-content">
+                        <div class="course-title"></div>
+                        <div class="course-meta">
+                            <div class="course-lessons"></div>
+                            <div class="course-time"></div>
+                        </div>
+                        <div class="course-description"></div>
+                        <div class="course-footer">
+                            <div class="course-status"></div>
+                            <div class="course-button"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pagination">
+                <div class="page-number active">1</div>
+                <div class="page-number">2</div>
+                <div class="page-number">3</div>
+                <div class="page-number">></div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="accessibility-panel">A</div>
+</body>
+</html>

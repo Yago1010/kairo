@@ -1,0 +1,1263 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suporte 24/7 com Agentes IA - Escola Eterna</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Cores */
+            --primary-bg: #000000;
+            --secondary-bg: #0A0A0A;
+            --text-color: #FFFFFF;
+            --accent-color: #00FF00;
+            --secondary-accent: #0066FF;
+            --tertiary-accent: #FFD700;
+            --border-color: rgba(255, 255, 255, 0.1);
+            
+            /* Tipografia */
+            --font-family: 'Inter', sans-serif;
+            --base-font-size: 20px;
+            --h1-size: 4rem;
+            --h2-size: 3rem;
+            --h3-size: 2rem;
+            --h4-size: 1.5rem;
+            --line-height: 1.6;
+            
+            /* Espaçamento */
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 1rem;
+            --spacing-md: 2rem;
+            --spacing-lg: 4rem;
+            --spacing-xl: 8rem;
+            
+            /* Bordas */
+            --border-radius: 12px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            font-size: var(--base-font-size);
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: var(--font-family);
+            background-color: var(--primary-bg);
+            color: var(--text-color);
+            line-height: var(--line-height);
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        h1 {
+            font-size: var(--h1-size);
+        }
+        
+        h2 {
+            font-size: var(--h2-size);
+        }
+        
+        h3 {
+            font-size: var(--h3-size);
+        }
+        
+        h4 {
+            font-size: var(--h4-size);
+        }
+        
+        p {
+            margin-bottom: var(--spacing-md);
+            font-size: 1.1rem;
+        }
+        
+        a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        a:hover {
+            color: var(--accent-color);
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-md);
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 1.2rem 2.5rem;
+            background-color: var(--accent-color);
+            color: var(--primary-bg);
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 255, 0, 0.2);
+            color: var(--primary-bg);
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            border: 2px solid var(--accent-color);
+            color: var(--accent-color);
+        }
+        
+        .btn-secondary:hover {
+            background-color: var(--accent-color);
+            color: var(--primary-bg);
+        }
+        
+        .btn-large {
+            padding: 1.5rem 3rem;
+            font-size: 1.4rem;
+        }
+        
+        /* Header */
+        .header {
+            padding: var(--spacing-md) 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 100;
+            background-color: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-color);
+        }
+        
+        .accessibility-controls {
+            display: flex;
+            gap: var(--spacing-sm);
+        }
+        
+        .accessibility-btn {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+        }
+        
+        .accessibility-btn:hover {
+            color: var(--accent-color);
+        }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: calc(var(--spacing-xl) * 2) 0 var(--spacing-xl);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-xl);
+            align-items: center;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .hero-title {
+            font-size: 4rem;
+            margin-bottom: var(--spacing-md);
+            line-height: 1.1;
+        }
+        
+        .hero-description {
+            font-size: 1.3rem;
+            margin-bottom: var(--spacing-lg);
+            max-width: 600px;
+        }
+        
+        .hero-image {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            min-height: 500px;
+            background-color: #111;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border: 2px solid var(--accent-color);
+        }
+        
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        /* Support Features Section */
+        .support-features {
+            padding: var(--spacing-xl) 0;
+            background-color: var(--secondary-bg);
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .section-subtitle {
+            color: var(--accent-color);
+            font-size: 1.2rem;
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--spacing-lg);
+        }
+        
+        .feature-card {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: var(--spacing-lg);
+            border-radius: var(--border-radius);
+            transition: transform 0.3s ease;
+            height: 100%;
+            border: 1px solid rgba(0, 255, 0, 0.1);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            background-color: rgba(255, 255, 255, 0.08);
+            border-color: var(--accent-color);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--accent-color);
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .feature-title {
+            font-size: 1.5rem;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        /* Chat Demo Section */
+        .chat-demo {
+            padding: var(--spacing-xl) 0;
+        }
+        
+        .chat-container {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: var(--spacing-lg);
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            border: 1px solid rgba(0, 255, 0, 0.1);
+        }
+        
+        .chat-sidebar {
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: var(--spacing-md);
+            border-right: 1px solid var(--border-color);
+        }
+        
+        .chat-header {
+            padding-bottom: var(--spacing-md);
+            margin-bottom: var(--spacing-md);
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .chat-title {
+            font-size: 1.3rem;
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .chat-subtitle {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+        
+        .agent-list {
+            list-style: none;
+        }
+        
+        .agent-item {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            padding: var(--spacing-sm) 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: var(--border-radius);
+            padding: var(--spacing-sm);
+        }
+        
+        .agent-item:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+        
+        .agent-item.active {
+            background-color: rgba(0, 255, 0, 0.1);
+            border-left: 3px solid var(--accent-color);
+        }
+        
+        .agent-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--accent-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--primary-bg);
+        }
+        
+        .agent-info {
+            flex: 1;
+        }
+        
+        .agent-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .agent-role {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+        
+        .agent-status {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: var(--accent-color);
+        }
+        
+        .chat-main {
+            padding: var(--spacing-md);
+            display: flex;
+            flex-direction: column;
+            height: 600px;
+        }
+        
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            margin-bottom: var(--spacing-md);
+            padding-right: var(--spacing-sm);
+        }
+        
+        .message {
+            margin-bottom: var(--spacing-md);
+            display: flex;
+            gap: var(--spacing-md);
+        }
+        
+        .message-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--accent-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--primary-bg);
+            flex-shrink: 0;
+        }
+        
+        .message-content {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: var(--spacing-sm);
+            border-radius: var(--border-radius);
+            max-width: 80%;
+        }
+        
+        .message-sender {
+            font-weight: 600;
+            margin-bottom: var(--spacing-xs);
+            font-size: 0.9rem;
+        }
+        
+        .message-text {
+            font-size: 1rem;
+            margin-bottom: 0;
+        }
+        
+        .message.user .message-content {
+            background-color: rgba(0, 255, 0, 0.1);
+            border: 1px solid rgba(0, 255, 0, 0.2);
+            margin-left: auto;
+        }
+        
+        .message.user {
+            flex-direction: row-reverse;
+        }
+        
+        .message.user .message-avatar {
+            background-color: var(--secondary-accent);
+        }
+        
+        .chat-input {
+            display: flex;
+            gap: var(--spacing-sm);
+        }
+        
+        .chat-input-field {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            border-radius: 50px;
+            color: var(--text-color);
+            font-size: 1rem;
+        }
+        
+        .chat-input-field:focus {
+            outline: none;
+            border-color: var(--accent-color);
+        }
+        
+        .chat-send-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--accent-color);
+            color: var(--primary-bg);
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .chat-send-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        /* Testimonials Section */
+        .testimonials {
+            padding: var(--spacing-xl) 0;
+            background-color: var(--secondary-bg);
+        }
+        
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--spacing-lg);
+        }
+        
+        .testimonial-card {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: var(--spacing-lg);
+            border-radius: var(--border-radius);
+            height: 100%;
+            border: 1px solid rgba(0, 255, 0, 0.1);
+        }
+        
+        .testimonial-content {
+            font-size: 1.2rem;
+            font-style: italic;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+        
+        .testimonial-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #333;
+            overflow: hidden;
+            border: 2px solid var(--accent-color);
+        }
+        
+        .testimonial-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .testimonial-info {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .testimonial-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .testimonial-age {
+            color: var(--accent-color);
+            font-size: 1rem;
+        }
+        
+        /* Support Stats Section */
+        .support-stats {
+            padding: var(--spacing-xl) 0;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--spacing-lg);
+        }
+        
+        .stat-card {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: var(--spacing-lg);
+            border-radius: var(--border-radius);
+            text-align: center;
+            border: 1px solid rgba(0, 255, 0, 0.1);
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .stat-label {
+            font-size: 1.1rem;
+        }
+        
+        /* CTA Section */
+        .cta {
+            padding: var(--spacing-xl) 0;
+            text-align: center;
+            background-color: var(--secondary-bg);
+        }
+        
+        .cta-title {
+            font-size: 3rem;
+            margin-bottom: var(--spacing-md);
+            color: var(--accent-color);
+        }
+        
+        .cta-description {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto var(--spacing-lg);
+        }
+        
+        /* Footer */
+        .footer {
+            padding: var(--spacing-xl) 0 var(--spacing-md);
+            background-color: var(--primary-bg);
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .footer-description {
+            margin-bottom: var(--spacing-md);
+            opacity: 0.8;
+        }
+        
+        .footer-social {
+            display: flex;
+            gap: var(--spacing-sm);
+        }
+        
+        .footer-social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease;
+        }
+        
+        .footer-social-link:hover {
+            background-color: var(--accent-color);
+        }
+        
+        .footer-heading {
+            font-size: 1.3rem;
+            margin-bottom: var(--spacing-md);
+            color: var(--accent-color);
+        }
+        
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-sm);
+        }
+        
+        .footer-link {
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+        
+        .footer-link:hover {
+            opacity: 1;
+            color: var(--accent-color);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: var(--spacing-md);
+            border-top: 1px solid var(--border-color);
+            opacity: 0.6;
+            font-size: 0.9rem;
+        }
+        
+        /* Accessibility Features */
+        .accessibility-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            padding: var(--spacing-sm) 0;
+            z-index: 100;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .accessibility-bar.active {
+            transform: translateY(0);
+        }
+        
+        .accessibility-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .accessibility-options {
+            display: flex;
+            gap: var(--spacing-md);
+        }
+        
+        .accessibility-option {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+        }
+        
+        .accessibility-toggle {
+            width: 50px;
+            height: 26px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 13px;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .accessibility-toggle::after {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 20px;
+            height: 20px;
+            background-color: var(--text-color);
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+        }
+        
+        .accessibility-toggle.active::after {
+            transform: translateX(24px);
+            background-color: var(--accent-color);
+        }
+        
+        .accessibility-label {
+            font-size: 1rem;
+        }
+        
+        .accessibility-close {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1200px) {
+            :root {
+                --h1-size: 3.5rem;
+                --h2-size: 2.5rem;
+                --h3-size: 1.8rem;
+            }
+            
+            .hero-grid {
+                gap: var(--spacing-lg);
+            }
+            
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 992px) {
+            :root {
+                --base-font-size: 18px;
+                --h1-size: 3rem;
+                --h2-size: 2.2rem;
+                --h3-size: 1.5rem;
+            }
+            
+            .hero-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-image {
+                order: -1;
+                max-height: 400px;
+            }
+            
+            .chat-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .chat-sidebar {
+                display: none;
+            }
+            
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-lg);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Accessibility Bar -->
+    <div class="accessibility-bar">
+        <div class="container accessibility-container">
+            <div class="accessibility-options">
+                <div class="accessibility-option">
+                    <span class="accessibility-label">Aumentar Fonte</span>
+                    <div class="accessibility-toggle" id="font-toggle"></div>
+                </div>
+                <div class="accessibility-option">
+                    <span class="accessibility-label">Alto Contraste</span>
+                    <div class="accessibility-toggle" id="contrast-toggle"></div>
+                </div>
+                <div class="accessibility-option">
+                    <span class="accessibility-label">Leitor de Tela</span>
+                    <div class="accessibility-toggle" id="screen-reader-toggle"></div>
+                </div>
+            </div>
+            <button class="accessibility-close" id="accessibility-close">&times;</button>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container header-container">
+            <a href="#" class="logo">ESCOLA ETERNA</a>
+            <div class="accessibility-controls">
+                <button class="accessibility-btn" id="accessibility-btn">Acessibilidade</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <h2 class="hero-subtitle">Suporte Exclusivo</h2>
+                    <h1 class="hero-title">Nunca Mais Fique Sozinho em Sua Jornada Digital</h1>
+                    <p class="hero-description">Nossos agentes IA estão disponíveis 24 horas por dia, 7 dias por semana, para ajudar você com qualquer dificuldade. Tire dúvidas às 3 da manhã, receba ajuda para resolver problemas ou simplesmente converse sobre tecnologia.</p>
+                    <a href="#chat-demo" class="btn btn-large">Experimente Nosso Suporte Agora</a>
+                </div>
+                <div class="hero-image">
+                    <img src="path-to-support-image.jpg" alt="Demonstração do suporte 24/7 com agentes IA">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Support Features Section -->
+    <section class="support-features">
+        <div class="container">
+            <div class="section-header">
+                <h3 class="section-subtitle">Nossos Diferenciais</h3>
+                <h2>Suporte Que Entende Suas Necessidades</h2>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🕒</div>
+                    <h3 class="feature-title">Disponível 24/7</h3>
+                    <p>Nossos agentes IA nunca dormem. Estão sempre prontos para ajudar você, não importa o horário ou dia da semana.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🧠</div>
+                    <h3 class="feature-title">Paciência Infinita</h3>
+                    <p>Explique quantas vezes precisar. Nossos agentes IA nunca ficam impacientes ou cansados de ajudar.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💬</div>
+                    <h3 class="feature-title">Múltiplos Canais</h3>
+                    <p>Escolha como prefere se comunicar: texto, áudio ou vídeo. Nossos agentes se adaptam ao seu estilo.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3 class="feature-title">WhatsApp Integrado</h3>
+                    <p>Acesse o suporte diretamente pelo WhatsApp, sem precisar baixar novos aplicativos ou criar novas contas.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔍</div>
+                    <h3 class="feature-title">Solução Rápida</h3>
+                    <p>Respostas imediatas para suas dúvidas, sem filas de espera ou transferências entre atendentes.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👵</div>
+                    <h3 class="feature-title">Especializado 50+</h3>
+                    <p>Agentes IA treinados especificamente para atender o público 50+, com linguagem clara e acessível.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chat Demo Section -->
+    <section class="chat-demo" id="chat-demo">
+        <div class="container">
+            <div class="section-header">
+                <h3 class="section-subtitle">Experimente Agora</h3>
+                <h2>Veja Como Funciona Nosso Suporte IA</h2>
+            </div>
+            <div class="chat-container">
+                <div class="chat-sidebar">
+                    <div class="chat-header">
+                        <h3 class="chat-title">Seus Agentes IA</h3>
+                        <p class="chat-subtitle">Disponíveis 24/7 para ajudar</p>
+                    </div>
+                    <ul class="agent-list">
+                        <li class="agent-item active">
+                            <div class="agent-avatar">👩‍🏫</div>
+                            <div class="agent-info">
+                                <div class="agent-name">Clara</div>
+                                <div class="agent-role">Especialista em Dispositivos</div>
+                            </div>
+                            <div class="agent-status"></div>
+                        </li>
+                        <li class="agent-item">
+                            <div class="agent-avatar">👨‍🏫</div>
+                            <div class="agent-info">
+                                <div class="agent-name">Carlos</div>
+                                <div class="agent-role">Especialista em Internet</div>
+                            </div>
+                            <div class="agent-status"></div>
+                        </li>
+                        <li class="agent-item">
+                            <div class="agent-avatar">👩‍💻</div>
+                            <div class="agent-info">
+                                <div class="agent-name">Mariana</div>
+                                <div class="agent-role">Especialista em Segurança</div>
+                            </div>
+                            <div class="agent-status"></div>
+                        </li>
+                        <li class="agent-item">
+                            <div class="agent-avatar">👨‍💼</div>
+                            <div class="agent-info">
+                                <div class="agent-name">Roberto</div>
+                                <div class="agent-role">Especialista em Apps</div>
+                            </div>
+                            <div class="agent-status"></div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="chat-main">
+                    <div class="chat-messages">
+                        <div class="message">
+                            <div class="message-avatar">👩‍🏫</div>
+                            <div class="message-content">
+                                <div class="message-sender">Clara</div>
+                                <p class="message-text">Olá! Sou Clara, sua assistente virtual da Escola Eterna. Como posso ajudar você hoje?</p>
+                            </div>
+                        </div>
+                        <div class="message user">
+                            <div class="message-avatar">👤</div>
+                            <div class="message-content">
+                                <div class="message-sender">Você</div>
+                                <p class="message-text">Olá Clara! Estou com dificuldade para conectar meu celular no Wi-Fi da minha casa.</p>
+                            </div>
+                        </div>
+                        <div class="message">
+                            <div class="message-avatar">👩‍🏫</div>
+                            <div class="message-content">
+                                <div class="message-sender">Clara</div>
+                                <p class="message-text">Entendi! Vamos resolver isso juntos. Primeiro, vamos verificar se o Wi-Fi do seu celular está ligado. Você poderia deslizar o dedo de cima para baixo na tela do seu celular para abrir o menu rápido?</p>
+                            </div>
+                        </div>
+                        <div class="message user">
+                            <div class="message-avatar">👤</div>
+                            <div class="message-content">
+                                <div class="message-sender">Você</div>
+                                <p class="message-text">Pronto, fiz isso. Vejo vários ícones.</p>
+                            </div>
+                        </div>
+                        <div class="message">
+                            <div class="message-avatar">👩‍🏫</div>
+                            <div class="message-content">
+                                <div class="message-sender">Clara</div>
+                                <p class="message-text">Ótimo! Agora procure pelo ícone que parece um leque ou um triângulo invertido. Esse é o símbolo do Wi-Fi. Ele está azul/verde ou cinza?</p>
+                            </div>
+                        </div>
+                        <div class="message user">
+                            <div class="message-avatar">👤</div>
+                            <div class="message-content">
+                                <div class="message-sender">Você</div>
+                                <p class="message-text">Está cinza.</p>
+                            </div>
+                        </div>
+                        <div class="message">
+                            <div class="message-avatar">👩‍🏫</div>
+                            <div class="message-content">
+                                <div class="message-sender">Clara</div>
+                                <p class="message-text">Isso significa que o Wi-Fi está desligado. Toque nesse ícone para ativá-lo. Ele deve mudar de cor. Depois, vamos procurar sua rede Wi-Fi na lista que vai aparecer. Conseguiu ativar?</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chat-input">
+                        <input type="text" class="chat-input-field" placeholder="Digite sua mensagem aqui...">
+                        <button class="chat-send-btn">→</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h3 class="section-subtitle">Experiências Reais</h3>
+                <h2>O Que Nossos Alunos Dizem Sobre o Suporte</h2>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-content">"Uma vez, às 2 da manhã, meu e-mail parou de funcionar. Achei que teria que esperar até o dia seguinte, mas lembrei do suporte 24/7. Em 10 minutos, o agente IA me ajudou a resolver o problema! Incrível!"</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">
+                            <img src="path-to-avatar1.jpg" alt="Foto de Antônio">
+                        </div>
+                        <div class="testimonial-info">
+                            <div class="testimonial-name">Antônio Ferreira</div>
+                            <div class="testimonial-age">65 anos</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-content">"O que mais gosto é que posso perguntar a mesma coisa várias vezes, e o agente IA sempre explica com paciência. Nunca me sinto julgada por não entender de primeira. Isso fez toda diferença na minha aprendizagem."</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">
+                            <img src="path-to-avatar2.jpg" alt="Foto de Helena">
+                        </div>
+                        <div class="testimonial-info">
+                            <div class="testimonial-name">Helena Souza</div>
+                            <div class="testimonial-age">58 anos</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Support Stats Section -->
+    <section class="support-stats">
+        <div class="container">
+            <div class="section-header">
+                <h3 class="section-subtitle">Números Que Impressionam</h3>
+                <h2>Nosso Suporte em Números</h2>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Disponibilidade</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">98%</div>
+                    <div class="stat-label">Taxa de Resolução</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">2 min</div>
+                    <div class="stat-label">Tempo Médio de Resposta</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">10.000+</div>
+                    <div class="stat-label">Dúvidas Resolvidas</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2 class="cta-title">Nunca Mais Enfrente Dificuldades Sozinho</h2>
+            <p class="cta-description">Tenha acesso ao nosso suporte exclusivo 24/7 com agentes IA especializados no público 50+. Comece sua jornada digital com a segurança de ter ajuda sempre que precisar.</p>
+            <a href="#" class="btn btn-large">Quero Meu Suporte 24/7 Agora</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-info">
+                    <div class="footer-logo">ESCOLA ETERNA</div>
+                    <p class="footer-description">Educação digital de qualidade para o público 50+, com metodologia exclusiva, avatares IA e suporte 24/7.</p>
+                    <div class="footer-social">
+                        <a href="#" class="footer-social-link">F</a>
+                        <a href="#" class="footer-social-link">I</a>
+                        <a href="#" class="footer-social-link">Y</a>
+                        <a href="#" class="footer-social-link">W</a>
+                    </div>
+                </div>
+                <div class="footer-links-column">
+                    <h4 class="footer-heading">Links Rápidos</h4>
+                    <div class="footer-links">
+                        <a href="#" class="footer-link">Início</a>
+                        <a href="#" class="footer-link">Sobre Nós</a>
+                        <a href="#" class="footer-link">Cursos</a>
+                        <a href="#" class="footer-link">Contato</a>
+                        <a href="#" class="footer-link">Blog</a>
+                    </div>
+                </div>
+                <div class="footer-links-column">
+                    <h4 class="footer-heading">Contato</h4>
+                    <div class="footer-links">
+                        <a href="#" class="footer-link">contato@escolaeterna.com.br</a>
+                        <a href="#" class="footer-link">(11) 99999-9999</a>
+                        <a href="#" class="footer-link">Política de Privacidade</a>
+                        <a href="#" class="footer-link">Termos de Uso</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Escola Eterna. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Accessibility Toggle
+        const accessibilityBtn = document.getElementById('accessibility-btn');
+        const accessibilityBar = document.querySelector('.accessibility-bar');
+        const accessibilityClose = document.getElementById('accessibility-close');
+        const fontToggle = document.getElementById('font-toggle');
+        const contrastToggle = document.getElementById('contrast-toggle');
+        const screenReaderToggle = document.getElementById('screen-reader-toggle');
+        
+        accessibilityBtn.addEventListener('click', () => {
+            accessibilityBar.classList.add('active');
+        });
+        
+        accessibilityClose.addEventListener('click', () => {
+            accessibilityBar.classList.remove('active');
+        });
+        
+        fontToggle.addEventListener('click', () => {
+            fontToggle.classList.toggle('active');
+            document.body.classList.toggle('large-font');
+            
+            if (document.body.classList.contains('large-font')) {
+                document.documentElement.style.fontSize = '24px';
+            } else {
+                document.documentElement.style.fontSize = '20px';
+            }
+        });
+        
+        contrastToggle.addEventListener('click', () => {
+            contrastToggle.classList.toggle('active');
+            document.body.classList.toggle('high-contrast');
+            // Add high-contrast styles dynamically or via CSS class
+        });
+        
+        screenReaderToggle.addEventListener('click', () => {
+            screenReaderToggle.classList.toggle('active');
+            alert('Leitor de tela ativado. Esta funcionalidade seria implementada com uma API real de leitor de tela.');
+        });
+        
+        // Chat Demo
+        const chatInput = document.querySelector('.chat-input-field');
+        const chatSendBtn = document.querySelector('.chat-send-btn');
+        const chatMessages = document.querySelector('.chat-messages');
+        
+        chatSendBtn.addEventListener('click', () => {
+            const message = chatInput.value.trim();
+            
+            if (message) {
+                // Add user message
+                addMessage(message, true);
+                
+                // Clear input
+                chatInput.value = '';
+                
+                // Simulate agent response after a short delay
+                setTimeout(() => {
+                    const responses = [
+                        "Entendi! Vamos tentar outra abordagem. Você consegue me dizer qual é o modelo do seu celular?",
+                        "Ótimo progresso! Agora, vamos verificar se sua rede Wi-Fi aparece na lista. Você consegue ver o nome da sua rede?",
+                        "Não se preocupe, isso é mais comum do que parece. Vamos tentar reiniciar o roteador. Você sabe onde ele está?"
+                    ];
+                    
+                    const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                    addMessage(randomResponse, false);
+                }, 1000);
+            }
+        });
+        
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                chatSendBtn.click();
+            }
+        });
+        
+        function addMessage(text, isUser) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = isUser ? 'message user' : 'message';
+            
+            const avatarDiv = document.createElement('div');
+            avatarDiv.className = 'message-avatar';
+            avatarDiv.textContent = isUser ? '👤' : '👩‍🏫';
+            
+            const contentDiv = document.createElement('div');
+            contentDiv.className = 'message-content';
+            
+            const senderDiv = document.createElement('div');
+            senderDiv.className = 'message-sender';
+            senderDiv.textContent = isUser ? 'Você' : 'Clara';
+            
+            const textP = document.createElement('p');
+            textP.className = 'message-text';
+            textP.textContent = text;
+            
+            contentDiv.appendChild(senderDiv);
+            contentDiv.appendChild(textP);
+            
+            messageDiv.appendChild(avatarDiv);
+            messageDiv.appendChild(contentDiv);
+            
+            chatMessages.appendChild(messageDiv);
+            
+            // Scroll to bottom
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+        
+        // Agent Selection
+        const agentItems = document.querySelectorAll('.agent-item');
+        
+        agentItems.forEach(item => {
+            item.addEventListener('click', () => {
+                // Remove active class from all items
+                agentItems.forEach(i => i.classList.remove('active'));
+                
+                // Add active class to clicked item
+                item.classList.add('active');
+                
+                // Get agent name
+                const agentName = item.querySelector('.agent-name').textContent;
+                
+                // Add system message
+                const systemMessage = `Você está agora conversando com ${agentName}. Como posso ajudar?`;
+                addMessage(systemMessage, false);
+            });
+        });
+        
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

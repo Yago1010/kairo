@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capas de Livro - Escola Eterna</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Cores */
+            --primary-bg: #000000;
+            --secondary-bg: #0A0A0A;
+            --text-color: #FFFFFF;
+            --accent-color: #00FF00;
+            --secondary-accent: #0066FF;
+            --tertiary-accent: #FF66CC;
+            --border-color: rgba(255, 255, 255, 0.1);
+            
+            /* Tipografia */
+            --font-family: 'Inter', sans-serif;
+            --base-font-size: 20px;
+            --h1-size: 3rem;
+            --h2-size: 2.5rem;
+            --h3-size: 1.8rem;
+            --h4-size: 1.5rem;
+            --line-height: 1.6;
+            
+            /* Espaçamento */
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 1rem;
+            --spacing-md: 2rem;
+            --spacing-lg: 4rem;
+            --spacing-xl: 8rem;
+            
+            /* Bordas */
+            --border-radius: 12px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            font-size: var(--base-font-size);
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: var(--font-family);
+            background-color: var(--primary-bg);
+            color: var(--text-color);
+            line-height: var(--line-height);
+            padding: var(--spacing-lg);
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        h1 {
+            font-size: var(--h1-size);
+            text-align: center;
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .book-covers {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--spacing-xl);
+        }
+        
+        .book-cover {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .cover-container {
+            width: 100%;
+            aspect-ratio: 2/3;
+            background-color: var(--secondary-bg);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .cover-1 {
+            background: linear-gradient(135deg, #00FF00 0%, #003300 100%);
+            border: 1px solid var(--accent-color);
+        }
+        
+        .cover-2 {
+            background: linear-gradient(135deg, #0066FF 0%, #000033 100%);
+            border: 1px solid var(--secondary-accent);
+        }
+        
+        .cover-3 {
+            background: linear-gradient(135deg, #FFD700 0%, #663300 100%);
+            border: 1px solid #FFD700;
+        }
+        
+        .cover-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: var(--spacing-lg);
+        }
+        
+        .cover-logo {
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+        
+        .cover-1 .cover-logo {
+            color: #FFFFFF;
+        }
+        
+        .cover-2 .cover-logo {
+            color: #FFFFFF;
+        }
+        
+        .cover-3 .cover-logo {
+            color: #FFFFFF;
+        }
+        
+        .cover-title-container {
+            text-align: center;
+        }
+        
+        .cover-volume {
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: var(--spacing-xs);
+            opacity: 0.8;
+        }
+        
+        .cover-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: var(--spacing-sm);
+            line-height: 1.2;
+        }
+        
+        .cover-subtitle {
+            font-size: 1rem;
+            font-weight: 400;
+            opacity: 0.8;
+        }
+        
+        .cover-footer {
+            font-size: 0.8rem;
+            opacity: 0.6;
+            text-align: center;
+        }
+        
+        .cover-badge {
+            position: absolute;
+            top: var(--spacing-md);
+            right: var(--spacing-md);
+            background-color: #FFFFFF;
+            color: var(--primary-bg);
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.8rem;
+        }
+        
+        .cover-1 .cover-badge {
+            background-color: var(--accent-color);
+        }
+        
+        .cover-2 .cover-badge {
+            background-color: var(--secondary-accent);
+        }
+        
+        .cover-3 .cover-badge {
+            background-color: #FFD700;
+        }
+        
+        .cover-price {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-top: var(--spacing-sm);
+        }
+        
+        .cover-1 .cover-price {
+            color: var(--accent-color);
+        }
+        
+        .cover-2 .cover-price {
+            color: var(--secondary-accent);
+        }
+        
+        .cover-3 .cover-price {
+            color: #FFD700;
+        }
+        
+        .cover-description {
+            text-align: center;
+            margin-top: var(--spacing-sm);
+            font-size: 0.9rem;
+            opacity: 0.8;
+            max-width: 80%;
+        }
+        
+        .cover-icon {
+            position: absolute;
+            bottom: var(--spacing-lg);
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 3rem;
+            opacity: 0.2;
+        }
+        
+        .cover-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+            opacity: 0.3;
+        }
+        
+        .cover-spine {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 20px;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+        
+        @media (max-width: 992px) {
+            .book-covers {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-xl);
+            }
+            
+            .cover-container {
+                max-width: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Capas dos Livros - Escola Eterna</h1>
+        
+        <div class="book-covers">
+            <!-- Volume 1 - Gratuito -->
+            <div class="book-cover">
+                <div class="cover-container cover-1">
+                    <div class="cover-pattern"></div>
+                    <div class="cover-spine"></div>
+                    <div class="cover-content">
+                        <div class="cover-logo">ESCOLA ETERNA</div>
+                        <div class="cover-title-container">
+                            <div class="cover-volume">VOLUME 1</div>
+                            <div class="cover-title">PRIMEIROS PASSOS DIGITAIS</div>
+                            <div class="cover-subtitle">Guia para iniciantes no mundo digital</div>
+                        </div>
+                        <div class="cover-footer">ESCOLA ETERNA © 2025</div>
+                    </div>
+                    <div class="cover-badge">GRATUITO</div>
+                    <div class="cover-icon">🚀</div>
+                </div>
+                <div class="cover-price">GRATUITO</div>
+                <div class="cover-description">Introdução ao mundo digital para o público 50+. Conceitos básicos e primeiros passos.</div>
+            </div>
+            
+            <!-- Volume 2 - R$19,90 -->
+            <div class="book-cover">
+                <div class="cover-container cover-2">
+                    <div class="cover-pattern"></div>
+                    <div class="cover-spine"></div>
+                    <div class="cover-content">
+                        <div class="cover-logo">ESCOLA ETERNA</div>
+                        <div class="cover-title-container">
+                            <div class="cover-volume">VOLUME 2</div>
+                            <div class="cover-title">NAVEGAÇÃO DIGITAL</div>
+                            <div class="cover-subtitle">Comunicação e serviços essenciais</div>
+                        </div>
+                        <div class="cover-footer">ESCOLA ETERNA © 2025</div>
+                    </div>
+                    <div class="cover-badge">ESSENCIAL</div>
+                    <div class="cover-icon">🌐</div>
+                </div>
+                <div class="cover-price">R$19,90</div>
+                <div class="cover-description">Comunicação digital, redes sociais e serviços essenciais para o dia a dia.</div>
+            </div>
+            
+            <!-- Volume 3 - R$100,00 -->
+            <div class="book-cover">
+                <div class="cover-container cover-3">
+                    <div class="cover-pattern"></div>
+                    <div class="cover-spine"></div>
+                    <div class="cover-content">
+                        <div class="cover-logo">ESCOLA ETERNA</div>
+                        <div class="cover-title-container">
+                            <div class="cover-volume">VOLUME 3</div>
+                            <div class="cover-title">CIDADANIA DIGITAL</div>
+                            <div class="cover-subtitle">Edição Premium com capa dura assinada</div>
+                        </div>
+                        <div class="cover-footer">ESCOLA ETERNA © 2025</div>
+                    </div>
+                    <div class="cover-badge">PREMIUM</div>
+                    <div class="cover-icon">👑</div>
+                </div>
+                <div class="cover-price">R$100,00</div>
+                <div class="cover-description">Versão premium com capa dura assinada pelo fundador. Cidadania digital completa.</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

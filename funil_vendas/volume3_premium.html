@@ -1,0 +1,1452 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funil de Vendas - Volume 3 (Premium) - Escola Eterna</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Cores */
+            --primary-bg: #000000;
+            --secondary-bg: #0A0A0A;
+            --text-color: #FFFFFF;
+            --accent-color: #00FF00;
+            --secondary-accent: #0066FF;
+            --tertiary-accent: #FF66CC;
+            --premium-accent: #FFD700;
+            --border-color: rgba(255, 255, 255, 0.1);
+            
+            /* Tipografia */
+            --font-family: 'Inter', sans-serif;
+            --base-font-size: 20px;
+            --h1-size: 4rem;
+            --h2-size: 3rem;
+            --h3-size: 2rem;
+            --h4-size: 1.5rem;
+            --line-height: 1.6;
+            
+            /* Espaçamento */
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 1rem;
+            --spacing-md: 2rem;
+            --spacing-lg: 4rem;
+            --spacing-xl: 8rem;
+            
+            /* Bordas */
+            --border-radius: 12px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            font-size: var(--base-font-size);
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: var(--font-family);
+            background-color: var(--primary-bg);
+            color: var(--text-color);
+            line-height: var(--line-height);
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        h1 {
+            font-size: var(--h1-size);
+        }
+        
+        h2 {
+            font-size: var(--h2-size);
+        }
+        
+        h3 {
+            font-size: var(--h3-size);
+        }
+        
+        h4 {
+            font-size: var(--h4-size);
+        }
+        
+        p {
+            margin-bottom: var(--spacing-md);
+            font-size: 1.1rem;
+        }
+        
+        a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        a:hover {
+            color: var(--premium-accent);
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-md);
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 1.2rem 2.5rem;
+            background-color: var(--premium-accent);
+            color: var(--primary-bg);
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 215, 0, 0.2);
+            color: var(--primary-bg);
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            border: 2px solid var(--premium-accent);
+            color: var(--premium-accent);
+        }
+        
+        .btn-secondary:hover {
+            background-color: var(--premium-accent);
+            color: var(--primary-bg);
+        }
+        
+        .btn-large {
+            padding: 1.5rem 3rem;
+            font-size: 1.4rem;
+        }
+        
+        /* Header */
+        .header {
+            padding: var(--spacing-md) 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 100;
+            background-color: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--premium-accent);
+        }
+        
+        .accessibility-controls {
+            display: flex;
+            gap: var(--spacing-sm);
+        }
+        
+        .accessibility-btn {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+        }
+        
+        .accessibility-btn:hover {
+            color: var(--premium-accent);
+        }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: calc(var(--spacing-xl) * 2) 0 var(--spacing-xl);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-xl);
+            align-items: center;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--premium-accent);
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .hero-title {
+            font-size: 4rem;
+            margin-bottom: var(--spacing-md);
+            line-height: 1.1;
+        }
+        
+        .hero-description {
+            font-size: 1.3rem;
+            margin-bottom: var(--spacing-lg);
+            max-width: 600px;
+        }
+        
+        .hero-image {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            min-height: 500px;
+            background-color: #111;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border: 2px solid var(--premium-accent);
+        }
+        
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .hero-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: var(--premium-accent);
+            color: var(--primary-bg);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            z-index: 3;
+        }
+        
+        .price-tag {
+            display: inline-block;
+            background-color: var(--premium-accent);
+            color: var(--primary-bg);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.5rem;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .original-price {
+            text-decoration: line-through;
+            opacity: 0.7;
+            margin-right: var(--spacing-sm);
+        }
+        
+        /* Features Section */
+        .features {
+            padding: var(--spacing-xl) 0;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .section-subtitle {
+            color: var(--premium-accent);
+            font-size: 1.2rem;
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--spacing-lg);
+        }
+        
+        .feature-card {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: var(--spacing-lg);
+            border-radius: var(--border-radius);
+            transition: transform 0.3s ease;
+            height: 100%;
+            border: 1px solid rgba(255, 215, 0, 0.1);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            background-color: rgba(255, 255, 255, 0.08);
+            border-color: var(--premium-accent);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--premium-accent);
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .feature-title {
+            font-size: 1.5rem;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        /* Book Preview Section */
+        .book-preview {
+            padding: var(--spacing-xl) 0;
+            background-color: var(--secondary-bg);
+        }
+        
+        .book-preview-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-xl);
+            align-items: center;
+        }
+        
+        .book-preview-image {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            background-color: #111;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border: 2px solid var(--premium-accent);
+        }
+        
+        .book-preview-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .book-preview-content {
+            padding: var(--spacing-lg);
+        }
+        
+        .book-preview-title {
+            font-size: 2.5rem;
+            margin-bottom: var(--spacing-md);
+            color: var(--premium-accent);
+        }
+        
+        .book-preview-description {
+            font-size: 1.2rem;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .book-preview-features {
+            list-style: none;
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .book-preview-feature {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-sm);
+            font-size: 1.1rem;
+        }
+        
+        .book-preview-feature-icon {
+            color: var(--premium-accent);
+            font-size: 1.5rem;
+        }
+        
+        /* Physical Book Section */
+        .physical-book {
+            padding: var(--spacing-xl) 0;
+        }
+        
+        .physical-book-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-xl);
+            align-items: center;
+        }
+        
+        .physical-book-image {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            background-color: #111;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border: 2px solid var(--premium-accent);
+        }
+        
+        .physical-book-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .physical-book-content {
+            padding: var(--spacing-lg);
+        }
+        
+        .physical-book-title {
+            font-size: 2.5rem;
+            margin-bottom: var(--spacing-md);
+            color: var(--premium-accent);
+        }
+        
+        .physical-book-description {
+            font-size: 1.2rem;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .physical-book-features {
+            list-style: none;
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .physical-book-feature {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-sm);
+            font-size: 1.1rem;
+        }
+        
+        .physical-book-feature-icon {
+            color: var(--premium-accent);
+            font-size: 1.5rem;
+        }
+        
+        /* Testimonials Section */
+        .testimonials {
+            padding: var(--spacing-xl) 0;
+            background-color: var(--secondary-bg);
+        }
+        
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--spacing-lg);
+        }
+        
+        .testimonial-card {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: var(--spacing-lg);
+            border-radius: var(--border-radius);
+            height: 100%;
+            border: 1px solid rgba(255, 215, 0, 0.1);
+        }
+        
+        .testimonial-content {
+            font-size: 1.2rem;
+            font-style: italic;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+        
+        .testimonial-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #333;
+            overflow: hidden;
+            border: 2px solid var(--premium-accent);
+        }
+        
+        .testimonial-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .testimonial-info {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .testimonial-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .testimonial-age {
+            color: var(--premium-accent);
+            font-size: 1rem;
+        }
+        
+        /* Bonus Section */
+        .bonus {
+            padding: var(--spacing-xl) 0;
+        }
+        
+        .bonus-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--spacing-lg);
+        }
+        
+        .bonus-card {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: var(--spacing-lg);
+            border-radius: var(--border-radius);
+            display: flex;
+            gap: var(--spacing-md);
+            align-items: flex-start;
+            border: 1px solid rgba(255, 215, 0, 0.1);
+        }
+        
+        .bonus-icon {
+            font-size: 2.5rem;
+            color: var(--premium-accent);
+            flex-shrink: 0;
+        }
+        
+        .bonus-content {
+            flex: 1;
+        }
+        
+        .bonus-title {
+            font-size: 1.3rem;
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .bonus-value {
+            color: var(--premium-accent);
+            font-weight: 600;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        /* Pricing Section */
+        .pricing {
+            padding: var(--spacing-xl) 0;
+            text-align: center;
+        }
+        
+        .pricing-card {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: var(--spacing-xl);
+            border-radius: var(--border-radius);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            border: 2px solid var(--premium-accent);
+        }
+        
+        .pricing-title {
+            font-size: 2.5rem;
+            margin-bottom: var(--spacing-md);
+            color: var(--premium-accent);
+        }
+        
+        .pricing-description {
+            font-size: 1.3rem;
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .pricing-amount {
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--premium-accent);
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .pricing-original {
+            font-size: 2rem;
+            text-decoration: line-through;
+            opacity: 0.7;
+            margin-right: var(--spacing-sm);
+        }
+        
+        .pricing-installment {
+            font-size: 1.3rem;
+            margin-bottom: var(--spacing-lg);
+            opacity: 0.9;
+        }
+        
+        .pricing-guarantee {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--spacing-md);
+            margin: var(--spacing-lg) 0;
+            padding: var(--spacing-md);
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: var(--border-radius);
+            border: 1px solid rgba(255, 215, 0, 0.1);
+        }
+        
+        .guarantee-icon {
+            font-size: 3rem;
+            color: var(--premium-accent);
+        }
+        
+        .guarantee-text {
+            text-align: left;
+        }
+        
+        .guarantee-title {
+            font-size: 1.3rem;
+            margin-bottom: var(--spacing-xs);
+            color: var(--premium-accent);
+        }
+        
+        /* Countdown Section */
+        .countdown {
+            padding: var(--spacing-xl) 0;
+            background-color: var(--secondary-bg);
+            text-align: center;
+        }
+        
+        .countdown-title {
+            margin-bottom: var(--spacing-lg);
+            color: var(--premium-accent);
+        }
+        
+        .countdown-timer {
+            display: flex;
+            justify-content: center;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .countdown-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 120px;
+        }
+        
+        .countdown-number {
+            font-size: 3rem;
+            font-weight: 700;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: var(--border-radius);
+            width: 100%;
+            padding: var(--spacing-sm) 0;
+            margin-bottom: var(--spacing-xs);
+            color: var(--premium-accent);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+        }
+        
+        .countdown-label {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        /* FAQ Section */
+        .faq {
+            padding: var(--spacing-xl) 0;
+        }
+        
+        .faq-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            margin-bottom: var(--spacing-md);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: var(--spacing-md);
+        }
+        
+        .faq-question {
+            font-size: 1.3rem;
+            margin-bottom: var(--spacing-sm);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--premium-accent);
+        }
+        
+        .faq-answer {
+            font-size: 1.1rem;
+            opacity: 0.8;
+        }
+        
+        /* CTA Section */
+        .cta {
+            padding: var(--spacing-xl) 0;
+            text-align: center;
+            background-color: var(--secondary-bg);
+        }
+        
+        .cta-title {
+            font-size: 3rem;
+            margin-bottom: var(--spacing-md);
+            color: var(--premium-accent);
+        }
+        
+        .cta-description {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto var(--spacing-lg);
+        }
+        
+        /* Footer */
+        .footer {
+            padding: var(--spacing-xl) 0 var(--spacing-md);
+            background-color: var(--primary-bg);
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--premium-accent);
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .footer-description {
+            margin-bottom: var(--spacing-md);
+            opacity: 0.8;
+        }
+        
+        .footer-social {
+            display: flex;
+            gap: var(--spacing-sm);
+        }
+        
+        .footer-social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease;
+        }
+        
+        .footer-social-link:hover {
+            background-color: var(--premium-accent);
+        }
+        
+        .footer-heading {
+            font-size: 1.3rem;
+            margin-bottom: var(--spacing-md);
+            color: var(--premium-accent);
+        }
+        
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-sm);
+        }
+        
+        .footer-link {
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+        
+        .footer-link:hover {
+            opacity: 1;
+            color: var(--premium-accent);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: var(--spacing-md);
+            border-top: 1px solid var(--border-color);
+            opacity: 0.6;
+            font-size: 0.9rem;
+        }
+        
+        /* Accessibility Features */
+        .accessibility-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            padding: var(--spacing-sm) 0;
+            z-index: 100;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .accessibility-bar.active {
+            transform: translateY(0);
+        }
+        
+        .accessibility-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .accessibility-options {
+            display: flex;
+            gap: var(--spacing-md);
+        }
+        
+        .accessibility-option {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+        }
+        
+        .accessibility-toggle {
+            width: 50px;
+            height: 26px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 13px;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .accessibility-toggle::after {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 20px;
+            height: 20px;
+            background-color: var(--text-color);
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+        }
+        
+        .accessibility-toggle.active::after {
+            transform: translateX(24px);
+            background-color: var(--premium-accent);
+        }
+        
+        .accessibility-label {
+            font-size: 1rem;
+        }
+        
+        .accessibility-close {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1200px) {
+            :root {
+                --h1-size: 3.5rem;
+                --h2-size: 2.5rem;
+                --h3-size: 1.8rem;
+            }
+            
+            .hero-grid,
+            .book-preview-grid,
+            .physical-book-grid {
+                gap: var(--spacing-lg);
+            }
+            
+            .features-grid,
+            .bonus-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 992px) {
+            :root {
+                --base-font-size: 18px;
+                --h1-size: 3rem;
+                --h2-size: 2.2rem;
+                --h3-size: 1.5rem;
+            }
+            
+            .hero-grid,
+            .book-preview-grid,
+            .physical-book-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-image,
+            .book-preview-image,
+            .physical-book-image {
+                order: -1;
+                max-height: 400px;
+            }
+            
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-lg);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .features-grid,
+            .bonus-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .countdown-timer {
+                flex-wrap: wrap;
+            }
+            
+            .countdown-item {
+                min-width: 100px;
+            }
+            
+            .pricing-guarantee {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .guarantee-text {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Accessibility Bar -->
+    <div class="accessibility-bar">
+        <div class="container accessibility-container">
+            <div class="accessibility-options">
+                <div class="accessibility-option">
+                    <span class="accessibility-label">Aumentar Fonte</span>
+                    <div class="accessibility-toggle" id="font-toggle"></div>
+                </div>
+                <div class="accessibility-option">
+                    <span class="accessibility-label">Alto Contraste</span>
+                    <div class="accessibility-toggle" id="contrast-toggle"></div>
+                </div>
+                <div class="accessibility-option">
+                    <span class="accessibility-label">Leitor de Tela</span>
+                    <div class="accessibility-toggle" id="screen-reader-toggle"></div>
+                </div>
+            </div>
+            <button class="accessibility-close" id="accessibility-close">&times;</button>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container header-container">
+            <a href="#" class="logo">ESCOLA ETERNA</a>
+            <div class="accessibility-controls">
+                <button class="accessibility-btn" id="accessibility-btn">Acessibilidade</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <h2 class="hero-subtitle">Volume 3 - Edição Premium</h2>
+                    <h1 class="hero-title">Cidadania Digital Completa</h1>
+                    <p class="hero-description">Domine todos os aspectos da vida digital moderna. Receba o livro físico de capa dura assinado pelo fundador da Escola Eterna, com dedicatória especial.</p>
+                    <div class="price-tag">
+                        <span class="original-price">R$197,00</span>
+                        <span>R$100,00</span>
+                    </div>
+                    <a href="#pricing" class="btn btn-large">Quero Garantir Minha Edição Premium</a>
+                </div>
+                <div class="hero-image">
+                    <span class="hero-badge">PREMIUM</span>
+                    <img src="path-to-book-cover.jpg" alt="Capa do Livro Cidadania Digital Completa">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="section-header">
+                <h3 class="section-subtitle">O Que Você Vai Aprender</h3>
+                <h2>Conteúdo Premium Exclusivo</h2>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🛒</div>
+                    <h3 class="feature-title">Compras Online Seguras</h3>
+                    <p>Aprenda a comprar em sites confiáveis, usar métodos de pagamento seguros e evitar fraudes no comércio eletrônico.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🏦</div>
+                    <h3 class="feature-title">Internet Banking</h3>
+                    <p>Domine o uso de aplicativos bancários, transferências, pagamentos e consultas de saldo com total segurança.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔍</div>
+                    <h3 class="feature-title">Pesquisas Avançadas</h3>
+                    <p>Técnicas para encontrar informações confiáveis, verificar fontes e identificar notícias falsas na internet.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3 class="feature-title">Aplicativos Essenciais</h3>
+                    <p>Conheça e aprenda a usar os aplicativos mais úteis para transporte, alimentação, saúde e entretenimento.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎬</div>
+                    <h3 class="feature-title">Streaming e Entretenimento</h3>
+                    <p>Domine plataformas como Netflix, YouTube, Spotify e outras para acessar filmes, séries, música e podcasts.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👨‍👩‍👧‍👦</div>
+                    <h3 class="feature-title">Conexão Familiar Digital</h3>
+                    <p>Estratégias para manter-se conectado com filhos, netos e familiares através da tecnologia, mesmo à distância.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Book Preview Section -->
+    <section class="book-preview">
+        <div class="container">
+            <div class="book-preview-grid">
+                <div class="book-preview-image">
+                    <img src="path-to-book-preview.jpg" alt="Prévia do conteúdo do livro">
+                </div>
+                <div class="book-preview-content">
+                    <h2 class="book-preview-title">Conteúdo Exclusivo</h2>
+                    <p class="book-preview-description">O Volume 3 da Escola Eterna traz conteúdo avançado e completo sobre cidadania digital, com mais de 300 páginas ricamente ilustradas e explicações passo a passo.</p>
+                    <ul class="book-preview-features">
+                        <li class="book-preview-feature">
+                            <span class="book-preview-feature-icon">✓</span>
+                            <span>Mais de 300 páginas de conteúdo exclusivo</span>
+                        </li>
+                        <li class="book-preview-feature">
+                            <span class="book-preview-feature-icon">✓</span>
+                            <span>Ilustrações coloridas em alta resolução</span>
+                        </li>
+                        <li class="book-preview-feature">
+                            <span class="book-preview-feature-icon">✓</span>
+                            <span>Tutoriais passo a passo com capturas de tela</span>
+                        </li>
+                        <li class="book-preview-feature">
+                            <span class="book-preview-feature-icon">✓</span>
+                            <span>Linguagem simples e direta para o público 50+</span>
+                        </li>
+                        <li class="book-preview-feature">
+                            <span class="book-preview-feature-icon">✓</span>
+                            <span>Tipografia ampliada para facilitar a leitura</span>
+                        </li>
+                    </ul>
+                    <a href="#pricing" class="btn">Quero Minha Cópia Premium</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Physical Book Section -->
+    <section class="physical-book">
+        <div class="container">
+            <div class="physical-book-grid">
+                <div class="physical-book-content">
+                    <h2 class="physical-book-title">Livro Físico de Capa Dura</h2>
+                    <p class="physical-book-description">Além do conteúdo premium, você receberá uma edição especial física de capa dura, assinada pelo fundador da Escola Eterna com uma dedicatória personalizada.</p>
+                    <ul class="physical-book-features">
+                        <li class="physical-book-feature">
+                            <span class="physical-book-feature-icon">✓</span>
+                            <span>Capa dura premium com acabamento especial</span>
+                        </li>
+                        <li class="physical-book-feature">
+                            <span class="physical-book-feature-icon">✓</span>
+                            <span>Papel de alta qualidade para melhor experiência de leitura</span>
+                        </li>
+                        <li class="physical-book-feature">
+                            <span class="physical-book-feature-icon">✓</span>
+                            <span>Assinatura do fundador da Escola Eterna</span>
+                        </li>
+                        <li class="physical-book-feature">
+                            <span class="physical-book-feature-icon">✓</span>
+                            <span>Dedicatória personalizada com seu nome</span>
+                        </li>
+                        <li class="physical-book-feature">
+                            <span class="physical-book-feature-icon">✓</span>
+                            <span>Entrega em todo o Brasil</span>
+                        </li>
+                    </ul>
+                    <a href="#pricing" class="btn">Quero Meu Livro Assinado</a>
+                </div>
+                <div class="physical-book-image">
+                    <img src="path-to-physical-book.jpg" alt="Livro físico de capa dura">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h3 class="section-subtitle">Depoimentos</h3>
+                <h2>O Que Nossos Leitores Premium Dizem</h2>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-content">"Nunca imaginei que conseguiria fazer compras online e usar internet banking sozinho. O livro explica tudo com tanta clareza que até eu, com 75 anos, consegui aprender. A dedicatória do autor foi um toque especial que valorizei muito."</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">
+                            <img src="path-to-avatar1.jpg" alt="Foto de Roberto">
+                        </div>
+                        <div class="testimonial-info">
+                            <div class="testimonial-name">Roberto Mendes</div>
+                            <div class="testimonial-age">75 anos</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-content">"O livro físico é lindo e muito bem feito! Agora consigo assistir meus programas favoritos no Netflix e usar aplicativos de transporte sem precisar pedir ajuda aos meus filhos. A sensação de independência digital é maravilhosa!"</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">
+                            <img src="path-to-avatar2.jpg" alt="Foto de Lúcia">
+                        </div>
+                        <div class="testimonial-info">
+                            <div class="testimonial-name">Lúcia Ferreira</div>
+                            <div class="testimonial-age">68 anos</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bonus Section -->
+    <section class="bonus">
+        <div class="container">
+            <div class="section-header">
+                <h3 class="section-subtitle">Bônus Exclusivos</h3>
+                <h2>Além do Livro Premium, Você Também Recebe</h2>
+            </div>
+            <div class="bonus-grid">
+                <div class="bonus-card">
+                    <div class="bonus-icon">📹</div>
+                    <div class="bonus-content">
+                        <h3 class="bonus-title">10 Vídeo-aulas Exclusivas</h3>
+                        <p class="bonus-value">Valor: R$297,00</p>
+                        <p>Vídeos detalhados mostrando na prática como realizar tarefas digitais avançadas, com explicações passo a passo.</p>
+                    </div>
+                </div>
+                <div class="bonus-card">
+                    <div class="bonus-icon">👨‍🏫</div>
+                    <div class="bonus-content">
+                        <h3 class="bonus-title">Mentoria Individual (30 minutos)</h3>
+                        <p class="bonus-value">Valor: R$197,00</p>
+                        <p>Uma sessão de mentoria individual por videochamada para tirar suas dúvidas específicas sobre tecnologia.</p>
+                    </div>
+                </div>
+                <div class="bonus-card">
+                    <div class="bonus-icon">📱</div>
+                    <div class="bonus-content">
+                        <h3 class="bonus-title">Guia de Configuração de Smartphone</h3>
+                        <p class="bonus-value">Valor: R$97,00</p>
+                        <p>Um guia personalizado para configurar seu smartphone de forma otimizada para suas necessidades específicas.</p>
+                    </div>
+                </div>
+                <div class="bonus-card">
+                    <div class="bonus-icon">🔐</div>
+                    <div class="bonus-content">
+                        <h3 class="bonus-title">Kit de Segurança Digital Premium</h3>
+                        <p class="bonus-value">Valor: R$147,00</p>
+                        <p>Ferramentas e guias para proteger sua privacidade e segurança online, incluindo gerenciador de senhas e antivírus.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <div class="pricing-card">
+                <h2 class="pricing-title">Cidadania Digital Completa</h2>
+                <p class="pricing-description">Livro físico de capa dura assinado + versão digital + todos os bônus exclusivos</p>
+                <div class="pricing-amount">
+                    <span class="pricing-original">R$197,00</span>
+                    <span>R$100,00</span>
+                </div>
+                <p class="pricing-installment">ou em até 10x de R$10,00 sem juros</p>
+                <a href="#" class="btn btn-large">Quero Garantir Minha Edição Premium</a>
+                <div class="pricing-guarantee">
+                    <div class="guarantee-icon">🛡️</div>
+                    <div class="guarantee-text">
+                        <h4 class="guarantee-title">Garantia Incondicional de 30 Dias</h4>
+                        <p>Se você não ficar 100% satisfeito por qualquer motivo, devolvemos seu dinheiro integralmente. Sem perguntas, sem burocracia.</p>
+                    </div>
+                </div>
+                <p>Formas de pagamento: Cartão de crédito, boleto, Pix ou PayPal</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Countdown Section -->
+    <section class="countdown">
+        <div class="container">
+            <h2 class="countdown-title">Oferta por Tempo Limitado</h2>
+            <div class="countdown-timer">
+                <div class="countdown-item">
+                    <div class="countdown-number" id="days">02</div>
+                    <div class="countdown-label">Dias</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="hours">12</div>
+                    <div class="countdown-label">Horas</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="minutes">45</div>
+                    <div class="countdown-label">Minutos</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="seconds">30</div>
+                    <div class="countdown-label">Segundos</div>
+                </div>
+            </div>
+            <a href="#pricing" class="btn btn-large">Garantir Minha Edição Premium Agora</a>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq">
+        <div class="container">
+            <div class="section-header">
+                <h3 class="section-subtitle">Perguntas Frequentes</h3>
+                <h2>Tire Suas Dúvidas</h2>
+            </div>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Quanto tempo leva para receber o livro físico?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>O livro físico é enviado em até 7 dias úteis após a confirmação do pagamento. O prazo de entrega varia de acordo com a sua localização, mas geralmente leva entre 5 e 15 dias úteis para todo o Brasil.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Preciso ter lido os volumes anteriores?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Embora seja recomendado para uma experiência completa, o Volume 3 foi projetado para funcionar de forma independente. Incluímos um capítulo introdutório que resume os conceitos básicos dos volumes anteriores.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Como funciona a mentoria individual?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Após a compra, você receberá um link para agendar sua sessão de mentoria de 30 minutos. A mentoria é realizada por videochamada com um de nossos especialistas, que irá tirar suas dúvidas específicas sobre tecnologia.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>O que acontece se eu tiver dificuldades técnicas?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Oferecemos suporte técnico dedicado para todos os compradores da Edição Premium. Você pode entrar em contato por e-mail, WhatsApp ou telefone, e nossa equipe irá ajudá-lo a resolver qualquer problema.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Posso comprar apenas o livro físico, sem os bônus?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Não, a Edição Premium é vendida como um pacote completo que inclui o livro físico assinado, a versão digital e todos os bônus. Isso garante que você tenha a experiência completa de aprendizado.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2 class="cta-title">Torne-se um Cidadão Digital Completo</h2>
+            <p class="cta-description">Não deixe a tecnologia ser um obstáculo em sua vida. Com nossa Edição Premium, você terá todas as ferramentas para participar plenamente do mundo digital com confiança e segurança.</p>
+            <a href="#pricing" class="btn btn-large">Quero Garantir Minha Edição Premium Agora</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-info">
+                    <div class="footer-logo">ESCOLA ETERNA</div>
+                    <p class="footer-description">Educação digital de qualidade para o público 50+, com metodologia exclusiva e material adaptado para suas necessidades.</p>
+                    <div class="footer-social">
+                        <a href="#" class="footer-social-link">F</a>
+                        <a href="#" class="footer-social-link">I</a>
+                        <a href="#" class="footer-social-link">Y</a>
+                        <a href="#" class="footer-social-link">W</a>
+                    </div>
+                </div>
+                <div class="footer-links-column">
+                    <h4 class="footer-heading">Links Rápidos</h4>
+                    <div class="footer-links">
+                        <a href="#" class="footer-link">Início</a>
+                        <a href="#" class="footer-link">Sobre Nós</a>
+                        <a href="#" class="footer-link">Cursos</a>
+                        <a href="#" class="footer-link">Contato</a>
+                        <a href="#" class="footer-link">Blog</a>
+                    </div>
+                </div>
+                <div class="footer-links-column">
+                    <h4 class="footer-heading">Contato</h4>
+                    <div class="footer-links">
+                        <a href="#" class="footer-link">contato@escolaeterna.com.br</a>
+                        <a href="#" class="footer-link">(11) 99999-9999</a>
+                        <a href="#" class="footer-link">Política de Privacidade</a>
+                        <a href="#" class="footer-link">Termos de Uso</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Escola Eterna. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Accessibility Toggle
+        const accessibilityBtn = document.getElementById('accessibility-btn');
+        const accessibilityBar = document.querySelector('.accessibility-bar');
+        const accessibilityClose = document.getElementById('accessibility-close');
+        const fontToggle = document.getElementById('font-toggle');
+        const contrastToggle = document.getElementById('contrast-toggle');
+        const screenReaderToggle = document.getElementById('screen-reader-toggle');
+        
+        accessibilityBtn.addEventListener('click', () => {
+            accessibilityBar.classList.add('active');
+        });
+        
+        accessibilityClose.addEventListener('click', () => {
+            accessibilityBar.classList.remove('active');
+        });
+        
+        fontToggle.addEventListener('click', () => {
+            fontToggle.classList.toggle('active');
+            document.body.classList.toggle('large-font');
+            
+            if (document.body.classList.contains('large-font')) {
+                document.documentElement.style.fontSize = '24px';
+            } else {
+                document.documentElement.style.fontSize = '20px';
+            }
+        });
+        
+        contrastToggle.addEventListener('click', () => {
+            contrastToggle.classList.toggle('active');
+            document.body.classList.toggle('high-contrast');
+        });
+        
+        screenReaderToggle.addEventListener('click', () => {
+            screenReaderToggle.classList.toggle('active');
+            alert('Leitor de tela ativado. Esta funcionalidade seria implementada com uma API real de leitor de tela.');
+        });
+        
+        // FAQ Accordion
+        const faqQuestions = document.querySelectorAll('.faq-question');
+        
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                const isOpen = answer.style.display === 'block';
+                
+                // Close all answers
+                document.querySelectorAll('.faq-answer').forEach(item => {
+                    item.style.display = 'none';
+                });
+                
+                document.querySelectorAll('.faq-question span:last-child').forEach(item => {
+                    item.textContent = '+';
+                });
+                
+                // Open current answer if it was closed
+                if (!isOpen) {
+                    answer.style.display = 'block';
+                    question.querySelector('span:last-child').textContent = '-';
+                }
+            });
+        });
+        
+        // Initialize first FAQ item as open
+        faqQuestions[0].nextElementSibling.style.display = 'block';
+        faqQuestions[0].querySelector('span:last-child').textContent = '-';
+        
+        // Countdown Timer
+        function updateCountdown() {
+            const now = new Date();
+            const endDate = new Date(now);
+            endDate.setDate(endDate.getDate() + 2);
+            endDate.setHours(endDate.getHours() + 12);
+            endDate.setMinutes(endDate.getMinutes() + 45);
+            endDate.setSeconds(endDate.getSeconds() + 30);
+            
+            const diff = endDate - now;
+            
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            document.getElementById('days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+        }
+        
+        // Update countdown every second
+        setInterval(updateCountdown, 1000);
+        
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

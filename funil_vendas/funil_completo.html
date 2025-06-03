@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funil de Alta Conversão - Escola Eterna</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Cores */
+            --primary-bg: #000000;
+            --secondary-bg: #0A0A0A;
+            --text-color: #FFFFFF;
+            --accent-color: #00FF00;
+            --secondary-accent: #0066FF;
+            --tertiary-accent: #FFD700;
+            --border-color: rgba(255, 255, 255, 0.1);
+            
+            /* Tipografia */
+            --font-family: 'Inter', sans-serif;
+            --base-font-size: 20px;
+            --h1-size: 3rem;
+            --h2-size: 2.5rem;
+            --h3-size: 1.8rem;
+            --h4-size: 1.5rem;
+            --line-height: 1.6;
+            
+            /* Espaçamento */
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 1rem;
+            --spacing-md: 2rem;
+            --spacing-lg: 4rem;
+            --spacing-xl: 8rem;
+            
+            /* Bordas */
+            --border-radius: 12px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            font-size: var(--base-font-size);
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: var(--font-family);
+            background-color: var(--primary-bg);
+            color: var(--text-color);
+            line-height: var(--line-height);
+            padding: var(--spacing-lg);
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        h1 {
+            font-size: var(--h1-size);
+            text-align: center;
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .funnel-diagram {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .funnel-stage {
+            width: 100%;
+            max-width: 1000px;
+            background-color: var(--secondary-bg);
+            border-radius: var(--border-radius);
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+            position: relative;
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .funnel-stage:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border-color: var(--accent-color);
+        }
+        
+        .funnel-stage-1 {
+            border-color: var(--accent-color);
+        }
+        
+        .funnel-stage-2 {
+            border-color: var(--secondary-accent);
+        }
+        
+        .funnel-stage-3 {
+            border-color: var(--tertiary-accent);
+        }
+        
+        .funnel-stage-4 {
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .funnel-stage-5 {
+            border-color: rgba(255, 102, 204, 0.5);
+        }
+        
+        .funnel-stage-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .funnel-stage-title {
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+        
+        .funnel-stage-icon {
+            font-size: 2rem;
+        }
+        
+        .funnel-stage-1 .funnel-stage-icon {
+            color: var(--accent-color);
+        }
+        
+        .funnel-stage-2 .funnel-stage-icon {
+            color: var(--secondary-accent);
+        }
+        
+        .funnel-stage-3 .funnel-stage-icon {
+            color: var(--tertiary-accent);
+        }
+        
+        .funnel-stage-4 .funnel-stage-icon {
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .funnel-stage-5 .funnel-stage-icon {
+            color: rgba(255, 102, 204, 0.8);
+        }
+        
+        .funnel-stage-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+        }
+        
+        .funnel-stage-1 .funnel-stage-price {
+            background-color: var(--accent-color);
+            color: var(--primary-bg);
+        }
+        
+        .funnel-stage-2 .funnel-stage-price {
+            background-color: var(--secondary-accent);
+            color: var(--primary-bg);
+        }
+        
+        .funnel-stage-3 .funnel-stage-price {
+            background-color: var(--tertiary-accent);
+            color: var(--primary-bg);
+        }
+        
+        .funnel-stage-4 .funnel-stage-price {
+            background-color: rgba(255, 255, 255, 0.8);
+            color: var(--primary-bg);
+        }
+        
+        .funnel-stage-5 .funnel-stage-price {
+            background-color: rgba(255, 102, 204, 0.8);
+            color: var(--primary-bg);
+        }
+        
+        .funnel-stage-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-lg);
+            align-items: center;
+        }
+        
+        .funnel-stage-description {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-md);
+        }
+        
+        .funnel-stage-text {
+            font-size: 1.1rem;
+        }
+        
+        .funnel-stage-features {
+            list-style: none;
+        }
+        
+        .funnel-stage-feature {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-sm);
+            font-size: 1.1rem;
+        }
+        
+        .funnel-stage-feature-icon {
+            font-size: 1.2rem;
+        }
+        
+        .funnel-stage-1 .funnel-stage-feature-icon {
+            color: var(--accent-color);
+        }
+        
+        .funnel-stage-2 .funnel-stage-feature-icon {
+            color: var(--secondary-accent);
+        }
+        
+        .funnel-stage-3 .funnel-stage-feature-icon {
+            color: var(--tertiary-accent);
+        }
+        
+        .funnel-stage-4 .funnel-stage-feature-icon {
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .funnel-stage-5 .funnel-stage-feature-icon {
+            color: rgba(255, 102, 204, 0.8);
+        }
+        
+        .funnel-stage-image {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background-color: #111;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .funnel-stage-1 .funnel-stage-image {
+            border: 2px solid var(--accent-color);
+        }
+        
+        .funnel-stage-2 .funnel-stage-image {
+            border: 2px solid var(--secondary-accent);
+        }
+        
+        .funnel-stage-3 .funnel-stage-image {
+            border: 2px solid var(--tertiary-accent);
+        }
+        
+        .funnel-stage-4 .funnel-stage-image {
+            border: 2px solid rgba(255, 255, 255, 0.5);
+        }
+        
+        .funnel-stage-5 .funnel-stage-image {
+            border: 2px solid rgba(255, 102, 204, 0.5);
+        }
+        
+        .funnel-stage-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .funnel-arrow {
+            width: 50px;
+            height: 50px;
+            margin: -25px 0;
+            font-size: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .funnel-stage-cta {
+            margin-top: var(--spacing-md);
+            text-align: center;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .btn-stage-1 {
+            background-color: var(--accent-color);
+            color: var(--primary-bg);
+        }
+        
+        .btn-stage-1:hover {
+            background-color: #00CC00;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 255, 0, 0.2);
+        }
+        
+        .btn-stage-2 {
+            background-color: var(--secondary-accent);
+            color: var(--primary-bg);
+        }
+        
+        .btn-stage-2:hover {
+            background-color: #0055CC;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 102, 255, 0.2);
+        }
+        
+        .btn-stage-3 {
+            background-color: var(--tertiary-accent);
+            color: var(--primary-bg);
+        }
+        
+        .btn-stage-3:hover {
+            background-color: #CCAA00;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 215, 0, 0.2);
+        }
+        
+        .btn-stage-4 {
+            background-color: rgba(255, 255, 255, 0.8);
+            color: var(--primary-bg);
+        }
+        
+        .btn-stage-4:hover {
+            background-color: rgba(255, 255, 255, 1);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 255, 255, 0.2);
+        }
+        
+        .btn-stage-5 {
+            background-color: rgba(255, 102, 204, 0.8);
+            color: var(--primary-bg);
+        }
+        
+        .btn-stage-5:hover {
+            background-color: rgba(255, 102, 204, 1);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 102, 204, 0.2);
+        }
+        
+        .funnel-stage-badge {
+            position: absolute;
+            top: var(--spacing-md);
+            right: var(--spacing-md);
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        
+        .funnel-stage-1 .funnel-stage-badge {
+            background-color: var(--accent-color);
+            color: var(--primary-bg);
+        }
+        
+        .funnel-stage-2 .funnel-stage-badge {
+            background-color: var(--secondary-accent);
+            color: var(--primary-bg);
+        }
+        
+        .funnel-stage-3 .funnel-stage-badge {
+            background-color: var(--tertiary-accent);
+            color: var(--primary-bg);
+        }
+        
+        .funnel-stage-4 .funnel-stage-badge {
+            background-color: rgba(255, 255, 255, 0.8);
+            color: var(--primary-bg);
+        }
+        
+        .funnel-stage-5 .funnel-stage-badge {
+            background-color: rgba(255, 102, 204, 0.8);
+            color: var(--primary-bg);
+        }
+        
+        .funnel-stage-downsell {
+            position: absolute;
+            bottom: -20px;
+            right: 100px;
+            background-color: var(--secondary-bg);
+            border: 1px solid var(--secondary-accent);
+            border-radius: var(--border-radius);
+            padding: var(--spacing-md);
+            width: 300px;
+            z-index: 10;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .funnel-stage-downsell-title {
+            font-size: 1rem;
+            margin-bottom: var(--spacing-xs);
+            color: var(--secondary-accent);
+        }
+        
+        .funnel-stage-downsell-price {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .funnel-stage-downsell-description {
+            font-size: 0.9rem;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .btn-downsell {
+            background-color: var(--secondary-accent);
+            color: var(--primary-bg);
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .btn-downsell:hover {
+            background-color: #0055CC;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 102, 255, 0.2);
+        }
+        
+        .funnel-stage-upsell {
+            position: absolute;
+            bottom: -20px;
+            right: 100px;
+            background-color: var(--secondary-bg);
+            border: 1px solid var(--tertiary-accent);
+            border-radius: var(--border-radius);
+            padding: var(--spacing-md);
+            width: 300px;
+            z-index: 10;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .funnel-stage-upsell-title {
+            font-size: 1rem;
+            margin-bottom: var(--spacing-xs);
+            color: var(--tertiary-accent);
+        }
+        
+        .funnel-stage-upsell-price {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .funnel-stage-upsell-description {
+            font-size: 0.9rem;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .btn-upsell {
+            background-color: var(--tertiary-accent);
+            color: var(--primary-bg);
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .btn-upsell:hover {
+            background-color: #CCAA00;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 215, 0, 0.2);
+        }
+        
+        .funnel-flow {
+            margin-top: var(--spacing-xl);
+            padding: var(--spacing-lg);
+            background-color: var(--secondary-bg);
+            border-radius: var(--border-radius);
+            border: 1px solid var(--border-color);
+        }
+        
+        .funnel-flow-title {
+            text-align: center;
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .funnel-flow-diagram {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .funnel-flow-diagram::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--border-color);
+            z-index: 1;
+        }
+        
+        .funnel-flow-step {
+            width: 150px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .funnel-flow-step-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto var(--spacing-sm);
+            font-size: 1.5rem;
+            background-color: var(--primary-bg);
+            border: 2px solid var(--border-color);
+        }
+        
+        .funnel-flow-step:nth-child(1) .funnel-flow-step-icon {
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+        }
+        
+        .funnel-flow-step:nth-child(2) .funnel-flow-step-icon {
+            border-color: var(--secondary-accent);
+            color: var(--secondary-accent);
+        }
+        
+        .funnel-flow-step:nth-child(3) .funnel-flow-step-icon {
+            border-color: var(--tertiary-accent);
+            color: var(--tertiary-accent);
+        }
+        
+        .funnel-flow-step:nth-child(4) .funnel-flow-step-icon {
+            border-color: rgba(255, 255, 255, 0.8);
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .funnel-flow-step:nth-child(5) .funnel-flow-step-icon {
+            border-color: rgba(255, 102, 204, 0.8);
+            color: rgba(255, 102, 204, 0.8);
+        }
+        
+        .funnel-flow-step-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .funnel-flow-step-description {
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+        
+        .funnel-flow-notes {
+            font-size: 1rem;
+            opacity: 0.8;
+            text-align: center;
+        }
+        
+        .accessibility-features {
+            margin-top: var(--spacing-xl);
+            padding: var(--spacing-lg);
+            background-color: var(--secondary-bg);
+            border-radius: var(--border-radius);
+            border: 1px solid var(--border-color);
+        }
+        
+        .accessibility-features-title {
+            text-align: center;
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .accessibility-features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--spacing-lg);
+        }
+        
+        .accessibility-feature {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .accessibility-feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: var(--spacing-sm);
+            color: var(--accent-color);
+        }
+        
+        .accessibility-feature-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .accessibility-feature-description {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        @media (max-width: 992px) {
+            .funnel-stage-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .funnel-stage-image {
+                order: -1;
+            }
+            
+            .accessibility-features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .funnel-flow-diagram {
+                flex-direction: column;
+                align-items: center;
+                gap: var(--spacing-lg);
+            }
+            
+            .funnel-flow-diagram::before {
+                width: 2px;
+                height: 100%;
+                top: 0;
+                left: 50%;
+            }
+            
+            .funnel-stage-downsell,
+            .funnel-stage-upsell {
+                position: static;
+                width: 100%;
+                margin-top: var(--spacing-md);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .accessibility-features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Funil de Alta Conversão - Escola Eterna</h1>
+        
+        <div class="funnel-diagram">
+            <!-- Estágio 1: Volume 1 Gratuito -->
+            <div class="funnel-stage funnel-stage-1">
+                <div class="funnel-stage-badge">Atração</div>
+                <div class="funnel-stage-header">
+                    <div class="funnel-stage-title">
+                        <span class="funnel-stage-icon">🚀</span>
+                        <span>Volume 1: Primeiros Passos Digitais</span>
+                    </div>
+                    <div class="funnel-stage-price">GRATUITO</div>
+                </div>
+                <div class="funnel-stage-content">
+                    <div class="funnel-stage-description">
+                        <p class="funnel-stage-text">Introdução ao mundo digital para o público 50+. Conceitos básicos e primeiros passos para quem está começando sua jornada tecnológica.</p>
+                        <ul class="funnel-stage-features">
+                            <li class="funnel-stage-feature">
+                                <span class="funnel-stage-feature-icon">✓</span>
+                                <span>Conhecendo seu dispositivo: smartphones, tablets e computadores</span>
+                            </li>
+                            <li class="funnel-stage-feature">
+                                <span class="funnel-stage-feature-icon">✓</span>
+                                <span>Primeiros toques: gestos básicos em telas sensíveis</span>
+                            </li>
+                            <li class="funnel-stage-feature">
+                                <span class="funnel-stage-feature-icon">✓</span>
+                                <span>Conectando-se à internet: Wi-Fi e dados móveis</span>
+                            </li>
+                            <li class="funnel-stage-feature">
+                                <span class="funnel-stage-feature-icon">✓</span>
+                                <span>Seu primeiro e-mail: criando conta e enviando mensagens</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="funnel-stage-image">
+                        <img src="path-to-volume1-cover.jpg" alt="Capa do Volume 1: Primeiros Passos Digitais">
+                    </div>
+                </div>
+                <div class="funnel-stage-cta">
+                    <a href="#" class="btn btn-stage-1">Baixar Gratuitamente</a>
+                </div>
+            </div>
+            
+            <div class="funnel-arrow">↓</div>
+            
+            <!-- Estágio 2: Volume 2 Pago (R$19,90) -->
+            <div class="funnel-stage funnel-stage-2">
+                <div class="funnel-stage-badge">Conversão Inicial</div>
+                <div class="funnel-stage-header">
+                    <div class="funnel-stage-title">
+                        <span class="funnel-stage-icon">🌐</span>
+                        <span>Volume 2: Navegação Digital</span>
+                    </div>
+                    <div class="funnel-stage-price">R$19,90</div>
+                </div>
+                <div class="funnel-stage-content">
+                    <div class="funnel-stage-description">
+                        <p class="funnel-stage-text">Aprofunde seus conhecimentos digitais com comunicação avançada, redes sociais e serviços essenciais para o dia a dia.</p>
+                        <ul class="funnel-stage-features">
+                            <li class="funnel-stage-feature">
+                                <span class="funnel-stage-feature-icon">✓</span>
+                                <span>Comunicação digital: WhatsApp, Telegram e videochamadas</span>
+                            </li>
+                            <li class="funnel-stage-feature">
+                                <span class="funnel-stage-feature-icon">✓</span>
+                                <span>Redes sociais para o público 50+: Facebook e Instagram</span>
+                            </li>
+                            <li class="funnel-stage-feature">
+                                <span class="funnel-stage-feature-icon">✓</span>
+                                <span>Serviços essenciais: agendamentos, Gov.br e transporte</span>
+                            </li>
+                            <li class="funnel-stage-feature">
+                                <span class="funnel-stage-feature-icon">✓</span>
+                                <span>Entretenimento digital: streaming, jogos e podcasts</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="funnel-stage-image">
+                        <img src="path-to-volume2-cover.jpg" alt="Capa do Volume 2: Navegação Digital">
+                    </div>
+                </div>
+                <div class="funnel-stage-cta">
+                    <a href="#" class="btn btn-stage-2">Adquirir por R$19,90</a>
+                </div>
+                
+                <!-- Downsell para quem não comprou o Volume 2 -->
+                <div class="funnel-stage-downsell">
+                    <div class="funnel-stage-downsell-title">Oferta Especial</div>
+                    <div class="funnel-stage-downsell-price">Apenas R$9,90</div>
+                    <div class="funnel-stage-downsell-description">Versão digital do Volume 2 com conteúdo essencial</div>
+                    <a href="#" class="btn btn-downsell">Aproveitar Oferta</a>
+                </div>
+            </div>
+            
+            <div class="funnel-arrow">↓</div>
+            
+            <!-- Estágio 3: Volume 3 Premium (R$100,00) -->
+            <div class="funnel-stage funnel-stage-3">
+                <div class="funnel-stage-badge">Upsell</div>
+                <div class="funnel-stage-header">
+                    <div class="funnel-stage-title">
+                        <span class="funnel-stage-icon">👑</span>
+                        <span>Volume 3: Cidadania Digital Completa</span>
+                    </div>
+                    <div class="funnel-stage-price">R$100,00</div>
+                </div>
+                <div class="funnel-stage-content">
+                    <div class="funnel-stage-description">
+                        <p class="funnel-stage-text">Edição Premium com livro físico de capa dura assinado pelo fundador da Escola Eterna. Torne-se um cidadão digital completo.</p>
+                        <ul class="funnel-stage-features">
+                            <li class="funnel-stage-feature">
+                                <span class="funnel-stage-feature-icon">✓</span>
+                                <span>Livro físico de capa dura com assinatura do fundador</span>
+                            </li>
+                            <li class="funnel-stage-feature">
+                                <span class="funnel-stage-feature-icon">✓</span>
+                                <span>Compras online seguras e internet banking</span>
+                            </li>
+                            <li class="funnel-stage-feature">
+                                <span class="funnel-stage-feature-icon">✓</span>
+                                <span>Pesquisa avançada e verificação de notícias falsas</span>
+                            </li>
+                            <li class="funnel-stage-feature">
+                                <span class="funnel-stage-feature-icon">✓</span>
+                                <span>10 vídeo-aulas exclusivas + mentoria individual</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="funnel-stage-image">
+                        <img src="path-to-volume3-cover.jpg" alt="Capa do Volume 3: Cidadania Digital Completa">
+                    </div>
+                </div>
+                <div class="funnel-stage-cta">
+                    <a href="#" class="btn btn-stage-3">Garantir Edição Premium</a>
+                </div>
+            </div>
+            
+            <div class="funnel-arrow">↓</div>
+            
+            <!-- Estágio 4: High Ticket (R$7.000,00) -->
+            <div class="funnel-stage funnel-stage-4">
+                <div class="funnel-stage-badge">High Ticket</div>
+                <div class="funnel-stage-header">
+                    <div class="funnel-stage-title">
+                        <span class="funnel-stage-icon">💎</span>
+                        <span>Acesso Vitalício Escola Eterna</span>
+                    </div>
+                    <div class="funnel-stage-price">R$7.000,00</div>
+                </div>
+                <div class="funnel-stage-content">
+                    <div class="funnel-stage-description">
+                        <p class="funnel-stage-text">Acesso completo e vitalício a todos os cursos atuais e futuros da Escola Eterna, com suporte personalizado e equipamentos inclusos.</p>
+                        <ul class="funnel-stage-features">
+                            <li class="funnel-stage-feature">
+                                <span class="funnel-stage-feature-icon">✓</span>
+                                <span>Acesso a todos os cursos atuais e futuros da plataforma</span>
+                            </li>
+                            <li class="funnel-stage-feature">
+                                <span class="funnel-stage-feature-icon">✓</span>
+                                <span>Mentoria mensal personalizada com especialistas</span>
+                            </li>
+                            <li class="funnel-stage-feature">
+                                <span class="funnel-stage-feature-icon">✓</span>
+                                <span>Tablet configurado e otimizado para suas necessidades</span>
+                            </li>
+                            <li class="funnel-stage-feature">
+                                <span class="funnel-stage-feature-icon">✓</span>
+                                <span>Suporte técnico prioritário 24/7 por WhatsApp</span>
+                            </li>
+                            <li class="funnel-stage-feature">
+                                <span class="funnel-stage-feature-icon">✓</span>
+                                <span>Encontros presenciais semestrais com outros alunos</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="funnel-stage-image">
+                        <img src="path-to-high-ticket.jpg" alt="Acesso Vitalício Escola Eterna">
+                    </div>
+                </div>
+                <div class="funnel-stage-cta">
+                    <a href="#" class="btn btn-stage-4">Agendar Conversa Pessoal</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Fluxo do Funil -->
+        <div class="funnel-flow">
+            <h2 class="funnel-flow-title">Fluxo do Funil de Conversão</h2>
+            <div class="funnel-flow-diagram">
+                <div class="funnel-flow-step">
+                    <div class="funnel-flow-step-icon">1</div>
+                    <div class="funnel-flow-step-title">Atração</div>
+                    <div class="funnel-flow-step-description">Volume 1 Gratuito</div>
+                </div>
+                <div class="funnel-flow-step">
+                    <div class="funnel-flow-step-icon">2</div>
+                    <div class="funnel-flow-step-title">Nutrição</div>
+                    <div class="funnel-flow-step-description">Sequência de E-mails</div>
+                </div>
+                <div class="funnel-flow-step">
+                    <div class="funnel-flow-step-icon">3</div>
+                    <div class="funnel-flow-step-title">Conversão</div>
+                    <div class="funnel-flow-step-description">Volume 2 (R$19,90)</div>
+                </div>
+                <div class="funnel-flow-step">
+                    <div class="funnel-flow-step-icon">4</div>
+                    <div class="funnel-flow-step-title">Upsell</div>
+                    <div class="funnel-flow-step-description">Volume 3 (R$100,00)</div>
+                </div>
+                <div class="funnel-flow-step">
+                    <div class="funnel-flow-step-icon">5</div>
+                    <div class="funnel-flow-step-title">High Ticket</div>
+                    <div class="funnel-flow-step-description">Acesso Vitalício (R$7.000,00)</div>
+                </div>
+            </div>
+            <p class="funnel-flow-notes">O funil inclui estratégias de downsell para recuperação de vendas e sequências de e-mail personalizadas para cada etapa.</p>
+        </div>
+        
+        <!-- Recursos de Acessibilidade -->
+        <div class="accessibility-features">
+            <h2 class="accessibility-features-title">Recursos de Acessibilidade para o Público 50+</h2>
+            <div class="accessibility-features-grid">
+                <div class="accessibility-feature">
+                    <div class="accessibility-feature-icon">👁️</div>
+                    <div class="accessibility-feature-title">Tipografia Ampliada</div>
+                    <div class="accessibility-feature-description">Fontes grandes (mínimo 18px) em todo o funil, com opção de aumentar ainda mais o tamanho.</div>
+                </div>
+                <div class="accessibility-feature">
+                    <div class="accessibility-feature-icon">🎨</div>
+                    <div class="accessibility-feature-title">Alto Contraste</div>
+                    <div class="accessibility-feature-description">Cores contrastantes para facilitar a leitura, com opção de modo de alto contraste.</div>
+                </div>
+                <div class="accessibility-feature">
+                    <div class="accessibility-feature-icon">👆</div>
+                    <div class="accessibility-feature-title">Botões Amplos</div>
+                    <div class="accessibility-feature-description">Áreas clicáveis grandes e bem espaçadas para facilitar a navegação.</div>
+                </div>
+                <div class="accessibility-feature">
+                    <div class="accessibility-feature-icon">🔊</div>
+                    <div class="accessibility-feature-title">Áudio-descrição</div>
+                    <div class="accessibility-feature-description">Opção de ouvir o conteúdo textual em todas as páginas do funil.</div>
+                </div>
+                <div class="accessibility-feature">
+                    <div class="accessibility-feature-icon">🗣️</div>
+                    <div class="accessibility-feature-title">Linguagem Simplificada</div>
+                    <div class="accessibility-feature-description">Textos claros e diretos, sem jargões técnicos, com exemplos práticos.</div>
+                </div>
+                <div class="accessibility-feature">
+                    <div class="accessibility-feature-icon">💬</div>
+                    <div class="accessibility-feature-title">Suporte Humanizado</div>
+                    <div class="accessibility-feature-description">Opção de suporte por WhatsApp e telefone em todas as etapas do funil.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

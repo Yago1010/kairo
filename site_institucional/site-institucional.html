@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escola Eterna - Educação Digital para o Público 50+</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Cores */
+            --primary-bg: #000000;
+            --secondary-bg: #0A0A0A;
+            --text-color: #FFFFFF;
+            --accent-color: #00FF00;
+            --secondary-accent: #0066FF;
+            --tertiary-accent: #FF66CC;
+            --border-color: rgba(255, 255, 255, 0.1);
+            
+            /* Tipografia */
+            --font-family: 'Inter', sans-serif;
+            --base-font-size: 20px;
+            --h1-size: 4rem;
+            --h2-size: 3rem;
+            --h3-size: 2rem;
+            --h4-size: 1.5rem;
+            --line-height: 1.6;
+            
+            /* Espaçamento */
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 1rem;
+            --spacing-md: 2rem;
+            --spacing-lg: 4rem;
+            --spacing-xl: 8rem;
+            
+            /* Bordas */
+            --border-radius: 12px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            font-size: var(--base-font-size);
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: var(--font-family);
+            background-color: var(--primary-bg);
+            color: var(--text-color);
+            line-height: var(--line-height);
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        h1 {
+            font-size: var(--h1-size);
+        }
+        
+        h2 {
+            font-size: var(--h2-size);
+        }
+        
+        h3 {
+            font-size: var(--h3-size);
+        }
+        
+        h4 {
+            font-size: var(--h4-size);
+        }
+        
+        p {
+            margin-bottom: var(--spacing-md);
+            font-size: 1.1rem;
+        }
+        
+        a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        a:hover {
+            color: var(--accent-color);
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-md);
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background-color: var(--accent-color);
+            color: var(--primary-bg);
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 255, 0, 0.2);
+            color: var(--primary-bg);
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            border: 2px solid var(--accent-color);
+            color: var(--accent-color);
+        }
+        
+        .btn-secondary:hover {
+            background-color: var(--accent-color);
+            color: var(--primary-bg);
+        }
+        
+        /* Header */
+        .header {
+            padding: var(--spacing-md) 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 100;
+            background-color: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-color);
+        }
+        
+        .nav-menu {
+            display: flex;
+            gap: var(--spacing-md);
+        }
+        
+        .nav-link {
+            font-size: 1.1rem;
+            font-weight: 500;
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+        
+        .accessibility-controls {
+            display: flex;
+            gap: var(--spacing-sm);
+        }
+        
+        .accessibility-btn {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+        }
+        
+        .accessibility-btn:hover {
+            color: var(--accent-color);
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: var(--spacing-xl);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .hero-title {
+            font-size: 4.5rem;
+            margin-bottom: var(--spacing-md);
+            line-height: 1.1;
+        }
+        
+        .hero-description {
+            font-size: 1.3rem;
+            margin-bottom: var(--spacing-lg);
+            max-width: 600px;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: var(--spacing-md);
+        }
+        
+        .hero-image {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50%;
+            height: 80%;
+            background-image: url('path-to-image.jpg');
+            background-size: cover;
+            background-position: center;
+            border-radius: var(--border-radius);
+            opacity: 0.7;
+        }
+        
+        /* About Section */
+        .about {
+            padding: var(--spacing-xl) 0;
+            background-color: var(--secondary-bg);
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .section-subtitle {
+            color: var(--accent-color);
+            font-size: 1.2rem;
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--spacing-lg);
+        }
+        
+        .about-card {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: var(--spacing-lg);
+            border-radius: var(--border-radius);
+            transition: transform 0.3s ease;
+        }
+        
+        .about-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .about-icon {
+            font-size: 3rem;
+            color: var(--accent-color);
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .about-card-title {
+            font-size: 1.5rem;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        /* Courses Section */
+        .courses {
+            padding: var(--spacing-xl) 0;
+        }
+        
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--spacing-lg);
+        }
+        
+        .course-card {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        
+        .course-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .course-image {
+            height: 200px;
+            background-color: #333;
+            position: relative;
+        }
+        
+        .course-level {
+            position: absolute;
+            top: var(--spacing-sm);
+            right: var(--spacing-sm);
+            background-color: var(--accent-color);
+            color: var(--primary-bg);
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        .course-content {
+            padding: var(--spacing-md);
+        }
+        
+        .course-title {
+            font-size: 1.5rem;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .course-description {
+            margin-bottom: var(--spacing-md);
+            opacity: 0.8;
+        }
+        
+        /* Testimonials Section */
+        .testimonials {
+            padding: var(--spacing-xl) 0;
+            background-color: var(--secondary-bg);
+        }
+        
+        .testimonials-slider {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .testimonial-card {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: var(--spacing-lg);
+            border-radius: var(--border-radius);
+            text-align: center;
+        }
+        
+        .testimonial-text {
+            font-size: 1.3rem;
+            font-style: italic;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .testimonial-author {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .testimonial-role {
+            color: var(--accent-color);
+            font-size: 1rem;
+        }
+        
+        /* CTA Section */
+        .cta {
+            padding: var(--spacing-xl) 0;
+            text-align: center;
+        }
+        
+        .cta-title {
+            font-size: 3rem;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .cta-description {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto var(--spacing-lg);
+        }
+        
+        /* Footer */
+        .footer {
+            padding: var(--spacing-xl) 0 var(--spacing-md);
+            background-color: var(--secondary-bg);
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .footer-description {
+            margin-bottom: var(--spacing-md);
+            opacity: 0.8;
+        }
+        
+        .footer-social {
+            display: flex;
+            gap: var(--spacing-sm);
+        }
+        
+        .footer-social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease;
+        }
+        
+        .footer-social-link:hover {
+            background-color: var(--accent-color);
+        }
+        
+        .footer-heading {
+            font-size: 1.3rem;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-sm);
+        }
+        
+        .footer-link {
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+        
+        .footer-link:hover {
+            opacity: 1;
+            color: var(--accent-color);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: var(--spacing-md);
+            border-top: 1px solid var(--border-color);
+            opacity: 0.6;
+            font-size: 0.9rem;
+        }
+        
+        /* Accessibility Features */
+        .accessibility-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            padding: var(--spacing-sm) 0;
+            z-index: 100;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .accessibility-bar.active {
+            transform: translateY(0);
+        }
+        
+        .accessibility-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .accessibility-options {
+            display: flex;
+            gap: var(--spacing-md);
+        }
+        
+        .accessibility-option {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+        }
+        
+        .accessibility-toggle {
+            width: 50px;
+            height: 26px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 13px;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .accessibility-toggle::after {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 20px;
+            height: 20px;
+            background-color: var(--text-color);
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+        }
+        
+        .accessibility-toggle.active::after {
+            transform: translateX(24px);
+            background-color: var(--accent-color);
+        }
+        
+        .accessibility-label {
+            font-size: 1rem;
+        }
+        
+        .accessibility-close {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1200px) {
+            :root {
+                --h1-size: 3.5rem;
+                --h2-size: 2.5rem;
+                --h3-size: 1.8rem;
+            }
+            
+            .hero-image {
+                width: 45%;
+            }
+            
+            .about-grid,
+            .courses-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            :root {
+                --base-font-size: 18px;
+                --h1-size: 3rem;
+                --h2-size: 2.2rem;
+                --h3-size: 1.5rem;
+            }
+            
+            .header-container {
+                flex-direction: column;
+                gap: var(--spacing-md);
+            }
+            
+            .nav-menu {
+                flex-direction: column;
+                align-items: center;
+                gap: var(--spacing-sm);
+            }
+            
+            .hero {
+                height: auto;
+                padding: calc(var(--spacing-xl) * 2) 0 var(--spacing-xl);
+            }
+            
+            .hero-content {
+                text-align: center;
+                margin: 0 auto;
+            }
+            
+            .hero-description {
+                margin-left: auto;
+                margin-right: auto;
+            }
+            
+            .hero-buttons {
+                justify-content: center;
+            }
+            
+            .hero-image {
+                display: none;
+            }
+            
+            .about-grid,
+            .courses-grid,
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Accessibility Bar -->
+    <div class="accessibility-bar">
+        <div class="container accessibility-container">
+            <div class="accessibility-options">
+                <div class="accessibility-option">
+                    <span class="accessibility-label">Aumentar Fonte</span>
+                    <div class="accessibility-toggle" id="font-toggle"></div>
+                </div>
+                <div class="accessibility-option">
+                    <span class="accessibility-label">Alto Contraste</span>
+                    <div class="accessibility-toggle" id="contrast-toggle"></div>
+                </div>
+                <div class="accessibility-option">
+                    <span class="accessibility-label">Leitor de Tela</span>
+                    <div class="accessibility-toggle" id="screen-reader-toggle"></div>
+                </div>
+            </div>
+            <button class="accessibility-close" id="accessibility-close">&times;</button>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container header-container">
+            <a href="#" class="logo">ESCOLA ETERNA</a>
+            <nav class="nav-menu">
+                <a href="#" class="nav-link active">Início</a>
+                <a href="#about" class="nav-link">Sobre</a>
+                <a href="#courses" class="nav-link">Cursos</a>
+                <a href="#testimonials" class="nav-link">Depoimentos</a>
+                <a href="#contact" class="nav-link">Contato</a>
+            </nav>
+            <div class="accessibility-controls">
+                <button class="accessibility-btn" id="accessibility-btn">Acessibilidade</button>
+                <a href="#" class="btn">Área do Aluno</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h2 class="hero-subtitle">Educação Digital para o Público 50+</h2>
+                <h1 class="hero-title">Tecnologia Simplificada para Sua Vida</h1>
+                <p class="hero-description">Aprenda no seu ritmo, com professores pacientes e material adaptado para suas necessidades. Transforme sua relação com a tecnologia.</p>
+                <div class="hero-buttons">
+                    <a href="#courses" class="btn">Conheça Nossos Cursos</a>
+                    <a href="#about" class="btn btn-secondary">Saiba Mais</a>
+                </div>
+            </div>
+            <div class="hero-image"></div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="section-header">
+                <h3 class="section-subtitle">Sobre Nós</h3>
+                <h2>Por Que Escolher a Escola Eterna?</h2>
+            </div>
+            <div class="about-grid">
+                <div class="about-card">
+                    <div class="about-icon">🎓</div>
+                    <h3 class="about-card-title">Metodologia Exclusiva</h3>
+                    <p>Desenvolvemos uma metodologia única para o público 50+, com ritmo adequado e linguagem acessível.</p>
+                </div>
+                <div class="about-card">
+                    <div class="about-icon">👨‍🏫</div>
+                    <h3 class="about-card-title">Professores Especializados</h3>
+                    <p>Nossa equipe é treinada para ensinar tecnologia com paciência e respeito ao seu tempo de aprendizado.</p>
+                </div>
+                <div class="about-card">
+                    <div class="about-icon">🏆</div>
+                    <h3 class="about-card-title">Reconhecimento MEC</h3>
+                    <p>Somos reconhecidos pelo Ministério da Educação como instituição de excelência em educação digital.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Courses Section -->
+    <section class="courses" id="courses">
+        <div class="container">
+            <div class="section-header">
+                <h3 class="section-subtitle">Nossos Cursos</h3>
+                <h2>Aprenda no Seu Ritmo</h2>
+            </div>
+            <div class="courses-grid">
+                <div class="course-card">
+                    <div class="course-image">
+                        <div class="course-level">Iniciante</div>
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title">Primeiros Passos Digitais</h3>
+                        <p class="course-description">Aprenda a usar computadores, smartphones e tablets sem complicação.</p>
+                        <a href="#" class="btn btn-secondary">Saiba Mais</a>
+                    </div>
+                </div>
+                <div class="course-card">
+                    <div class="course-image">
+                        <div class="course-level">Intermediário</div>
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title">Comunicação Digital</h3>
+                        <p class="course-description">Domine e-mails, WhatsApp, videochamadas e redes sociais com segurança.</p>
+                        <a href="#" class="btn btn-secondary">Saiba Mais</a>
+                    </div>
+                </div>
+                <div class="course-card">
+                    <div class="course-image">
+                        <div class="course-level">Avançado</div>
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title">Serviços Online</h3>
+                        <p class="course-description">Aprenda a usar internet banking, compras online e serviços governamentais.</p>
+                        <a href="#" class="btn btn-secondary">Saiba Mais</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h3 class="section-subtitle">Depoimentos</h3>
+                <h2>O Que Nossos Alunos Dizem</h2>
+            </div>
+            <div class="testimonials-slider">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Nunca imaginei que conseguiria fazer videochamadas com meus netos que moram longe. A Escola Eterna me ensinou com tanta paciência que hoje faço isso sozinha!"</p>
+                    <p class="testimonial-author">Maria Silva, 68 anos</p>
+                    <p class="testimonial-role">Aluna do curso Comunicação Digital</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta" id="contact">
+        <div class="container">
+            <h2 class="cta-title">Comece Sua Jornada Digital Hoje</h2>
+            <p class="cta-description">Transforme sua relação com a tecnologia e descubra um mundo de possibilidades. O primeiro passo é gratuito.</p>
+            <a href="#" class="btn">Quero Começar Agora</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-info">
+                    <div class="footer-logo">ESCOLA ETERNA</div>
+                    <p class="footer-description">Educação digital de qualidade para o público 50+, com metodologia exclusiva e professores especializados.</p>
+                    <div class="footer-social">
+                        <a href="#" class="footer-social-link">F</a>
+                        <a href="#" class="footer-social-link">I</a>
+                        <a href="#" class="footer-social-link">Y</a>
+                        <a href="#" class="footer-social-link">L</a>
+                    </div>
+                </div>
+                <div class="footer-links-column">
+                    <h4 class="footer-heading">Links Rápidos</h4>
+                    <div class="footer-links">
+                        <a href="#" class="footer-link">Início</a>
+                        <a href="#about" class="footer-link">Sobre</a>
+                        <a href="#courses" class="footer-link">Cursos</a>
+                        <a href="#testimonials" class="footer-link">Depoimentos</a>
+                        <a href="#contact" class="footer-link">Contato</a>
+                    </div>
+                </div>
+                <div class="footer-links-column">
+                    <h4 class="footer-heading">Cursos</h4>
+                    <div class="footer-links">
+                        <a href="#" class="footer-link">Primeiros Passos</a>
+                        <a href="#" class="footer-link">Comunicação Digital</a>
+                        <a href="#" class="footer-link">Serviços Online</a>
+                        <a href="#" class="footer-link">Segurança Digital</a>
+                        <a href="#" class="footer-link">Todos os Cursos</a>
+                    </div>
+                </div>
+                <div class="footer-links-column">
+                    <h4 class="footer-heading">Contato</h4>
+                    <div class="footer-links">
+                        <a href="#" class="footer-link">contato@escolaeterna.com.br</a>
+                        <a href="#" class="footer-link">(11) 99999-9999</a>
+                        <a href="#" class="footer-link">São Paulo, SP</a>
+                        <a href="#" class="footer-link">Política de Privacidade</a>
+                        <a href="#" class="footer-link">Termos de Uso</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Escola Eterna. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Accessibility Toggle
+        const accessibilityBtn = document.getElementById('accessibility-btn');
+        const accessibilityBar = document.querySelector('.accessibility-bar');
+        const accessibilityClose = document.getElementById('accessibility-close');
+        const fontToggle = document.getElementById('font-toggle');
+        const contrastToggle = document.getElementById('contrast-toggle');
+        const screenReaderToggle = document.getElementById('screen-reader-toggle');
+        
+        accessibilityBtn.addEventListener('click', () => {
+            accessibilityBar.classList.add('active');
+        });
+        
+        accessibilityClose.addEventListener('click', () => {
+            accessibilityBar.classList.remove('active');
+        });
+        
+        fontToggle.addEventListener('click', () => {
+            fontToggle.classList.toggle('active');
+            document.body.classList.toggle('large-font');
+        });
+        
+        contrastToggle.addEventListener('click', () => {
+            contrastToggle.classList.toggle('active');
+            document.body.classList.toggle('high-contrast');
+        });
+        
+        screenReaderToggle.addEventListener('click', () => {
+            screenReaderToggle.classList.toggle('active');
+            alert('Leitor de tela ativado. Esta funcionalidade seria implementada com uma API real de leitor de tela.');
+        });
+        
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
