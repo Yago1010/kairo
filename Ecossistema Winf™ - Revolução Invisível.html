@@ -1,0 +1,659 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ecossistema Winf™ - Invista R$ 1 Milhão com Consórcio Ademicon e @Tiago.winf">
+    <meta name="keywords" content="Winf, WINF SELECT, NeoSkin, AEROCORE, investimento, consórcio Ademicon, Tiago.winf">
+    <title>Ecossistema Winf™ - Revolução Invisível</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+        body {
+            background: #0a0a0a;
+            color: #fff;
+            overflow-x: hidden;
+        }
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: #000;
+            padding: 12px 0;
+            z-index: 1000;
+            text-align: center;
+        }
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 12px;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+        .navbar a:hover {
+            color: #ff4d4d;
+        }
+        .hero {
+            height: 100vh;
+            background: #0a0a0a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+        .hero-content {
+            z-index: 1;
+        }
+        .hero h1 {
+            font-size: 36px;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            animation: pulse 2s infinite;
+        }
+        .hero p {
+            font-size: 16px;
+            margin-bottom: 24px;
+            font-family: 'Roboto', sans-serif;
+        }
+        .cta-button {
+            background: #ff4d4d;
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 14px;
+            transition: background 0.3s;
+        }
+        .cta-button:hover {
+            background: #cc0000;
+        }
+        .section {
+            padding: 50px 15px;
+            text-align: center;
+        }
+        .section h2 {
+            font-size: 24px;
+            margin-bottom: 24px;
+            animation: fadeIn 1s;
+        }
+        .ecosystem-grid, .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 12px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .card {
+            background: #1a1a1a;
+            padding: 12px;
+            border-radius: 6px;
+            transition: transform 0.3s;
+        }
+        .card:hover {
+            transform: scale(1.05);
+        }
+        .card h3 {
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+        .card p {
+            font-size: 12px;
+            color: #ccc;
+            font-family: 'Roboto', sans-serif;
+        }
+        .card svg {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 8px;
+            fill: #ff4d4d;
+        }
+        .chart-container {
+            max-width: 500px;
+            margin: 0 auto;
+            margin-bottom: 24px;
+        }
+        .pitch-deck {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        .pitch-slide {
+            display: none;
+            background: #1a1a1a;
+            padding: 24px;
+            border-radius: 6px;
+            text-align: left;
+            animation: fadeIn 0.5s;
+        }
+        .pitch-slide.active {
+            display: block;
+        }
+        .pitch-slide h3 {
+            font-size: 20px;
+            margin-bottom: 12px;
+            color: #ff4d4d;
+        }
+        .pitch-slide p, .pitch-slide ul {
+            font-size: 14px;
+            line-height: 1.4;
+            font-family: 'Roboto', sans-serif;
+        }
+        .pitch-slide ul {
+            list-style-type: disc;
+            margin-left: 16px;
+        }
+        .pitch-slide svg {
+            width: 60px;
+            height: 60px;
+            margin: 12px 0;
+            fill: #ff4d4d;
+        }
+        .pitch-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 16px;
+        }
+        .pitch-nav button {
+            background: #ff4d4d;
+            color: #fff;
+            padding: 6px 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+            font-size: 12px;
+        }
+        .pitch-nav button:hover {
+            background: #cc0000;
+        }
+        .pitch-nav button:disabled {
+            background: #555;
+            cursor: not-allowed;
+        }
+        .contact form {
+            max-width: 400px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .contact input, .contact textarea {
+            padding: 6px;
+            border: none;
+            border-radius: 4px;
+            background: #222;
+            color: #fff;
+            font-family: 'Roboto', sans-serif;
+            font-size: 12px;
+        }
+        .contact button {
+            background: #ff4d4d;
+            color: #fff;
+            padding: 6px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+            font-size: 12px;
+        }
+        .contact button:hover {
+            background: #cc0000;
+        }
+        .heat-demo {
+            max-width: 700px;
+            margin: 0 auto 24px;
+            text-align: center;
+        }
+        .heat-demo svg {
+            width: 100%;
+            max-height: 200px;
+        }
+        .heat-demo button {
+            background: #ff4d4d;
+            color: #fff;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 12px;
+            font-size: 12px;
+        }
+        .heat-demo button:hover {
+            background: #cc0000;
+        }
+        .footer {
+            background: #000;
+            padding: 12px;
+            text-align: center;
+            margin-top: 24px;
+        }
+        .footer img {
+            max-width: 60px;
+            margin: 0 8px;
+        }
+        .footer p, .footer a {
+            font-size: 12px;
+            font-family: 'Roboto', sans-serif;
+            color: #ccc;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            color: #ff4d4d;
+        }
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: 0;
+        }
+        .success-message {
+            display: none;
+            position: fixed;
+            top: 16px;
+            right: 16px;
+            background: #ff4d4d;
+            color: #fff;
+            padding: 6px 12px;
+            border-radius: 4px;
+            z-index: 2000;
+            font-size: 12px;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 24px;
+            }
+            .hero p {
+                font-size: 12px;
+            }
+            .navbar a {
+                font-size: 10px;
+                margin: 0 6px;
+            }
+            .section h2 {
+                font-size: 20px;
+            }
+            .pitch-slide h3 {
+                font-size: 16px;
+            }
+            .pitch-slide p, .pitch-slide ul {
+                font-size: 12px;
+            }
+            .card h3 {
+                font-size: 16px;
+            }
+            .card p {
+                font-size: 10px;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <canvas class="particles" id="particles"></canvas>
+    <header>
+        <nav class="navbar">
+            <a href="#home">Home</a>
+            <a href="#ecosystem">Ecossistema</a>
+            <a href="#demo">Demo</a>
+            <a href="#pitch">Pitch Deck</a>
+            <a href="#data">Dados</a>
+            <a href="#products">Produtos</a>
+            <a href="#contact">Contato</a>
+        </nav>
+    </header>
+    <main>
+        <section class="hero" id="home">
+            <div class="hero-content">
+                <h1>Revolução com Ademicon</h1>
+                <p>Invista no Ecossistema Winf™ com @Tiago.winf</p>
+                <a href="#pitch" class="cta-button">Explore o Pitch</a>
+            </div>
+        </section>
+        <section class="section" id="ecosystem">
+            <h2>Ecossistema Winf™</h2>
+            <div class="ecosystem-grid">
+                <div class="card">
+                    <svg viewBox="0 0 24 24"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 2.3l7.7 4.4v7.3L12 20.7 4.3 16.3V8.7L12 4.3z"/></svg>
+                    <h3>WINF SELECT™</h3>
+                    <p>Películas arquitetônicas premium, margens de 80-93%.</p>
+                </div>
+                <div class="card">
+                    <svg viewBox="0 0 24 24"><path d="M21 8H3V6h18v2zm0 4H3v2h18v-2zm0 4H3v2h18v-2z"/></svg>
+                    <h3>NeoSkin</h3>
+                    <p>PPF 3x mais resistente para off-road.</p>
+                </div>
+                <div class="card">
+                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>
+                    <h3>AEROCORE™</h3>
+                    <p>Proteção para veículos de luxo e aeronaves.</p>
+                </div>
+                <div class="card">
+                    <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14z"/></svg>
+                    <h3>Coatings Nanocerâmicos</h3>
+                    <p>Revestimentos de alta performance.</p>
+                </div>
+            </div>
+        </section>
+        <section class="section" id="demo">
+            <h2>Demo de Redução de Calor</h2>
+            <div class="heat-demo">
+                <svg id="heatAnimation" viewBox="0 0 200 100">
+                    <rect x="0" y="0" width="200" height="100" fill="#ff4d4d"/>
+                    <rect id="coolEffect" x="0" y="0" width="0" height="100" fill="#0a1a2a"/>
+                </svg>
+                <button onclick="toggleCoolEffect()">Aplicar Película Winf™</button>
+            </div>
+        </section>
+        <section class="section" id="pitch">
+            <h2>Pitch Deck – Ademicon</h2>
+            <div class="pitch-deck">
+                <div class="pitch-slide active">
+                    <h3>1. Revolução Invisível</h3>
+                    <p>Ecossistema Winf™ – Inovação premium. Invista R$ 1 milhão em 5 cotas com @Tiago.winf e Ademicon.</p>
+                    <svg viewBox="0 0 24 24"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 2.3l7.7 4.4v7.3L12 20.7 4.3 16.3V8.7L12 4.3z"/></svg>
+                </div>
+                <div class="pitch-slide">
+                    <h3>2. Desafio</h3>
+                    <ul>
+                        <li>Mercado fragmentado, baixa qualidade.</li>
+                        <li>Alto consumo de energia com ar condicionado.</li>
+                        <li>Ambientes superaquecidos.</li>
+                    </ul>
+                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>
+                </div>
+                <div class="pitch-slide">
+                    <h3>3. Solução</h3>
+                    <ul>
+                        <li>Reduz energia do ar condicionado.</li>
+                        <li>Diminui calor com nano cerâmica.</li>
+                        <li>Margens de 80-95%, exclusividade.</li>
+                    </ul>
+                    <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14z"/></svg>
+                </div>
+                <div class="pitch-slide">
+                    <h3>4. Mercado</h3>
+                    <ul>
+                        <li>R$ 2,4-3,9 milhões (WINF SELECT™).</li>
+                        <li>R$ 40-50 milhões (NeoSkin).</li>
+                        <li>420-550 licenciados.</li>
+                    </ul>
+                    <svg viewBox="0 0 24 24"><path d="M21 8H3V6h18v2zm0 4H3v2h18v-2zm0 4H3v2h18v-2z"/></svg>
+                </div>
+                <div class="pitch-slide">
+                    <h3>5. Modelo</h3>
+                    <ul>
+                        <li>Licenciamento: R$ 5.000-15.000.</li>
+                        <li>Fase 1: R$ 1,57 milhão.</li>
+                        <li>Consórcio Ademicon facilita.</li>
+                    </ul>
+                    <svg viewBox="0 0 24 24"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 2.3l7.7 4.4v7.3L12 20.7 4.3 16.3V8.7L12 4.3z"/></svg>
+                </div>
+                <div class="pitch-slide">
+                    <h3>6. Projeção</h3>
+                    <canvas id="financialChart" style="max-height: 180px;"></canvas>
+                    <p>Lucro de R$ 720.000 na Fase 1.</p>
+                </div>
+                <div class="pitch-slide">
+                    <h3>7. Ação</h3>
+                    <p>Vagas limitadas! Invista com @Tiago.winf e Ademicon. Contate Augusto Valença.</p>
+                    <svg viewBox="0 0 24 24"><path d="M21 8H3V6h18v2zm0 4H3v2h18v-2zm0 4H3v2h18v-2z"/></svg>
+                </div>
+                <div class="pitch-nav">
+                    <button id="prevSlide">Anterior</button>
+                    <button id="nextSlide">Próximo</button>
+                </div>
+            </div>
+        </section>
+        <section class="section" id="data">
+            <h2>Dados</h2>
+            <div class="chart-container">
+                <canvas id="regionChart"></canvas>
+            </div>
+            <div class="chart-container">
+                <canvas id="planChart"></canvas>
+            </div>
+        </section>
+        <section class="section" id="products">
+            <h2>Produtos</h2>
+            <div class="products-grid">
+                <div class="card">
+                    <svg viewBox="0 0 24 24"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 2.3l7.7 4.4v7.3L12 20.7 4.3 16.3V8.7L12 4.3z"/></svg>
+                    <h3>WINF SELECT™</h3>
+                    <p>Películas arquitetônicas premium.</p>
+                </div>
+                <div class="card">
+                    <svg viewBox="0 0 24 24"><path d="M21 8H3V6h18v2zm0 4H3v2h18v-2zm0 4H3v2h18v-2z"/></svg>
+                    <h3>NeoSkin</h3>
+                    <p>PPF ultra-resistente para off-road.</p>
+                </div>
+                <div class="card">
+                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>
+                    <h3>AEROCORE™</h3>
+                    <p>Proteção para veículos de luxo.</p>
+                </div>
+                <div class="card">
+                    <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14z"/></svg>
+                    <h3>Coatings Nanocerâmicos</h3>
+                    <p>Revestimentos de alta performance.</p>
+                </div>
+                <div class="card">
+                    <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                    <h3>Licenciado Winf™</h3>
+                    <p>Aplicador com exclusividade.</p>
+                </div>
+            </div>
+        </section>
+        <section class="section contact" id="contact">
+            <h2>Contate-nos</h2>
+            <form id="contactForm">
+                <input type="text" name="name" placeholder="Nome" required>
+                <input type="email" name="email" placeholder="E-mail" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+                <input type="tel" name="phone" placeholder="Telefone" required>
+                <textarea name="message" placeholder="Mensagem" rows="4" required></textarea>
+                <button type="submit">Enviar</button>
+            </form>
+            <div class="success-message" id="successMessage">Mensagem enviada!</div>
+        </section>
+    </main>
+    <footer class="footer">
+        <p>Tiago Augusto Correa, CEO & Chief Vision Officer | Winf.inc<br>Inovação Pioneira, Branding Estratégico e Tecnologia Inteligente<br><a href="https://www.instagram.com/tiago.winf/" target="_blank">@Tiago.winf</a></p>
+        <img src="https://images.unsplash.com/photo-1620121478247-ec786bd85fa1?ixlib=rb-4.0.3&auto=format&fit=crop&w=60&q=80" alt="Ademicon Logo">
+    </footer>
+    <script>
+        // Partículas para Sinapses Nervosas
+        const canvas = document.getElementById('particles');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        const particles = [];
+        for (let i = 0; i < 30; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                radius: Math.random() * 1.5 + 0.5,
+                vx: Math.random() * 1 - 0.5,
+                vy: Math.random() * 1 - 0.5
+            });
+        }
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                ctx.fillStyle = '#ff4d4d';
+                ctx.fill();
+                p.x += p.vx;
+                p.y += p.vy;
+                if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+                if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+            });
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+
+        // Demo de Redução de Calor
+        function toggleCoolEffect() {
+            const coolEffect = document.getElementById('coolEffect');
+            coolEffect.style.transition = 'width 2s ease-in-out';
+            coolEffect.style.width = coolEffect.style.width === '200px' ? '0px' : '200px';
+        }
+
+        // Inicializar Gráficos Após DOM Carregado
+        document.addEventListener('DOMContentLoaded', () => {
+            // Gráfico de Licenciados por Região
+            const regionChart = new Chart(document.getElementById('regionChart'), {
+                type: 'bar',
+                data: {
+                    labels: ['Sudeste', 'Sul', 'Nordeste', 'Centro-Oeste', 'Norte'],
+                    datasets: [{
+                        label: 'Licenciados Estimados',
+                        data: [175, 100, 85, 50, 40],
+                        backgroundColor: ['#ff4d4d', '#0a1a2a', '#c0c0c0', '#333333', '#1a1a1a'],
+                        borderColor: '#ffffff',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: { beginAtZero: true, title: { display: true, text: 'Licenciados' } },
+                        x: { title: { display: true, text: 'Região' } }
+                    },
+                    plugins: { title: { display: true, text: 'Licenciados por Região' } }
+                }
+            });
+
+            // Gráfico de Captação por Plano
+            const planChart = new Chart(document.getElementById('planChart'), {
+                type: 'pie',
+                data: {
+                    labels: ['Basic', 'Advanced', 'Enterprise'],
+                    datasets: [{
+                        label: 'Captação (R$)',
+                        data: [975000, 1818750, 641250],
+                        backgroundColor: ['#ff4d4d', '#0a1a2a', '#c0c0c0']
+                    }]
+                },
+                options: {
+                    plugins: { title: { display: true, text: 'Captação por Plano (R$)' } }
+                }
+            });
+
+            // Gráfico de Projeção Financeira
+            const financialChart = new Chart(document.getElementById('financialChart'), {
+                type: 'line',
+                data: {
+                    labels: ['Fase 1', 'Fase 2', 'Fase 3', 'Fase 4'],
+                    datasets: [{
+                        label: 'Receita (R$ milhões)',
+                        data: [1.57, 2.5, 12, 25],
+                        borderColor: '#ff4d4d',
+                        fill: false
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: { beginAtZero: true, title: { display: true, text: 'Receita (R$ milhões)' } },
+                        x: { title: { display: true, text: 'Fases' } }
+                    },
+                    plugins: { title: { display: true, text: 'Projeção Financeira' } }
+                }
+            });
+        });
+
+        // Controle do Pitch Deck (Manual)
+        const slides = document.querySelectorAll('.pitch-slide');
+        let currentSlide = 0;
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === index);
+            });
+            document.getElementById('prevSlide').disabled = index === 0;
+            document.getElementById('nextSlide').disabled = index === slides.length - 1;
+        }
+        document.getElementById('prevSlide').addEventListener('click', () => {
+            if (currentSlide > 0) {
+                currentSlide--;
+                showSlide(currentSlide);
+            }
+        });
+        document.getElementById('nextSlide').addEventListener('click', () => {
+            if (currentSlide < slides.length - 1) {
+                currentSlide++;
+                showSlide(currentSlide);
+            }
+        });
+
+        // Formulário com Validação
+        document.getElementById('contactForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            if (formData.get('email').match(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/)) {
+                console.log('Lead capturado:', Object.fromEntries(formData));
+                document.getElementById('successMessage').style.display = 'block';
+                setTimeout(() => {
+                    document.getElementById('successMessage').style.display = 'none';
+                }, 3000);
+                e.target.reset();
+            } else {
+                alert('Por favor, insira um e-mail válido.');
+            }
+        });
+    </script>
+</body>
+</html>
